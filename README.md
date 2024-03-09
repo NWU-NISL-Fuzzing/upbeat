@@ -1,2 +1,3 @@
 # UPBEAT
-Companion website of "Upbeat: Test Input Checks of Q# Quantum Libraries", accepted at ISSTA2024.
+
+UPBEAT is a fuzzing tool to generate random test cases for bugs related to inputchecking in Q# libraries.
