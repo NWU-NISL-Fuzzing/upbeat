@@ -1,0 +1,78 @@
+func_name:
+AssertAllZeroFxP        
+AssertAllZero(fp::Register);
+func_name:
+MultiplyFxP            
+AssertAllZeroFxP(result);
+func_name:
+SquareFxP            
+AssertAllZeroFxP(result);
+func_name:
+EvaluatePolynomialFxP            
+AssertAllZeroFxP(result);
+func_name:
+EvaluateEvenPolynomialFxP            
+AssertAllZeroFxP(result);
+func_name:
+EvaluateOddPolynomialFxP            
+AssertAllZeroFxP(result);
+func_name:
+ComputeReciprocalFxP            
+AssertAllZero(rs);
+func_name:
+MultiplyI            
+AssertAllZero(result!);
+func_name:
+MultiplyI            
+AssertAllZero(result!);
+func_name:
+SquareI            
+AssertAllZero(result!);
+func_name:
+AssertProbInt            
+AssertMeasurementProbability([PauliZ], [flag], One, expected, $"AssertProbInt failed on stateIndex {stateIndex}, expected probability {expected}.", tolerance);
+func_name:
+AssertMostSignificantBit            
+AssertMeasurement([PauliZ], [mostSingificantQubit], value, $"Most significant bit expected to be {value}");
+func_name:
+AssertMostSignificantBit            
+AssertMostSignificantBit(value, number);
+func_name:
+AssertPhaseLessThan            
+AssertPhaseLessThan(value, number);
+func_name:
+IncrementPhaseByModularInteger                
+ApplyLEOperationOnPhaseLEA(AssertMostSignificantBit(Zero, _), target);
+func_name:
+IncrementPhaseByModularInteger                
+AssertPhaseLessThan(modulus, target);
+func_name:
+MultiplyAndAddPhaseByModularInteger            
+ApplyLEOperationOnPhaseLECA(AssertMostSignificantBit(Zero, _), phaseSummand);
+func_name:
+MultiplyAndAddPhaseByModularInteger            
+AssertPhaseLessThan(modulus, phaseSummand);
+func_name:
+ApplyAnd            
+AssertAllZero([target]);
+func_name:
+ApplyAnd            
+AssertMeasurementProbability([PauliZ], [target], One, 0.5, "Probability of the measurement must be 0.5", 1e-10);
+func_name:
+ApplyLowDepthAnd            
+AssertAllZero([target]);
+func_name:
+AssertPhase        
+AssertMeasurementProbability([PauliZ], [qubit], Zero, 0.5, $"AssertPhase failed. Was not given a uniform superposition.", tolerance);
+func_name:
+AssertPhase        
+AssertMeasurementProbability([PauliY], [qubit], Zero, exptectedProbY, $"AssertPhase failed. PauliY Zero basis did not give probability {exptectedProbY}.", tolerance);
+func_name:
+AssertPhase        
+AssertMeasurementProbability([PauliX], [qubit], Zero, exptectedProbX, $"AssertPhase failed. PauliX Zero basis did not give probability {exptectedProbX}.", tolerance);
+func_name:
+AssertPhase        
+Microsoft.Quantum.Diagnostics.AssertPhase(expected, qubit, tolerance);
+func_name:
+PrepareUniformSuperposition            
+AssertAllZero(indexRegister!);

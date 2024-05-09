@@ -1,0 +1,2781 @@
+operation XX ((a:Qubit,b:Qubit)) : Unit is Adj + Ctl {
+    X(a);
+    X(b);
+}
+========================================
+operation XXMulti ((a:Qubit[],b:Qubit[])) : Unit is Adj + Ctl {
+    X(a[0]);
+    X(b[0]);
+}
+========================================
+operation IntX((a:Int,b:Qubit)) : Unit is Adj + Ctl {
+    X(b);
+}
+========================================
+operation ApplyTOracle (power : Int, target : Qubit[]) : Unit is Adj + Ctl {
+    for idxPower in 0 .. power - 1 {
+        T(Head(target));
+    }
+}
+========================================
+operation AdjUnitOperation1 (): Unit is Adj {}
+========================================
+operation AdjUnitOperation2 (): Unit is Ctl {}
+========================================
+operation AdjUnitOperation3 (): Unit is Adj + Ctl {}
+========================================
+operation NoOp1(arg : Int) : Unit is Adj { }
+========================================
+operation NoOp2(arg : Int) : Unit is Ctl { }
+========================================
+operation NoOp3(arg : Int) : Unit is Adj + Ctl { }
+========================================
+operation NoOp4(arg : BigInt) : Unit is Adj { }
+========================================
+operation NoOp5(arg : BigInt) : Unit is Ctl { }
+========================================
+operation NoOp6(arg : BigInt) : Unit is Adj + Ctl { }
+========================================
+operation NoOp7(arg : Double) : Unit is Adj { }
+========================================
+operation NoOp8(arg : Double) : Unit is Ctl { }
+========================================
+operation NoOp9(arg : Double) : Unit is Adj + Ctl { }
+========================================
+operation NoOp10(arg : Bool) : Unit is Adj { }
+========================================
+operation NoOp11(arg : Bool) : Unit is Ctl { }
+========================================
+operation NoOp12(arg : Bool) : Unit is Adj + Ctl { }
+========================================
+operation NoOp13(arg : String) : Unit is Adj { }
+========================================
+operation NoOp14(arg : String) : Unit is Ctl { }
+========================================
+operation NoOp15(arg : String) : Unit is Adj + Ctl { }
+========================================
+operation NoOp16(arg : Qubit) : Unit is Adj { }
+========================================
+operation NoOp17(arg : Qubit) : Unit is Ctl { }
+========================================
+operation NoOp18(arg : Qubit) : Unit is Adj + Ctl { }
+========================================
+operation NoOp19(arg : Result) : Unit is Adj { }
+========================================
+operation NoOp20(arg : Result) : Unit is Ctl { }
+========================================
+operation NoOp21(arg : Result) : Unit is Adj + Ctl { }
+========================================
+operation NoOp22(arg : Pauli) : Unit is Adj { }
+========================================
+operation NoOp23(arg : Pauli) : Unit is Ctl { }
+========================================
+operation NoOp24(arg : Pauli) : Unit is Adj + Ctl { }
+========================================
+operation NoOp25(arg : Qubit[]) : Unit is Adj { }
+========================================
+operation NoOp26(arg : Qubit[]) : Unit is Ctl { }
+========================================
+operation NoOp27(arg : Qubit[]) : Unit is Adj + Ctl { }
+========================================
+operation NoOp28(arg : Int[]) : Unit is Adj { }
+========================================
+operation NoOp29(arg : Int[]) : Unit is Ctl { }
+========================================
+operation NoOp30(arg : Int[]) : Unit is Adj + Ctl { }
+========================================
+operation NoOp31(arg : BigInt[]) : Unit is Adj { }
+========================================
+operation NoOp32(arg : BigInt[]) : Unit is Ctl { }
+========================================
+operation NoOp33(arg : BigInt[]) : Unit is Adj + Ctl { }
+========================================
+operation NoOp34(arg : Double[]) : Unit is Adj { }
+========================================
+operation NoOp35(arg : Double[]) : Unit is Ctl { }
+========================================
+operation NoOp36(arg : Double[]) : Unit is Adj + Ctl { }
+========================================
+operation NoOp37(arg : Bool[]) : Unit is Adj { }
+========================================
+operation NoOp38(arg : Bool[]) : Unit is Ctl { }
+========================================
+operation NoOp39(arg : Bool[]) : Unit is Adj + Ctl { }
+========================================
+operation NoOp40(arg : String[]) : Unit is Adj { }
+========================================
+operation NoOp41(arg : String[]) : Unit is Ctl { }
+========================================
+operation NoOp42(arg : String[]) : Unit is Adj + Ctl { }
+========================================
+operation NoOp43(arg : Result[]) : Unit is Adj { }
+========================================
+operation NoOp44(arg : Result[]) : Unit is Ctl { }
+========================================
+operation NoOp45(arg : Result[]) : Unit is Adj + Ctl { }
+========================================
+operation NoOp46(arg : Pauli[]) : Unit is Adj { }
+========================================
+operation NoOp47(arg : Pauli[]) : Unit is Ctl { }
+========================================
+operation NoOp48(arg : Pauli[]) : Unit is Adj + Ctl { }
+========================================
+operation NoOp49(arg1:Qubit, arg2:Qubit, arg3:Qubit) : Unit is Adj { }
+========================================
+operation NoOp50(arg1:Qubit, arg2:Qubit, arg3:Qubit) : Unit is Ctl { }
+========================================
+operation NoOp51(arg1:Qubit, arg2:Qubit, arg3:Qubit) : Unit is Adj + Ctl { }
+========================================
+operation NoOp52(arg1:Qubit, arg2:Qubit) : Unit is Adj { }
+========================================
+operation NoOp53(arg1:Qubit, arg2:Qubit) : Unit is Ctl { }
+========================================
+operation NoOp54(arg1:Qubit, arg2:Qubit) : Unit is Adj + Ctl { }
+========================================
+operation NoOp55(arg : Qubit[]) : Unit is Adj { }
+========================================
+operation NoOp56(arg : Qubit[]) : Unit is Ctl { }
+========================================
+operation NoOp57(arg : Qubit[]) : Unit is Adj + Ctl { }
+========================================
+operation NoOp58(arg1 : Qubit[], arg2 : Qubit[]) : Unit is Adj { }
+========================================
+operation NoOp59(arg1 : Qubit[], arg2 : Qubit[]) : Unit is Ctl { }
+========================================
+operation NoOp60(arg1 : Qubit[], arg2 : Qubit[]) : Unit is Adj + Ctl { }
+========================================
+operation NoOp61(arg : Int[]) : Unit is Adj { }
+========================================
+operation NoOp62(arg : Int[]) : Unit is Ctl { }
+========================================
+operation NoOp63(arg : Int[]) : Unit is Adj + Ctl { }
+========================================
+operation NoOp64(arg : BigInt[]) : Unit is Adj { }
+========================================
+operation NoOp65(arg : BigInt[]) : Unit is Ctl { }
+========================================
+operation NoOp66(arg : BigInt[]) : Unit is Adj + Ctl { }
+========================================
+operation NoOp67(arg : Double[]) : Unit is Adj { }
+========================================
+operation NoOp68(arg : Double[]) : Unit is Ctl { }
+========================================
+operation NoOp69(arg : Double[]) : Unit is Adj + Ctl { }
+========================================
+operation NoOp70(arg : Bool[]) : Unit is Adj { }
+========================================
+operation NoOp71(arg : Bool[]) : Unit is Ctl { }
+========================================
+operation NoOp72(arg : Bool[]) : Unit is Adj + Ctl { }
+========================================
+operation NoOp73(arg : String[]) : Unit is Adj { }
+========================================
+operation NoOp74(arg : String[]) : Unit is Ctl { }
+========================================
+operation NoOp75(arg : String[]) : Unit is Adj + Ctl { }
+========================================
+operation NoOp76(arg : Result[]) : Unit is Adj { }
+========================================
+operation NoOp77(arg : Result[]) : Unit is Ctl { }
+========================================
+operation NoOp78(arg : Result[]) : Unit is Adj + Ctl { }
+========================================
+operation NoOp79(arg : Pauli[]) : Unit is Adj { }
+========================================
+operation NoOp80(arg : Pauli[]) : Unit is Ctl { }
+========================================
+operation NoOp81(arg : Pauli[]) : Unit is Adj + Ctl { }
+========================================
+operation NoOp82(arg : Qubit[]) : Unit is Adj { }
+========================================
+operation NoOp83(arg : Qubit[]) : Unit is Ctl { }
+========================================
+operation NoOp84(arg : Qubit[]) : Unit is Adj + Ctl { }
+========================================
+operation NoOp85(arg : Qubit[]) : Unit is Adj { }
+========================================
+operation NoOp86(arg : Qubit[]) : Unit is Ctl { }
+========================================
+operation NoOp87(arg : Qubit[]) : Unit is Adj + Ctl { }
+========================================
+operation NoOp88(arg : Int) : Unit is Adj { }
+========================================
+operation NoOp89(arg : Int) : Unit is Ctl { }
+========================================
+operation NoOp90(arg : Int) : Unit is Adj + Ctl { }
+========================================
+operation NoOp91(arg : BigInt) : Unit is Adj { }
+========================================
+operation NoOp92(arg : BigInt) : Unit is Ctl { }
+========================================
+operation NoOp93(arg : BigInt) : Unit is Adj + Ctl { }
+========================================
+operation NoOp94(arg : Double) : Unit is Adj { }
+========================================
+operation NoOp95(arg : Double) : Unit is Ctl { }
+========================================
+operation NoOp96(arg : Double) : Unit is Adj + Ctl { }
+========================================
+operation NoOp97(arg : Bool) : Unit is Adj { }
+========================================
+operation NoOp98(arg : Bool) : Unit is Ctl { }
+========================================
+operation NoOp99(arg : Bool) : Unit is Adj + Ctl { }
+========================================
+operation NoOp100(arg : String) : Unit is Adj { }
+========================================
+operation NoOp101(arg : String) : Unit is Ctl { }
+========================================
+operation NoOp102(arg : String) : Unit is Adj + Ctl { }
+========================================
+operation NoOp103(arg : Result) : Unit is Adj { }
+========================================
+operation NoOp104(arg : Result) : Unit is Ctl { }
+========================================
+operation NoOp105(arg : Result) : Unit is Adj + Ctl { }
+========================================
+operation NoOp106(arg : Pauli) : Unit is Adj { }
+========================================
+operation NoOp107(arg : Pauli) : Unit is Ctl { }
+========================================
+operation NoOp108(arg : Pauli) : Unit is Adj + Ctl { }
+========================================
+operation NoOp109(arg1 : Int, arg2: Int) : Unit is Adj { }
+========================================
+operation NoOp110(arg1 : Int, arg2: Int) : Unit is Ctl { }
+========================================
+operation NoOp111(arg1 : Int, arg2: Int) : Unit is Adj + Ctl { }
+========================================
+operation NoOp112(arg1 : Int, arg2: BigInt) : Unit is Adj { }
+========================================
+operation NoOp113(arg1 : Int, arg2: BigInt) : Unit is Ctl { }
+========================================
+operation NoOp114(arg1 : Int, arg2: BigInt) : Unit is Adj + Ctl { }
+========================================
+operation NoOp115(arg1 : Int, arg2: Double) : Unit is Adj { }
+========================================
+operation NoOp116(arg1 : Int, arg2: Double) : Unit is Ctl { }
+========================================
+operation NoOp117(arg1 : Int, arg2: Double) : Unit is Adj + Ctl { }
+========================================
+operation NoOp118(arg1 : Int, arg2: Bool) : Unit is Adj { }
+========================================
+operation NoOp119(arg1 : Int, arg2: Bool) : Unit is Ctl { }
+========================================
+operation NoOp120(arg1 : Int, arg2: Bool) : Unit is Adj + Ctl { }
+========================================
+operation NoOp121(arg1 : Int, arg2: String) : Unit is Adj { }
+========================================
+operation NoOp122(arg1 : Int, arg2: String) : Unit is Ctl { }
+========================================
+operation NoOp123(arg1 : Int, arg2: String) : Unit is Adj + Ctl { }
+========================================
+operation NoOp124(arg1 : Int, arg2: Qubit) : Unit is Adj { }
+========================================
+operation NoOp125(arg1 : Int, arg2: Qubit) : Unit is Ctl { }
+========================================
+operation NoOp126(arg1 : Int, arg2: Qubit) : Unit is Adj + Ctl { }
+========================================
+operation NoOp127(arg1 : Int, arg2: Result) : Unit is Adj { }
+========================================
+operation NoOp128(arg1 : Int, arg2: Result) : Unit is Ctl { }
+========================================
+operation NoOp129(arg1 : Int, arg2: Result) : Unit is Adj + Ctl { }
+========================================
+operation NoOp130(arg1 : Int, arg2: Pauli) : Unit is Adj { }
+========================================
+operation NoOp131(arg1 : Int, arg2: Pauli) : Unit is Ctl { }
+=======================================
+operation NoOp132(arg1 : Int, arg2: Pauli) : Unit is Adj + Ctl { }
+========================================
+operation NoOp133(arg1 : BigInt, arg2: Int) : Unit is Adj { }
+========================================
+operation NoOp134(arg1 : BigInt, arg2: Int) : Unit is Ctl { }
+========================================
+operation NoOp135(arg1 : BigInt, arg2: Int) : Unit is Adj + Ctl { }
+========================================
+operation NoOp136(arg1 : BigInt, arg2: BigInt) : Unit is Adj { }
+========================================
+operation NoOp137(arg1 : BigInt, arg2: BigInt) : Unit is Ctl { }
+========================================
+operation NoOp138(arg1 : BigInt, arg2: BigInt) : Unit is Adj + Ctl { }
+========================================
+operation NoOp139(arg1 : BigInt, arg2: Double) : Unit is Adj { }
+========================================
+operation NoOp140(arg1 : BigInt, arg2: Double) : Unit is Ctl { }
+========================================
+operation NoOp141(arg1 : BigInt, arg2: Double) : Unit is Adj + Ctl { }
+========================================
+operation NoOp142(arg1 : BigInt, arg2: Bool) : Unit is Adj { }
+========================================
+operation NoOp143(arg1 : BigInt, arg2: Bool) : Unit is Ctl { }
+========================================
+operation NoOp144(arg1 : BigInt, arg2: Bool) : Unit is Adj + Ctl { }
+========================================
+operation NoOp145(arg1 : BigInt, arg2: String) : Unit is Adj { }
+========================================
+operation NoOp146(arg1 : BigInt, arg2: String) : Unit is Ctl { }
+========================================
+operation NoOp147(arg1 : BigInt, arg2: String) : Unit is Adj + Ctl { }
+========================================
+operation NoOp148(arg1 : BigInt, arg2: Qubit) : Unit is Adj { }
+========================================
+operation NoOp149(arg1 : BigInt, arg2: Qubit) : Unit is Ctl { }
+========================================
+operation NoOp150(arg1 : BigInt, arg2: Qubit) : Unit is Adj + Ctl { }
+========================================
+operation NoOp151(arg1 : BigInt, arg2: Result) : Unit is Adj { }
+========================================
+operation NoOp152(arg1 : BigInt, arg2: Result) : Unit is Ctl { }
+========================================
+operation NoOp153(arg1 : BigInt, arg2: Result) : Unit is Adj + Ctl { }
+========================================
+operation NoOp154(arg1 : BigInt, arg2: Pauli) : Unit is Adj { }
+========================================
+operation NoOp155(arg1 : BigInt, arg2: Pauli) : Unit is Ctl { }
+========================================
+operation NoOp156(arg1 : BigInt, arg2: Pauli) : Unit is Adj + Ctl { }
+========================================
+operation NoOp157(arg1 : Double, arg2: Int) : Unit is Adj { }
+========================================
+operation NoOp158(arg1 : Double, arg2: Int) : Unit is Ctl { }
+========================================
+operation NoOp159(arg1 : Double, arg2: Int) : Unit is Adj + Ctl { }
+========================================
+operation NoOp160(arg1 : Double, arg2: BigInt) : Unit is Adj { }
+========================================
+operation NoOp161(arg1 : Double, arg2: BigInt) : Unit is Ctl { }
+========================================
+operation NoOp162(arg1 : Double, arg2: BigInt) : Unit is Adj + Ctl { }
+========================================
+operation NoOp163(arg1 : Double, arg2: Double) : Unit is Adj { }
+========================================
+operation NoOp164(arg1 : Double, arg2: Double) : Unit is Ctl { }
+========================================
+operation NoOp165(arg1 : Double, arg2: Double) : Unit is Adj + Ctl { }
+========================================
+operation NoOp166(arg1 : Double, arg2: Bool) : Unit is Adj { }
+========================================
+operation NoOp167(arg1 : Double, arg2: Bool) : Unit is Ctl { }
+========================================
+operation NoOp168(arg1 : Double, arg2: Bool) : Unit is Adj + Ctl { }
+========================================
+operation NoOp169(arg1 : Double, arg2: String) : Unit is Adj { }
+========================================
+operation NoOp170(arg1 : Double, arg2: String) : Unit is Ctl { }
+========================================
+operation NoOp171(arg1 : Double, arg2: String) : Unit is Adj + Ctl { }
+========================================
+operation NoOp172(arg1 : Double, arg2: Qubit) : Unit is Adj { }
+========================================
+operation NoOp173(arg1 : Double, arg2: Qubit) : Unit is Ctl { }
+========================================
+operation NoOp174(arg1 : Double, arg2: Qubit) : Unit is Adj + Ctl { }
+========================================
+operation NoOp175(arg1 : Double, arg2: Result) : Unit is Adj { }
+========================================
+operation NoOp176(arg1 : Double, arg2: Result) : Unit is Ctl { }
+========================================
+operation NoOp177(arg1 : Double, arg2: Result) : Unit is Adj + Ctl { }
+========================================
+operation NoOp178(arg1 : Double, arg2: Pauli) : Unit is Adj { }
+========================================
+operation NoOp179(arg1 : Double, arg2: Pauli) : Unit is Ctl { }
+========================================
+operation NoOp180(arg1 : Double, arg2: Pauli) : Unit is Adj + Ctl { }
+========================================
+operation NoOp181(arg1 : Bool, arg2: Int) : Unit is Adj { }
+========================================
+operation NoOp182(arg1 : Bool, arg2: Int) : Unit is Ctl { }
+========================================
+operation NoOp183(arg1 : Bool, arg2: Int) : Unit is Adj + Ctl { }
+========================================
+operation NoOp184(arg1 : Bool, arg2: BigInt) : Unit is Adj { }
+========================================
+operation NoOp185(arg1 : Bool, arg2: BigInt) : Unit is Ctl { }
+========================================
+operation NoOp186(arg1 : Bool, arg2: BigInt) : Unit is Adj + Ctl { }
+========================================
+operation NoOp187(arg1 : Bool, arg2: Double) : Unit is Adj { }
+========================================
+operation NoOp188(arg1 : Bool, arg2: Double) : Unit is Ctl { }
+========================================
+operation NoOp189(arg1 : Bool, arg2: Double) : Unit is Adj + Ctl { }
+========================================
+operation NoOp190(arg1 : Bool, arg2: Bool) : Unit is Adj { }
+========================================
+operation NoOp191(arg1 : Bool, arg2: Bool) : Unit is Ctl { }
+========================================
+operation NoOp192(arg1 : Bool, arg2: Bool) : Unit is Adj + Ctl { }
+========================================
+operation NoOp193(arg1 : Bool, arg2: String) : Unit is Adj { }
+========================================
+operation NoOp194(arg1 : Bool, arg2: String) : Unit is Ctl { }
+========================================
+operation NoOp195(arg1 : Bool, arg2: String) : Unit is Adj + Ctl { }
+========================================
+operation NoOp196(arg1 : Bool, arg2: Qubit) : Unit is Adj { }
+========================================
+operation NoOp197(arg1 : Bool, arg2: Qubit) : Unit is Ctl { }
+========================================
+operation NoOp198(arg1 : Bool, arg2: Qubit) : Unit is Adj + Ctl { }
+========================================
+operation NoOp199(arg1 : Bool, arg2: Result) : Unit is Adj { }
+========================================
+operation NoOp200(arg1 : Bool, arg2: Result) : Unit is Ctl { }
+========================================
+operation NoOp201(arg1 : Bool, arg2: Result) : Unit is Adj + Ctl { }
+========================================
+operation NoOp202(arg1 : Bool, arg2: Pauli) : Unit is Adj { }
+========================================
+operation NoOp203(arg1 : Bool, arg2: Pauli) : Unit is Ctl { }
+========================================
+operation NoOp204(arg1 : Bool, arg2: Pauli) : Unit is Adj + Ctl { }
+========================================
+operation NoOp205(arg1 : String, arg2: Int) : Unit is Adj { }
+========================================
+operation NoOp206(arg1 : String, arg2: Int) : Unit is Ctl { }
+========================================
+operation NoOp207(arg1 : String, arg2: Int) : Unit is Adj + Ctl { }
+========================================
+operation NoOp208(arg1 : String, arg2: BigInt) : Unit is Adj { }
+========================================
+operation NoOp209(arg1 : String, arg2: BigInt) : Unit is Ctl { }
+========================================
+operation NoOp210(arg1 : String, arg2: BigInt) : Unit is Adj + Ctl { }
+========================================
+operation NoOp211(arg1 : String, arg2: Double) : Unit is Adj { }
+========================================
+operation NoOp212(arg1 : String, arg2: Double) : Unit is Ctl { }
+========================================
+operation NoOp213(arg1 : String, arg2: Double) : Unit is Adj + Ctl { }
+========================================
+operation NoOp214(arg1 : String, arg2: Bool) : Unit is Adj { }
+========================================
+operation NoOp215(arg1 : String, arg2: Bool) : Unit is Ctl { }
+========================================
+operation NoOp216(arg1 : String, arg2: Bool) : Unit is Adj + Ctl { }
+========================================
+operation NoOp217(arg1 : String, arg2: String) : Unit is Adj { }
+========================================
+operation NoOp218(arg1 : String, arg2: String) : Unit is Ctl { }
+========================================
+operation NoOp219(arg1 : String, arg2: String) : Unit is Adj + Ctl { }
+========================================
+operation NoOp220(arg1 : String, arg2: Qubit) : Unit is Adj { }
+========================================
+operation NoOp221(arg1 : String, arg2: Qubit) : Unit is Ctl { }
+========================================
+operation NoOp222(arg1 : String, arg2: Qubit) : Unit is Adj + Ctl { }
+========================================
+operation NoOp223(arg1 : String, arg2: Result) : Unit is Adj { }
+========================================
+operation NoOp224(arg1 : String, arg2: Result) : Unit is Ctl { }
+========================================
+operation NoOp225(arg1 : String, arg2: Result) : Unit is Adj + Ctl { }
+========================================
+operation NoOp226(arg1 : String, arg2: Pauli) : Unit is Adj { }
+========================================
+operation NoOp227(arg1 : String, arg2: Pauli) : Unit is Ctl { }
+========================================
+operation NoOp228(arg1 : String, arg2: Pauli) : Unit is Adj + Ctl { }
+========================================
+operation NoOp229(arg1 : Result, arg2: Int) : Unit is Adj { }
+========================================
+operation NoOp230(arg1 : Result, arg2: Int) : Unit is Ctl { }
+========================================
+operation NoOp231(arg1 : Result, arg2: Int) : Unit is Adj + Ctl { }
+========================================
+operation NoOp232(arg1 : Result, arg2: BigInt) : Unit is Adj { }
+========================================
+operation NoOp233(arg1 : Result, arg2: BigInt) : Unit is Ctl { }
+========================================
+operation NoOp234(arg1 : Result, arg2: BigInt) : Unit is Adj + Ctl { }
+========================================
+operation NoOp235(arg1 : Result, arg2: Double) : Unit is Adj { }
+========================================
+operation NoOp236(arg1 : Result, arg2: Double) : Unit is Ctl { }
+========================================
+operation NoOp237(arg1 : Result, arg2: Double) : Unit is Adj + Ctl { }
+========================================
+operation NoOp238(arg1 : Result, arg2: Bool) : Unit is Adj { }
+========================================
+operation NoOp239(arg1 : Result, arg2: Bool) : Unit is Ctl { }
+========================================
+operation NoOp240(arg1 : Result, arg2: Bool) : Unit is Adj + Ctl { }
+========================================
+operation NoOp241(arg1 : Result, arg2: String) : Unit is Adj { }
+========================================
+operation NoOp242(arg1 : Result, arg2: String) : Unit is Ctl { }
+========================================
+operation NoOp243(arg1 : Result, arg2: String) : Unit is Adj + Ctl { }
+========================================
+operation NoOp244(arg1 : Result, arg2: Qubit) : Unit is Adj { }
+========================================
+operation NoOp245(arg1 : Result, arg2: Qubit) : Unit is Ctl { }
+========================================
+operation NoOp246(arg1 : Result, arg2: Qubit) : Unit is Adj + Ctl { }
+========================================
+operation NoOp247(arg1 : Result, arg2: Result) : Unit is Adj { }
+========================================
+operation NoOp248(arg1 : Result, arg2: Result) : Unit is Ctl { }
+========================================
+operation NoOp249(arg1 : Result, arg2: Result) : Unit is Adj + Ctl { }
+========================================
+operation NoOp250(arg1 : Result, arg2: Pauli) : Unit is Adj { }
+========================================
+operation NoOp251(arg1 : Result, arg2: Pauli) : Unit is Ctl { }
+========================================
+operation NoOp252(arg1 : Result, arg2: Pauli) : Unit is Adj + Ctl { }
+========================================
+operation NoOp253(arg1 : Pauli, arg2: Int) : Unit is Adj { }
+========================================
+operation NoOp254(arg1 : Pauli, arg2: Int) : Unit is Ctl { }
+========================================
+operation NoOp255(arg1 : Pauli, arg2: Int) : Unit is Adj + Ctl { }
+========================================
+operation NoOp256(arg1 : Pauli, arg2: BigInt) : Unit is Adj { }
+========================================
+operation NoOp257(arg1 : Pauli, arg2: BigInt) : Unit is Ctl { }
+========================================
+operation NoOp258(arg1 : Pauli, arg2: BigInt) : Unit is Adj + Ctl { }
+========================================
+operation NoOp259(arg1 : Pauli, arg2: Double) : Unit is Adj { }
+========================================
+operation NoOp260(arg1 : Pauli, arg2: Double) : Unit is Ctl { }
+========================================
+operation NoOp261(arg1 : Pauli, arg2: Double) : Unit is Adj + Ctl { }
+========================================
+operation NoOp262(arg1 : Pauli, arg2: Bool) : Unit is Adj { }
+========================================
+operation NoOp263(arg1 : Pauli, arg2: Bool) : Unit is Ctl { }
+========================================
+operation NoOp264(arg1 : Pauli, arg2: Bool) : Unit is Adj + Ctl { }
+========================================
+operation NoOp265(arg1 : Pauli, arg2: String) : Unit is Adj { }
+========================================
+operation NoOp266(arg1 : Pauli, arg2: String) : Unit is Ctl { }
+========================================
+operation NoOp267(arg1 : Pauli, arg2: String) : Unit is Adj + Ctl { }
+========================================
+operation NoOp268(arg1 : Pauli, arg2: Qubit) : Unit is Adj { }
+========================================
+operation NoOp269(arg1 : Pauli, arg2: Qubit) : Unit is Ctl { }
+========================================
+operation NoOp270(arg1 : Pauli, arg2: Qubit) : Unit is Adj + Ctl { }
+========================================
+operation NoOp271(arg1 : Pauli, arg2: Result) : Unit is Adj { }
+========================================
+operation NoOp272(arg1 : Pauli, arg2: Result) : Unit is Ctl { }
+========================================
+operation NoOp273(arg1 : Pauli, arg2: Result) : Unit is Adj + Ctl { }
+========================================
+operation NoOp274(arg1 : Pauli, arg2: Pauli) : Unit is Adj { }
+========================================
+operation NoOp275(arg1 : Pauli, arg2: Pauli) : Unit is Ctl { }
+========================================
+operation NoOp276(arg1 : Pauli, arg2: Pauli) : Unit is Adj + Ctl { }
+========================================
+function TrueOp1(arg: Bool) : Bool {return true;}
+========================================
+function TrueOp2(arg: Int) : Bool {return true;}
+========================================
+function TrueOp3(arg: BigInt) : Bool {return true;}
+========================================
+function TrueOp4(arg: Double) : Bool {return true;}
+========================================
+operation TrueOp5(arg: Bool) : Bool {return false;}
+========================================
+operation TrueOp6(arg: Int) : Bool {return false;}
+========================================
+operation TrueOp7(arg: BigInt) : Bool {return false;}
+========================================
+operation TrueOp8(arg: Double) : Bool {return false;}
+========================================
+operation BoolToDouble(arg: Bool) : Double {return 0.0;}
+========================================
+operation AdjointGenDirective1 () : Unit is Adj {
+    body (...) {}
+    adjoint self;
+}
+========================================
+operation AdjointGenDirective2 () : Unit is Adj {
+    body (...) {}
+    adjoint invert;
+}
+========================================
+operation AdjointGenDirective4 () : Unit is Adj{
+    body (...) {}
+    adjoint auto;
+}
+========================================
+operation AdjointGenDirective3 () : Unit is Adj{
+    body (...) {}
+    adjoint distribute;
+}
+========================================
+operation PrepareEntangledPair(left : Qubit, right : Qubit) : Unit is Adj + Ctl {
+    H(left);
+    CNOT(left, right);
+}
+========================================
+operation ApplyCorrection(src : Qubit, intermediary : Qubit, dest : Qubit) : Unit is Adj {
+    if (MResetZ(src) == One) { Z(dest); }
+    if (MResetZ(intermediary) == One) { X(dest); }
+}
+========================================
+operation Qop(q : Qubit) : Unit is Adj {
+    body (...) { H(q); }
+    adjoint self;
+}
+========================================
+operation NoArgs() : Unit is Adj + Ctl {
+    body (...) {
+        use q = Qubit();
+        X(q);
+        if M(q) != One { fail("Unexpected qubit state"); }
+    }
+    adjoint self;
+    controlled (ctrls, ...) {
+        use q = Qubit();
+        Controlled X(ctrls, q);
+        if M(q) != One { fail("Unexpected qubit state"); }
+    }
+}
+========================================
+operation Foo1 (q : Qubit) : Unit is Adj + Ctl {
+    body (...) {
+        X(q);
+    }
+
+    adjoint self;
+    controlled distribute;
+    controlled adjoint self;
+}
+========================================
+operation ControlledGenDirective1 () : Unit is Ctl {
+    body (...) {}
+    controlled auto;
+}
+========================================
+operation ControlledGenDirective2 () : Unit is Ctl {
+    body (...) {}
+    controlled distribute;
+}
+========================================
+operation ControlledAdjointGenDirective1 () : Unit is Adj + Ctl{
+    body (...) {}
+    controlled adjoint self;
+    adjoint auto;
+    controlled auto;
+}
+========================================
+operation ControlledAdjointGenDirective2 () : Unit is Adj + Ctl{
+    body (...) {}
+    controlled adjoint invert;
+    adjoint auto;
+    controlled auto;
+}
+========================================
+operation ControlledAdjointGenDirective3 () : Unit is Adj + Ctl{
+    body (...) {}
+    controlled adjoint distribute;
+    adjoint auto;
+    controlled auto;
+}
+========================================
+operation ControlledAdjointGenDirective4 () : Unit is Adj + Ctl{
+    body (...) {}
+    controlled adjoint auto;
+    adjoint auto;
+    controlled auto;
+}
+========================================
+operation ControlledAdjointGenDirective9 (q : Qubit) : Unit is Adj + Ctl {
+    body (...) { }
+    adjoint self;
+    controlled adjoint self;
+    controlled auto;
+}
+========================================
+operation VariableNeedsFunctorSupport1 (q : Qubit) : Unit {
+    body (...) {
+        let op = Controllable;
+        op(q);
+    }
+    adjoint auto;
+}
+========================================
+operation Empty (qs : Qubit[]) : Unit is Adj + Ctl {
+}
+========================================
+operation DoNothing (qs : Qubit[]) : Unit is Adj + Ctl {
+    let dummy = 1;
+}
+========================================
+operation CNOT (control : Qubit, target : Qubit) : Unit is Adj + Ctl {
+
+    body (...) {
+        Controlled X([control], target);
+    }
+
+    adjoint self;
+}
+========================================
+operation VariableDeclaration1 () : Unit {
+    use q = Qubit() {}
+}
+========================================
+operation VariableDeclaration2 () : Unit {
+    use q = (Qubit()) {}
+}
+========================================
+operation VariableDeclaration3 () : Unit {
+    use (q) = Qubit() {}
+}
+========================================
+operation VariableDeclaration4 () : Unit {
+    use (q) = (Qubit()) {}
+}
+========================================
+operation VariableDeclaration5 () : Unit {
+    use (q1, q2) = (Qubit(), Qubit()) {}
+}
+========================================
+operation VariableDeclaration6 () : Unit {
+    use (q1, (q2)) = (Qubit(), Qubit()) {}
+}
+========================================
+operation VariableDeclaration7 () : Unit {
+    use (qs) = (Qubit(), Qubit()) {}
+}
+========================================
+operation VariableDeclaration8 () : Unit {
+    use qs = (Qubit(), Qubit()) {}
+}
+========================================
+operation VariableDeclaration9 () : Unit {
+    use (q1, q2) = (Qubit()) {}
+}
+========================================
+operation VariableDeclaration10 () : Unit {
+    use (q1, q2, q3) = (Qubit(), (Qubit(), Qubit())) {}
+}
+========================================
+operation VariableDeclaration31() : Unit {
+    borrow q = Qubit()
+}
+========================================
+function CopyAndUpdateArray1 (arr : Int[]) : Int[] {
+    return arr w/ 0 <- 1;
+}
+========================================
+function CopyAndUpdateArray3 (arr : Int[][]) : Int[][] {
+    return arr w/ 0 <- [0, size = 10];
+}
+========================================
+function CopyAndUpdateArray5 (arr : Int[]) : Int[] {
+    return arr w/ 0 <- 1.;
+}
+========================================
+function CopyAndUpdateArray9 (arr : Int[]) : Int[] {
+    return arr
+        w/ 0 <- 1
+        w/ 1 <- 2;
+}
+========================================
+function CopyAndUpdateArray10 (arr : Int[]) : Int[] {
+    return arr w/ 0 .. 2 <- [1,1,1];
+}
+========================================
+function UpdateAndReassign1 () : Unit {
+    mutable arr = [0, size = 10];
+    set arr w/= 1 <- 0;
+}
+========================================
+operation Foo2() : Unit {
+    let r = Zero;
+
+    if (r == Zero) {
+        for (index in 0 .. 3) {
+            let temp = index;
+        }
+
+        repeat {
+            let success = true;
+        } until (success)
+        fixup {
+            let temp2 = 0;
+        }
+    }
+}
+========================================
+operation Foo3() : Unit {
+    let r = Zero;
+
+    if (r == Zero) {
+        let temp = 2;
+    }
+}
+========================================
+operation Foo4() : Unit {
+    let r = Zero;
+
+    if (r == Zero) {
+        mutable temp = 3;
+        set temp = 4;
+    }
+}
+========================================
+operation Foo5() : Unit {
+    let r = Zero;
+
+    mutable temp = 3;
+    if (r == Zero) {
+        set temp = 4;
+    }
+}
+========================================
+operation Foo6() : Unit {
+    let r = Zero;
+
+    if r == Zero {
+        mutable x = 0;
+        if r == One {
+            set x = 1;
+        }
+    }
+}
+========================================
+operation Foo7() : Unit {
+    let r = Zero;
+
+    mutable x = 0;
+    if r == Zero {
+        if r == One {
+            set x = 1;
+        }
+    }
+}
+========================================
+operation Foo8() : Unit {
+    let r = Zero;
+
+    if r == Zero {
+        if r == One {
+            return ();
+        }
+    }
+}
+========================================
+function NoFunc0(a: Int) : Int {}
+========================================
+function NoFunc1(a: Int) : BigInt {}
+========================================
+function NoFunc2(a: Int) : Double {}
+========================================
+function NoFunc3(a: Int) : Bool {}
+========================================
+function NoFunc4(a: Int) : Result {}
+========================================
+function NoFunc5(a: Int) : Pauli {}
+========================================
+function NoFunc6(a: Int) : Range {}
+========================================
+function NoFunc7(a: BigInt) : Int {}
+========================================
+function NoFunc8(a: BigInt) : BigInt {}
+========================================
+function NoFunc9(a: BigInt) : Double {}
+========================================
+function NoFunc10(a: BigInt) : Bool {}
+========================================
+function NoFunc11(a: BigInt) : Result {}
+========================================
+function NoFunc12(a: BigInt) : Pauli {}
+========================================
+function NoFunc13(a: BigInt) : Range {}
+========================================
+function NoFunc14(a: Double) : Int {}
+========================================
+function NoFunc15(a: Double) : BigInt {}
+========================================
+function NoFunc16(a: Double) : Double {}
+========================================
+function NoFunc17(a: Double) : Bool {}
+========================================
+function NoFunc18(a: Double) : Result {}
+========================================
+function NoFunc19(a: Double) : Pauli {}
+========================================
+function NoFunc20(a: Double) : Range {}
+========================================
+function NoFunc21(a: Bool) : Int {}
+========================================
+function NoFunc22(a: Bool) : BigInt {}
+========================================
+function NoFunc23(a: Bool) : Double {}
+========================================
+function NoFunc24(a: Bool) : Bool {}
+========================================
+function NoFunc25(a: Bool) : Result {}
+========================================
+function NoFunc26(a: Bool) : Pauli {}
+========================================
+function NoFunc27(a: Bool) : Range {}
+========================================
+function NoFunc28(a: Result) : Int {}
+========================================
+function NoFunc29(a: Result) : BigInt {}
+========================================
+function NoFunc30(a: Result) : Double {}
+========================================
+function NoFunc31(a: Result) : Bool {}
+========================================
+function NoFunc32(a: Result) : Result {}
+========================================
+function NoFunc33(a: Result) : Pauli {}
+========================================
+function NoFunc34(a: Result) : Range {}
+========================================
+function NoFunc35(a: Pauli) : Int {}
+========================================
+function NoFunc36(a: Pauli) : BigInt {}
+========================================
+function NoFunc37(a: Pauli) : Double {}
+========================================
+function NoFunc38(a: Pauli) : Bool {}
+========================================
+function NoFunc39(a: Pauli) : Result {}
+========================================
+function NoFunc40(a: Pauli) : Pauli {}
+========================================
+function NoFunc41(a: Pauli) : Range {}
+========================================
+function NoFunc42(a: Range) : Int {}
+========================================
+function NoFunc43(a: Range) : BigInt {}
+========================================
+function NoFunc44(a: Range) : Double {}
+========================================
+function NoFunc45(a: Range) : Bool {}
+========================================
+function NoFunc46(a: Range) : Result {}
+========================================
+function NoFunc47(a: Range) : Pauli {}
+========================================
+function NoFunc48(a: Range) : Range {}
+========================================
+function IsDivisibleByThreeOrFiveOrSeven(i: Int) : (Bool, Bool, Bool) {
+    mutable isDivisibleByThree = false;
+    mutable isDivisibleByFive = false;
+    mutable isDivisibleByEleven = false;
+    if ((i % 3) == 0) {
+        set isDivisibleByThree = true;
+    }
+    elif ((i % 5) == 0){
+        set isDivisibleByFive = true;
+    }
+    else {
+        set isDivisibleByEleven = (i % 7) == 0;
+    }
+
+    return (isDivisibleByThree, isDivisibleByFive, isDivisibleByEleven);
+}
+========================================
+function ForLoop() : Unit {
+    mutable counter = 0;
+    for (i in 1 .. 2 .. 10) {
+        set counter = counter + 1;
+    }
+}
+========================================
+function WhileLoop() : Unit {
+    let arr = [-10, -11, 36, -49];
+    mutable (item, index) = (-1, 0);
+    while (index < Length(arr) && item < 0) {
+        set item = arr[index];
+        set index += 1;
+    }
+}
+========================================
+function AllPathsReturnValue1 () : Int {
+    return 1;
+}
+========================================
+function AllPathsReturnValue2 () : Int {
+    if (true) { return 1; }
+    else { return 1; }
+}
+========================================
+function AllPathsReturnValue3 () : Int {
+    if (true) { return 1; }
+    elif (true) { return 1; }
+    else { return 1; }
+}
+========================================
+function AllPathsReturnValue4 () : Int {
+    if (true) {
+        if (true) { return 1; }
+        else { return 1; }
+    }
+    else { return 1; }
+}
+========================================
+function AllPathsReturnValue5 () : Int {
+    if (true) { return 1; }
+    else {
+        if (true) { return 1; }
+        else { return 1; }
+    }
+}
+========================================
+operation AllPathsReturnValue6 () : Int {
+    repeat { return 1; }
+    until (true)
+    fixup {}
+}
+========================================
+operation AllPathsReturnValue7 () : Int {
+    repeat {
+        if (true) { return 1; }
+        else { return 1; }
+    }
+    until (true)
+    fixup {}
+}
+========================================
+operation AllPathsReturnValue8 () : Int {
+    use q = Qubit() {
+        return 1;
+    }
+}
+========================================
+operation AllPathsReturnValue9 () : Int {
+    borrow q = Qubit() {
+        return 1;
+    }
+}
+========================================
+operation AllPathsReturnValue10 () : Int {
+    use q = Qubit() {
+        repeat { return 1; }
+        until (true);
+    }
+}
+========================================
+operation AllPathsReturnValue11 () : Int {
+    borrow q = Qubit() {
+        repeat { return 1; }
+        until (true);
+    }
+}
+========================================
+operation AllPathsReturnValue12 (cond : Bool) : Int {
+    if (cond) {
+        borrow q = Qubit() {
+            repeat { return 1; }
+            until (true);
+        }
+    }
+    else {
+        use q = Qubit() {
+            repeat { return 1; }
+            until (true)
+            fixup {}
+        }
+    }
+}
+========================================
+operation AllPathsReturnValue13 () : Int {
+    within {
+        return 1;
+    }
+    apply {}
+}
+========================================
+operation AllPathsReturnValue14 () : Int {
+    within {}
+    apply {
+        return 1;
+    }
+}
+========================================
+function NotAllPathsReturnValue1 () : Int {
+    if (true) { return 1; }
+}
+========================================
+function NotAllPathsReturnValue2 () : Int {
+    if (true) {}
+    else { return 1; }
+}
+========================================
+function NotAllPathsReturnValue3 () : Int {
+    if (true) { return 1; }
+    elif (true) { }
+    else { return 1; }
+}
+========================================
+function NotAllPathsReturnValue4 () : Int {
+    if (true) {
+        if (true) { return 1; }
+    }
+    else { return 1; }
+}
+========================================
+function NotAllPathsReturnValue5 () : Int {
+    if (true) {
+        if (true) {}
+        else { return 1; }
+    }
+    else { return 1; }
+}
+========================================
+function NotAllPathsReturnValue6 () : Int {
+    if (true) { return 1; }
+    else {
+        if (true) { return 1; }
+    }
+}
+========================================
+operation NotAllPathsReturnValue7 () : Int {
+    if (true) { return 1; }
+    else {
+        if (true) {}
+        else { return 1; }
+    }
+}
+========================================
+operation NotAllPathsReturnValue8 () : Int {
+    repeat {}
+    until (true)
+    fixup { return 1; }
+}
+========================================
+operation NotAllPathsReturnValue9 () : Int {
+    repeat {
+        if (true) {}
+        else { return 1; }
+    }
+    until (true)
+    fixup {}
+}
+========================================
+operation NotAllPathsReturnValue10 () : Int {
+    repeat {
+        if (true) { return 1; }
+        elif (true) {}
+        else { return 1; }
+    }
+    until (true)
+    fixup {}
+}
+========================================
+operation NotAllPathsReturnValue11 () : Int {
+    use q = Qubit() {
+        repeat {}
+        until (true)
+        fixup { return 1; }
+    }
+}
+========================================
+operation NotAllPathsReturnValue12 () : Int {
+    borrow q = Qubit() {
+        repeat {}
+        until (true)
+        fixup { return 1; }
+    }
+}
+========================================
+function NotAllPathsReturnValue13 () : Int {
+    for i in 1 .. 0 { // empty range
+        return 1;     // never executed
+    }
+}
+========================================
+function NotAllPathsReturnValue14 () : Int {
+    while (false) {
+        return 1;
+    }
+}
+========================================
+function NotAllPathsReturnOrFail1 () : Int {
+    if (true) { fail ""; }
+    return 1;
+}
+========================================
+function NotAllPathsReturnOrFail2 () : Int {
+    if (true) {}
+    else { fail ""; }
+    return 1;
+}
+========================================
+function NotAllPathsReturnOrFail3 () : Int {
+    if (true) { fail ""; }
+    elif (true) { }
+    else { fail ""; }
+    return 1;
+}
+========================================
+function NotAllPathsReturnOrFail4 () : Int {
+    if (true) {
+        if (true) { fail ""; }
+    }
+    else { fail ""; }
+    return 1;
+}
+========================================
+function NotAllPathsReturnOrFail5 () : Int {
+    if (true) {
+        if (true) {}
+        else { fail ""; }
+    }
+    else { fail ""; }
+    return 1;
+}
+========================================
+function NotAllPathsReturnOrFail6 () : Int {
+    if (true) { fail ""; }
+    else {
+        if (true) { fail ""; }
+    }
+    return 1;
+}
+========================================
+operation NotAllPathsReturnOrFail7 () : Int {
+    if (true) { fail ""; }
+    else {
+        if (true) {}
+        else { fail ""; }
+    }
+    return 1;
+}
+========================================
+operation NotAllPathsReturnOrFail8 () : Int {
+    repeat {}
+    until (true)
+    fixup { fail ""; }
+    return 1;
+}
+========================================
+operation NotAllPathsReturnOrFail9 () : Int {
+    repeat {
+        if (true) {}
+        else { fail ""; }
+    }
+    until (true)
+    fixup {}
+    return 1;
+}
+========================================
+operation NotAllPathsReturnOrFail10 () : Int {
+    repeat {
+        if (true) { fail ""; }
+        elif (true) {}
+        else { fail ""; }
+    }
+    until (true)
+    fixup {}
+    return 1;
+}
+========================================
+operation NotAllPathsReturnOrFail11 () : Int {
+    use q = Qubit() {
+        repeat {}
+        until (true)
+        fixup { fail ""; }
+    }
+    return 1;
+}
+========================================
+operation NotAllPathsReturnOrFail12 () : Int {
+    borrow q = Qubit() {
+        repeat {}
+        until (true)
+        fixup { fail ""; }
+    }
+    return 1;
+}
+========================================
+function NotAllPathsReturnOrFail13 (range : Range) : Int {
+    for i in range {
+        fail "";
+    }
+    return 1;
+}
+========================================
+function NotAllPathsReturnOrFail14 (cond : Bool) : Int {
+    while (cond) {
+        fail "";
+    }
+    return 1;
+}
+========================================
+operation ReturnFromWithinUsing1 () : Unit {
+    use q = Qubit() {
+        return ();
+    }
+}
+========================================
+operation ReturnFromWithinUsing2 () : Unit {
+    use q = Qubit() {
+        if (true) { return (); }
+        else {}
+    }
+}
+========================================
+operation ReturnFromWithinUsing3 () : Unit {
+    use q = Qubit() {
+        if (true) {}
+        elif (true) { return (); }
+        else {}
+    }
+}
+========================================
+operation ReturnFromWithinUsing4 () : Unit {
+    use q = Qubit() {
+        if (true) {}
+        elif (true) {}
+        else { return (); }
+    }
+}
+========================================
+operation ReturnFromWithinUsing5 () : Unit {
+    use q = Qubit() {
+        if (true) { return (); }
+        elif (true) { return (); }
+        else { return (); }
+    }
+}
+========================================
+operation ReturnFromWithinBorrowing1 () : Unit {
+    borrow q = Qubit() {
+        return ();
+    }
+}
+========================================
+operation ReturnFromWithinBorrowing5 () : Unit {
+    borrow q = Qubit() {
+        if (true) { return (); }
+        elif (true) { return (); }
+        else { return (); }
+    }
+}
+========================================
+operation ValidReturnPlacement14 () : Unit {
+    use q = Qubit() {
+        for i in 1 .. 10 {
+            use c = Qubit() {
+                if (i == 1) { return (); }
+            }
+        }
+    }
+}
+========================================
+function UpdateAndReassign2 () : Unit {
+    mutable arr = [0, size = 10];
+    set arr w/= 0 .. 2 <- [0,0,0];
+}
+========================================
+function UpdateAndReassign3 () : Unit {
+    mutable arr = [0, size = 10];
+    set arr w/= 0 .. Length(arr)-1 <- arr w/ 0 <- 1;
+}
+========================================
+function UpdateAndReassign4 () : Unit {
+    mutable arr = [0, size = 10];
+    set arr w/= 1 <- 0.;
+}
+========================================
+function UpdateAndReassign5 () : Unit {
+    mutable arr = [0, size = 10];
+    set arr w/= 0 .. Length(arr) <- 1 .. Length(arr);
+}
+========================================
+function ApplyAndReassign1 () : Unit {
+    mutable i = 0;
+    set i += 1;
+    set i -= 1;
+    set i *= 10;
+    set i /= 2;
+    set i %= 3;
+    set i ^= 2;
+}
+========================================
+function ApplyAndReassign2 () : Unit {
+    mutable i = true;
+    set i and= false;
+    set i or= true;
+}
+========================================
+function ApplyAndReassign3 () : Unit {
+    mutable i = 23;
+    set i &&&= 2^10 - 1;
+    set i |||= 1;
+    set i ^^^= 2^10 - 1;
+    set i <<<= 3;
+    set i >>>= 1;
+}
+========================================
+function ApplyAndReassign4 () : Unit {
+    mutable i = 1L;
+    set i ^= 2;
+}
+========================================
+function ApplyAndReassign5 () : Unit {
+    mutable i = 1L;
+    set i += 2L ^ 2;
+}
+========================================
+function ApplyAndReassign6 () : Unit {
+    mutable i = true;
+    set i and= 1;
+}
+========================================
+function ApplyAndReassign7 () : Unit {
+    mutable i = 1;
+    set i += 1.;
+}
+========================================
+function ApplyAndReassign8 () : Unit {
+    let i = 1;
+    set i += 1;
+}
+========================================
+function ApplyAndReassign9 () : Unit {
+    mutable a = [0, size = 10];
+    set a[0] = 1;
+}
+========================================
+function ApplyAndReassign10 () : Unit {
+    mutable a = [0, size = 10];
+    set a[0] += 1;
+}
+========================================
+function ApplyAndReassign11 () : Unit {
+    set bool = true;
+}
+========================================
+operation ValidConjugation7 (cond : Bool) : Unit {
+    mutable foo = 1;
+    within {
+        if (cond) {
+            fail "{foo}";
+        }
+    }
+    apply {
+        if (not cond) {
+            set (_, (foo, _)) = (1, (10, ""));
+        }
+    }
+}
+========================================
+operation InvalidConjugation3 () : Unit {
+    mutable foo = 1;
+    within {
+        let _ = foo;
+    }
+    apply {
+        set foo = 10;
+    }
+}
+========================================
+operation InvalidConjugation4 () : Unit {
+    mutable foo = 1;
+    within {
+        let _ = foo;
+    }
+    apply {
+        set (_, foo) = (1, 10);
+    }
+}
+========================================
+operation InvalidConjugation5 () : Unit {
+    mutable foo = 1;
+    within {
+        if (foo + 1 > 0) {}
+    }
+    apply {
+        set (_, foo) = (1, 10);
+    }
+}
+========================================
+function ValidArraySlice1 (arr : Int[]) : Int[] {
+    return arr[3...];
+}
+========================================
+function ValidArraySlice2 (arr : Int[]) : Int[] {
+    return arr [0 .. 2 ... ];
+}
+========================================
+function ValidArraySlice3 (arr : Int[]) : Int[] {
+    return arr[...2];
+}
+========================================
+function ValidArraySlice4 (arr : Int[]) : Int[] {
+    return arr[...2..3];
+}
+========================================
+function ValidArraySlice5 (arr : Int[]) : Int[] {
+    return arr[...2...];
+}
+========================================
+function ValidArraySlice6 (arr : Int[]) : Int[] {
+    return arr[...];
+}
+========================================
+function ValidArraySlice7 (arr : Int[]) : Int[] {
+    return arr [4 .. -2 ... ];
+}
+========================================
+function ValidArraySlice8 (arr : Int[]) : Int[] {
+    return arr[ ... -1 .. 3];
+}
+========================================
+function ValidArraySlice9 (arr : Int[]) : Int[] {
+    return arr[...-1...];
+}
+========================================
+operation op0 (q : Qubit) : Result {
+
+    // Body comment
+    repeat {
+        mutable res = new Result[2];
+        let o = [1.,2.,-4.2];
+    } until (res[0] == One)
+    fixup {
+        set res w/= 0 <- One;
+    }
+
+    using (qs = Qubit [4]) {
+        return One;
+    }
+}
+========================================
+function pickM (p : Pauli, d : Double) : (Qubit => Result) {
+
+    // Function comment
+    let twice = d * 2.0;
+
+    if (twice > 1.0) {
+        if (p == PauliZ) {
+            return op0;
+        }
+    }
+
+    return (M);
+}
+========================================
+function Indexed1(xs : Int[], i : Int) : Int {
+    return xs[i];
+}
+========================================
+function CommonBaseType11 () : BigInt {
+    return 1 + 1;
+}
+========================================
+function CommonBaseType12 () : BigInt {
+    return 1L + 1;
+}
+========================================
+function UnitEquality(x : Unit, y : Unit) : Bool { return x == y; }
+========================================
+function UnitInequality(x : Unit, y : Unit) : Bool { return x != y; }
+========================================
+function IntEquality(x : Int, y : Int) : Bool { return x == y; }
+========================================
+function IntInequality(x : Int, y : Int) : Bool { return x != y; }
+========================================
+function BigIntEquality(x : BigInt, y : BigInt) : Bool { return x == y; }
+========================================
+function BigIntInequality(x : BigInt, y : BigInt) : Bool { return x != y; }
+========================================
+function DoubleEquality(x : Double, y : Double) : Bool { return x == y; }
+========================================
+function DoubleInequality(x : Double, y : Double) : Bool { return x != y; }
+========================================
+function BoolEquality(x : Bool, y : Bool) : Bool { return x == y; }
+========================================
+function BoolInequality(x : Bool, y : Bool) : Bool { return true != true; }
+========================================
+function StringEquality(x : String, y : String) : Bool { return x == y; }
+========================================
+function StringInequality(x : String, y : String) : Bool { return x != y; }
+========================================
+function QubitEquality(x : Qubit, y : Qubit) : Bool { return x == y; }
+========================================
+function QubitInequality(x : Qubit, y : Qubit) : Bool { return x != y; }
+========================================
+function ResultEquality(x : Result, y : Result) : Bool { return x == y; }
+========================================
+function ResultInequality(x : Result, y : Result) : Bool { return x != y; }
+========================================
+function PauliEquality(x : Pauli, y : Pauli) : Bool { return x == y; }
+========================================
+function PauliInequality(x : Pauli, y : Pauli) : Bool { return x != y; }
+========================================
+function ArrayEquality(x : Int[], y : Int[]) : Bool { return x == y; }
+========================================
+function ArrayInequality(x : Int[], y : Int[]) : Bool { return x != y; }
+========================================
+function NoCommonBaseEquality(x : Int, y : String) : Bool { return x == y; }
+========================================
+function NoCommonBaseInequality(x : Int, y : String) : Bool { return x != y; }
+========================================
+function SizedArrayInvalid3() : Int[] {
+    return [5, size = (1, 2)];
+}
+========================================
+function SizedArrayInvalid1(n : Double) : Int[] {
+    return [10, size = n];
+}
+========================================
+function SizedArrayInvalid2(n : String) : Int[] {
+    return [10, size = n];
+}
+========================================
+function SizedArray1(n : Int) : Int[] {
+    return [10, size = n];
+}
+========================================
+function SizedArray2() : String[] {
+    return ["foo", size = 0];
+}
+========================================
+function SizedArray3() : String[] {
+    return ["foo", size = -1];
+}
+========================================
+operation OverrideBqfToBmf(q : Qubit) : Unit is Adj{
+    X(q);
+}
+========================================
+operation OverrideBmfToFull(q : Qubit) : Unit {
+    if (M(q) == One) {
+        X(q);
+    }
+}
+========================================
+operation OverrideBmfToBqf(q : Qubit) : Unit {
+    if (M(q) == One) {
+        X(q);
+    }
+}
+========================================
+operation OverrideFullToBmf(q : Qubit) : Bool {
+    return M(q) == One ? true | false;
+}
+========================================
+operation ExplicitBmf(q : Qubit) : Unit {
+    if (M(q) == One) {
+        X(q);
+    }
+}
+========================================
+operation CallBmfFullB(q : Qubit) : Result {
+    let r = M(q);
+    if (r == One) {
+        X(q);
+    }
+    return r;
+}
+========================================
+operation CallBmfFullC(r : Result) : Bool {
+    return r == One ? true | false;
+}
+========================================
+operation CallFullC(q : Qubit) : Result {
+    let r = M(q);
+    if (r == One) {
+        X(q);
+    }
+    return r;
+}
+========================================
+operation CallFullOverrideC(q : Qubit) : Unit {
+    if (M(q) == One) {
+        X(q);
+    }
+}
+========================================
+operation CallBmfOverrideC(q : Qubit) : Bool {
+    let r = M(q);
+    if (r == One) {
+        X(q);
+    }
+    return r == One ? true | false;
+}
+========================================
+operation ReferenceBmfB(q : Qubit) : Unit {
+    if (M(q) == One) {
+        X(q);
+    }
+}
+========================================
+function ResultAsBool(result : Result) : Bool {
+    return result == Zero ? false | true;
+}
+========================================
+function ResultAsBoolNeq(result : Result) : Bool {
+    return result != One ? false | true;
+}
+========================================
+operation ResultAsBoolOp(result : Result) : Bool {
+    return result == Zero ? false | true;
+}
+========================================
+function ResultAsBoolNeqOp(result : Result) : Bool {
+    return result != One ? false | true;
+}
+========================================
+operation ResultAsBoolOpReturnIf(result : Result) : Bool {
+    if (result == Zero) {
+        return false;
+    } else {
+        return true;
+    }
+}
+========================================
+operation ResultAsBoolNeqOpReturnIf(result : Result) : Bool {
+    if (result != One) {
+        return false;
+    } else {
+        return true;
+    }
+}
+========================================
+operation ResultAsBoolOpReturnIfNested(result : Result) : Bool {
+    if (result == Zero) {
+        let x = 5;
+        if (x == 5) {
+            return false;
+        } else {
+            fail "error";
+        }
+    } else {
+        let x = 7;
+        if (x == 7) {
+            return true;
+        } else {
+            fail "error";
+        }
+    }
+}
+========================================
+operation ResultAsBoolOpSetIf(result : Result) : Bool {
+    mutable b = false;
+    if (result == One) {
+        set b = true;
+    }
+    return b;
+}
+========================================
+operation ResultAsBoolNeqOpSetIf(result : Result) : Bool {
+    mutable b = false;
+    if (result != Zero) {
+        set b = true;
+    }
+    return b;
+}
+========================================
+operation NestedResultIfReturn(b : Bool, result : Result) : Bool {
+    if (b) {
+        if (result == One) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+========================================
+operation ElifSet(result : Result, flag : Bool) : Bool {
+    mutable b = false;
+    if (flag) {
+        set b = true;
+    } elif (result != Zero) {
+        set b = true;
+    }
+    return b;
+}
+========================================
+operation SetLocal(result : Result) : Unit {
+    if (result == One) {
+        mutable b = false;
+        set b = true;
+    }
+}
+========================================
+operation SetReusedName(result : Result) : Unit {
+    mutable b = false;
+    if (result == One) {
+        if (true) {
+            // Re-declaring b is an error, but it shouldn't affect the invalid sets below.
+            mutable b = false;
+            set b = true;
+        }
+        set b = true;
+    }
+}
+========================================
+operation SetTuple(result : Result) : Unit {
+    mutable a = false;
+    if (result == One) {
+        mutable b = 0;
+        mutable c = 0.0;
+        set (c, (b, a)) = (1.0, (1, true));
+    }
+}
+========================================
+function EmptyIf(result : Result) : Unit {
+    if (result == Zero) { }
+}
+========================================
+function EmptyIfNeq(result : Result) : Unit {
+    if (result != Zero) { }
+}
+========================================
+operation EmptyIfOp(result : Result) : Unit {
+    if (result == Zero) { }
+}
+========================================
+operation EmptyIfNeqOp(result : Result) : Unit {
+    if (result != Zero) { }
+}
+========================================
+operation Reset(q : Qubit) : Unit {
+    if (M(q) == One) {
+        X(q);
+    }
+}
+========================================
+operation ResetNeq(q : Qubit) : Unit {
+    if (M(q) != Zero) {
+        X(q);
+    }
+}
+========================================
+function ResultArray(rs : Result[]) : Bool {
+    return rs == [One] ? true | false;
+}
+========================================
+operation EntryPoint1() : Result {
+    return Zero;
+}
+========================================
+operation EntryPoint2() : Result[] {
+    return [Zero];
+}
+========================================
+operation EntryPoint6() : (Int, Result) {
+    return (0, Zero);
+}
+========================================
+operation EntryPoint7() : String[] {
+    return [""];
+}
+========================================
+operation ValidEntryPoint4(arg : String) : Unit {}
+========================================
+operation ValidEntryPoint5(arg : String[]) : Unit {}
+========================================
+operation ValidEntryPoint6(a : Int, b: Double[]) : Unit {}
+========================================
+operation ValidEntryPoint16(a : BigInt[]) : Unit {}
+========================================
+operation ValidEntryPoint18(a : Result[]) : Unit {}
+========================================
+operation ValidEntryPoint19(a : Pauli[]) : Unit {}
+========================================
+operation Test () : Int {
+    let x = 5;
+    let y = x + 3;
+    let z = y * 5 % 4;
+    let w = z > 1;
+    let a = w ? 2 | y / 2;
+    return a;
+}
+========================================
+operation TestArithmeticForInt (x : Int) : Int {
+    let y = ((x - 0) + (x / 1) * 1) + 0;
+    return y;
+}
+========================================
+operation TestArithmeticForDouble (x : Double) : Double {
+    let y = ((x - 0.0) + (x / 1.0) * 1.0) + 0.0;
+    return y;
+}
+========================================
+operation TestArithmeticForBigInt (x : BigInt) : BigInt {
+    let y = ((x - 0L) + (x / 1L) * 1L) + 0L;
+    return y;
+}
+========================================
+function f (x : Int, w : Int) : Int {
+    mutable y = 1;
+    mutable z = new Int[5];
+    set z = z w/ 0 <- x;
+    while (z[0] > 0) {
+        set y += w;
+        set z = z w/ 0 <- z[0] / 2;
+    }
+    mutable b = 0;
+    for (a in z) {
+        set b += a;
+    }
+    return y + b;
+}
+========================================
+function g1 (x : Int) : Int {
+    if (x == 0) {
+        return 0;
+    }
+    if (x == 1) {
+        return 1;
+    }
+    return g1(x-1) + g1(x-2);
+}
+========================================
+function g2 (x : Int) : Int {
+    return x == 0 ? 0 | (x == 1 ? 1 | g2(x-1) + g2(x-2));
+}
+========================================
+function mySin (x : Double) : Double {
+    let y = ArcSinh(x);
+    if (y == 0.0) {
+        return 2.0;
+    }
+    return ArcSinh(y);
+}
+========================================
+operation Test () : Int {
+    using (qs = Qubit[20]) {
+        for (i in 0..9) {
+            X(qs[i]);
+        }
+    }
+
+    mutable r = 0;
+    for (i in [0, 2, 4]) {
+        if (i == 2) {
+            set r = i + 1;
+        }
+    }
+    return r;
+}
+========================================
+function h (a : Int, b : Int, c : Int) : Int {
+    return a + b + c;
+}
+========================================
+function TestArrayUpdate1a (cond : Bool) : Unit {
+
+    let value = [0];
+    mutable arr = [value, [0,0]];
+
+
+    if cond {
+        set arr w/= 0 <- [];
+    }
+
+    Message($"{value}");
+    Message($"{arr}");
+}
+========================================
+function TestArrayUpdate1b (cond : Bool) : Unit {
+
+    let value = [0];
+    mutable arr = [value, [0,0]];
+
+
+    if cond {
+        set arr w/= 1..-1..0 <- arr;
+    }
+
+    Message($"{value}");
+    Message($"{arr}");
+}
+========================================
+function TestArrayUpdate2a (cond : Bool) : Unit {
+
+    mutable arr = [[0], [0,0]];
+    let value = arr[0];
+
+    if cond {
+        set arr w/= 0 <- [];
+    }
+
+    Message($"{value}");
+    Message($"{arr}");
+}
+========================================
+function TestArrayUpdate2b (cond : Bool) : Unit {
+
+    mutable arr = [[0], [0,0], []];
+    let value = arr[0];
+
+    if cond {
+        set arr w/= 0..2..2 <- [[1], [2]];
+    }
+
+    Message($"{value}");
+    Message($"{arr}");
+}
+========================================
+function TestArrayUpdate3a (cond : Bool) : Unit {
+
+    mutable arr = [[0], [0,0]];
+    let value = arr;
+
+    if cond {
+        set arr w/= 0 <- [];
+    }
+
+    Message($"{value}");
+    Message($"{arr}");
+}
+========================================
+function TestArrayUpdate3b (cond : Bool) : Unit {
+
+    mutable arr = [[0], [0,0]];
+    let value = arr;
+
+    if cond {
+        set arr w/= 0..-1 <- [];
+    }
+
+    Message($"{value}");
+    Message($"{arr}");
+}
+========================================
+function TestArrayUpdate4a (cond : Bool) : Unit {
+    mutable arr = [[0], [0,0]];
+    let value = arr;
+
+    set arr = cond
+        ? [[0], size = 5] w/ 3 <- [1]
+        | (value w/ 1 <- []);
+
+    Message($"{value}");
+    Message($"{arr}");
+}
+========================================
+function TestArrayUpdate4b (cond : Bool) : Unit {
+    mutable arr = [[0], [0,0], []];
+    let value = arr;
+
+    set arr = cond
+        ? [[0], size = 5] w/ 4..-2..-1 <- [[], size = 3]
+        | (value w/ 0..2..3 <- arr[1...]);
+
+    Message($"{value}");
+    Message($"{arr}");
+}
+========================================
+function TestArrayUpdate5a(cond : Bool) : Unit {
+
+    mutable value = ["hello", "bye"];
+    mutable arr = value;
+    set value = [];
+
+    if cond {
+        set arr w/= 0 <- "";
+    }
+
+    Message($"{value}");
+    Message($"{arr}");
+}
+========================================
+function TestArrayUpdate5b(cond : Bool) : Unit {
+
+    mutable value = ["hello", "bye"];
+    mutable arr = value;
+    set value = [""];
+
+    if cond {
+        set arr w/= 0 <- "";
+        set value w/= 0 <- arr[1];
+    }
+
+    Message($"{value}");
+    Message($"{arr}");
+}
+========================================
+function TestArrayUpdate6a(cond : Bool) : Unit {
+
+    mutable value = [[0], [0,0]];
+    mutable arr = value;
+    set value = [];
+
+    if cond {
+        set arr w/= 0 <- [];
+    }
+
+    Message($"{value}");
+    Message($"{arr}");
+}
+========================================
+function TestArrayUpdate6b(cond : Bool) : Unit {
+
+    mutable value = [[0], [0,0]];
+    mutable arr = value;
+    set value = [[]];
+
+    if cond {
+        let item = [1,2];
+        set arr w/= 0 <- [];
+        set value w/= 0 <- (item w/ 1 <- 0);
+    }
+
+    Message($"{value}");
+    Message($"{arr}");
+}
+========================================
+function TestArrayUpdate7a(cond1 : Bool, cond2 : Bool) : Unit {
+
+    mutable value = [[0], [0,0]];
+    if cond1 {
+        mutable arr = value;
+        set value = [];
+
+        if cond2 {
+            set arr w/= 0 <- [];
+        }
+
+        Message($"{arr}");
+
+    }
+    Message($"{value}");
+}
+========================================
+function TestArrayUpdate7b(cond1 : Bool, cond2 : Bool) : Unit {
+
+    mutable value = [[0], [0,0]];
+    if cond1 {
+        mutable arr = value;
+        set value = [[],[]];
+
+        if cond2 {
+            set arr w/= 0 <- [];
+            set value w/= 1 <- [1];
+        }
+
+        Message($"{arr}");
+
+    }
+    Message($"{value}");
+}
+========================================
+function TestArrayUpdate8a(cond1 : Bool, cond2 : Bool, cond3 : Bool) : Unit {
+
+    mutable value = [[0], [0,0]];
+    if cond1 {
+        mutable arr = value;
+        if cond2 {
+            set value = [];
+
+            if cond2 {
+                set arr w/= 0 <- [];
+            }
+        }
+        Message($"{arr}");
+    }
+    Message($"{value}");
+}
+========================================
+function TestArrayUpdate8b(cond1 : Bool, cond2 : Bool, cond3 : Bool) : Unit {
+
+    mutable value = [[0], [0,0]];
+    if cond1 {
+        mutable arr = value;
+        if cond2 {
+            set value = [[1],[2]];
+
+            if cond2 {
+                set arr w/= 0 <- [];
+                set value w/= 1 <- (value[1] w/ 0 <- 0);
+            }
+        }
+        Message($"{arr}");
+    }
+    Message($"{value}");
+}
+========================================
+function TestCopyAndUpdate9a () : Unit {
+
+    let arr = [[0, 1, 2], size = 5] w/ 3 <- [];
+    Message($"{arr}");
+}
+========================================
+function TestCopyAndUpdate9b () : Unit {
+
+    mutable original = [[0, 1, 2], size = 5];
+    let arr = original w/ 3 <- [];
+    set original w/= 0 <- [0];
+    Message($"{original}");
+    Message($"{arr}");
+}
+========================================
+function TestCopyAndUpdate10a () : Unit {
+
+    let original = [[0, 1, 2], size = 5];
+    let arr = original w/ 3 <- [];
+    Message($"{original}");
+    Message($"{arr}");
+}
+========================================
+function TestCopyAndUpdate10b () : Unit {
+
+    mutable original = [[0, 1, 2], size = 5];
+    let arr = original w/ 3 <- [];
+    set original w/= 0 <- original[0];
+    Message($"{original}");
+    Message($"{arr}");
+}
+========================================
+function TestCopyAndUpdate11a () : Unit {
+
+    let original = [[0, 1, 2], size = 5];
+    let arr = original w/ 3 <- (original[3] w/ 1 <- -1);
+    Message($"{original}");
+    Message($"{arr}");
+}
+========================================
+function TestCopyAndUpdate11b () : Unit {
+
+    mutable original = [[0, 1, 2], size = 5];
+    let arr = original w/ 3 <- (original[3] w/ 1 <- -1);
+    set original w/= 0 <- original[1];
+    Message($"{original}");
+    Message($"{arr}");
+}
+========================================
+function TestCopyAndUpdate12a () : Unit {
+
+    let item = [0, 1, 2];
+    let original = [item, size = 5];
+    let arr = original w/ 3 <- (original[3] w/ 1 <- -1);
+    Message($"{item}");
+    Message($"{original}");
+    Message($"{arr}");
+}
+========================================
+function TestCopyAndUpdate12b () : Unit {
+
+    let item = [0, 1, 2];
+    mutable original = [item, size = 5];
+    let arr = original w/ 3 <- (original[3] w/ 1 <- -1);
+    set original w/= 0 <- arr[0];
+    Message($"{item}");
+    Message($"{original}");
+    Message($"{arr}");
+}
+========================================
+function TestCopyAndUpdate13a () : Unit {
+
+    let item = [0, 1, 2];
+    let original = [item, size = 5];
+    let arr = original w/ 3 <- (item w/ 1 <- -1);
+    Message($"{item}");
+    Message($"{original}");
+    Message($"{arr}");
+}
+========================================
+function TestCopyAndUpdate13b () : Unit {
+
+    mutable item = [0, 1, 2];
+    let original = [item, size = 5];
+    let arr = original w/ 3 <- (item w/ 1 <- -1);
+    set item w/= 0 <- -1;
+    Message($"{item}");
+    Message($"{original}");
+    Message($"{arr}");
+}
+========================================
+function TestCopyAndUpdate14a () : Unit {
+
+    let original = [[0, 1, 2], size = 5];
+    let arr = original[3] w/ 1 <- -1;
+    Message($"{original}");
+    Message($"{arr}");
+}
+========================================
+function TestCopyAndUpdate14b () : Unit {
+
+    mutable original = [[0, 1, 2], size = 5];
+    let arr = original[3] w/ 1 <- -1;
+    set original w/= 3 <- [];
+    Message($"{original}");
+    Message($"{arr}");
+}
+========================================
+function GetArrayOfArray(rows : Int, columns : Int) : String[][] {
+    return [["", size = columns], size = rows];
+}
+========================================
+function TestCopyAndUpdate16a () : Unit {
+
+    mutable original = [[0, 1, 2], size = 5];
+    let arr = original w/ 0..2..2 <- [[-1],[-1]];
+    set original w/= 1..2 <- [[10], [10]];
+    Message($"{original}");
+    Message($"{arr}");
+}
+========================================
+function TestCopyAndUpdate16b () : Unit {
+
+    let item = [1];
+    mutable arr = [[0, 1, 2], size = 5] w/ 0..2..2 <- [item, item];
+    set arr w/= 1..2 <- [[10], [10]];
+    Message($"{item}");
+    Message($"{arr}");
+}
+========================================
+operation TestVariableReassignment6 () : Unit {
+
+    mutable foo = "";
+    use q = Qubit(){
+        set foo = "updated";
+    }
+    Message(foo);
+}
+========================================
+operation TestVariableReassignment7 () : Unit {
+
+    mutable foo = "";
+    use q = Qubit();
+    set foo = "reset";
+    Message(foo);
+}
+========================================
+function TestVariableReassignment8 (str : String, value : String) : Unit {
+
+    mutable foo = "";
+    if str == "a" {
+        set foo = "a";
+    }
+    elif str == "b" {
+        set foo = "b";
+    }
+    elif str == "c" {
+        set foo = str;
+    }
+    elif str == "d" {
+        set foo = value;
+    }
+    else {
+        set foo += "unknown";
+    }
+    Message(foo);
+}
+========================================
+operation TestArraySlicing() : Range {
+
+    mutable arr = [1,2,3,4];
+    Message($"{arr}, {arr[...-1...]}");
+    mutable value = arr;
+    let check1 = value;
+    mutable check2 = arr;
+
+    if arr[0] == 1 {
+        set arr w/= 3..-1..0 <- arr;
+        Message($"{arr}, {value}");
+        set value w/= 0..2..2 <- arr[Length(arr)/2...];
+        Message($"{arr}, {value}");
+        set arr w/= 0..-1 <- [];
+        Message($"{arr}, {value}");
+    }
+
+    mutable arrarr = [[], [0], [1]];
+    set arrarr w/= 2..-1..0 <- arrarr;
+    let iter = [[1],[2],[3]];
+    Message($"{arrarr}, {iter w/ 2..-1..0 <- iter}");
+
+    set arrarr = value[0] == 1
+        ? [[10], size = 5] w/ 4..-2..-1 <- [[6], size = 3]
+        | (iter w/ 0..2..3 <- arrarr[1...]);
+    Message($"{arrarr}, {iter}");
+
+    set arrarr = value[0] != 1
+        ? [[10], size = 5] w/ 4..-2..-1 <- [[5], size = 3]
+        | (iter w/ 0..2..3 <- arrarr[1...]);
+    Message($"{arrarr}, {iter}");
+
+    set arrarr = [[0], [0,0], [1,1,1]];
+    Message($"{arrarr}");
+    set arrarr w/= 1..-1..0 <- arrarr[0..1];
+    Message($"{arrarr}");
+    set arrarr w/= 2..-1..0 <- arrarr;
+    Message($"{arrarr}");
+    set arrarr w/= 0..2..3 <- arrarr[0..2..3][...-1...];
+    Message($"{arrarr}");
+
+    Message($"{check1}, {check2}");
+    return 1..3..5;
+}
+========================================
+function PrintSection(sectionIdx : Int, sectionTitle : String) : Unit {
+    Message("\n********************");
+    Message($"Section {sectionIdx}: {sectionTitle}");
+    Message("********************\n");
+}
+========================================
+function PI() : Double
+{
+    return 3.14159265357989;
+}
+========================================
+operation MResetZ(qb : Qubit) : Result
+{
+    let res = M(qb);
+    if (res == One)
+    {
+        X(qb);
+    }
+    return res;
+}
+========================================
+function TestArrayUpdate1(even : String) : String[]
+{
+    mutable arr = new String[10];
+    for i in 0 .. 9
+    {
+        let str = i % 2 != 0 ? "odd" | even;
+        set arr w/= i <- str;
+    }
+
+    return arr;
+}
+========================================
+function TestArrayUpdate2(array : String[], even : String) : String[]
+{
+    mutable arr = array;
+    for i in 0 .. 9
+    {
+        let str = i % 2 != 0 ? "odd" | even;
+        set arr w/= i <- str;
+    }
+
+    return arr;
+}
+========================================
+function TestArrayUpdate3(y : String[], b : String) : String[]
+{
+    mutable x = y;
+    set x w/= 0 <- b;
+    set x w/= 1 <- "Hello";
+
+    mutable arr = [(0,0), size = 10];
+    for i in 0 .. 9
+    {
+        set arr w/= i <- (i, i + 1);
+    }
+
+    return x;
+}
+========================================
+function TestArrayUpdate4(array : String[]) : String[]
+{
+    let item = "Hello";
+    mutable arr = new String[0];
+    set arr = array;
+
+    for i in 0 .. 9
+    {
+        set arr w/= i <- item;
+    }
+
+    return arr;
+}
+========================================
+function TestBigInts (a : BigInt, b : BigInt) : BigInt
+{
+    let c = a > b ? a | b;
+    let d = c * a - b / 7L;
+    let e = d >>> 3;
+    let f = d ^ 5;
+    let g = (e &&& f) ||| 0xffffL;
+    return ~~~g;
+}
+========================================
+function TestBools (a : Bool, b : Bool) : Bool
+{
+    let c = a == b ? a | b;
+    let d = a and b;
+    let e = a or b;
+    let f = not a;
+    if (f)
+    {
+        return d;
+    }
+    else
+    {
+        return e;
+    }
+}
+========================================
+operation LengthCaching (vals : Int[]) : Int[] {
+    return vals[...2...];
+}
+========================================
+function Conditional(res : Result, (x : Double, y : Double)) : (Double, Double) {
+        return res == Zero ? (x - 0.5, y) | (x, y + 0.5);
+}
+========================================
+function ReturnFromNested(branch1 : Bool, branch2 : Bool) : Int {
+    if branch1 {
+        if branch2 {
+            return 1;
+        }
+        else {
+            return 2;
+        }
+    }
+    else {
+        if branch2 {
+            return 3;
+        }
+        else {
+            return 4;
+        }
+    }
+}
+========================================
+function TestConditions(input : String, arr : Int[]) : Int {
+    if input == "true" {
+        let _ = true;
+    } elif input == "false" {
+        let _ = false;
+    } elif Length(arr) > 0 {
+        let _ = false;
+    }
+    return Length(arr);
+}
+========================================
+function Hello(withPunctuation : Bool) : String[] {
+   let arr = ["Hello","World", ""];
+   return withPunctuation ?
+       arr | (arr w/ 2 <- "!");
+}
+========================================
+function TestDouble (x : Double, y : Double) : Double
+{
+    let a = x + y - 2.0;
+    let b = a * 1.235 + x ^ y;
+    let c = a >= b ? a - b | a + b;
+    return a * b * c;
+}
+========================================
+function ReturnConditional(arg : Bool) : BigInt {
+    return arg ? 0L | 1L;
+}
+========================================
+function ReturnCopyAndUpdateArray() : Result[] {
+    let arr = new Result[5];
+    return arr w/ 3 <- One;
+}
+========================================
+function ReturnEquality(a1 : Int, a2 : Int) : Bool {
+    return a1 == a2;
+}
+========================================
+function ReturnAddition(i1 : Double, i2 : Double) : Double {
+    return i1 + i2;
+}
+========================================
+function ReturnSubtraction(i1 : Int, i2 : Int) : Int {
+    return i1 - i2;
+}
+========================================
+function ReturnMultiplication(i1 : Double, i2 : Double) : Double {
+    return i1 * i2;
+}
+========================================
+function ReturnDivision(i1 : Int, i2 : Int) : Int {
+    return i1 / i2;
+}
+========================================
+function ReturnModulo(ex : Int) : Int {
+    return 10 % ex;
+}
+========================================
+function ReturnExponentiation1(ex : Int) : Int {
+    return 4 ^ ex;
+}
+========================================
+function ReturnExponentiation2(ex : Double) : Double {
+    return 4. ^ ex;
+}
+========================================
+function ReturnExponentiation3(ex : Int) : BigInt {
+    return 4L ^ ex;
+}
+========================================
+function ReturnLeftShift() : Int {
+    return 22 <<< 2;
+}
+========================================
+function ReturnRightShift() : BigInt {
+    return 22L >>> 2;
+}
+========================================
+function ReturnBXOr() : Int {
+    return 42 ^^^ 4;
+}
+========================================
+function ReturnBAnd() : BigInt {
+    return 3L &&& 10L;
+}
+========================================
+function ReturnBOr() : Int {
+    return 33 ||| 31;
+}
+========================================
+function ReturnBNot() : Int {
+    return ~~~10;
+}
+========================================
+function ReturnNot() : Bool {
+    return not false;
+}
+========================================
+function ReturnNegative(arg : Double) : Double {
+    return -arg;
+}
+========================================
+function ReturnPauli() : Pauli {
+    return PauliZ;
+}
+========================================
+function ReturnResult() : Result {
+    return Zero;
+}
+========================================
+function ReturnBool() : Bool {
+    return false;
+}
+========================================
+function ReturnInt() : Int {
+    return 11;
+}
+========================================
+function ReturnDouble() : Double {
+    return 12.;
+}
+========================================
+function ReturnBigInt() : BigInt {
+    return 13L;
+}
+========================================
+operation ReturnUnit() : Unit {
+    return ();
+}
+========================================
+operation Qop(q : Qubit, n : Int) : Unit is Adj+Ctl {
+    body (...)
+    {
+        if (n%2 == 1) { K(q); }
+    }
+    adjoint (...) // self, but have to define explicitly due to https://github.com/microsoft/qsharp-compiler/issues/781
+    {
+        if (n%2 == 1) { K(q); }
+    }
+    controlled (ctrls, ...)
+    {
+        if (n%2 == 1) { Controlled K(ctrls, q); }
+    }
+}
+========================================
+operation AsTuple(q : Qubit) : (Double, Qubit) {
+        return (0.3, q);
+}
+========================================
+function TestInts (a : Int, b : Int) : Int {
+    let c = a > b ? a | b;
+    let d = c * a - b / 7;
+    let e = d >>> 3;
+    let f = d ^ b;
+    let g = (e &&& f) ||| 0xffff;
+    return ~~~g;
+}
+========================================
+operation Baz(q : Qubit) : Unit is Adj {
+    H(q);
+    T(q);
+}
+========================================
+function TestRange () : Range
+{
+    let x = 0..2..6;
+    let a = [0, 2, 4, 6, 8, 10, 12, 14, 16];
+    let b = a[x];
+
+    let y = 0..4;
+    for j in y
+    {
+        let m = 1;
+    }
+    return x;
+}
+========================================
+function TestRefCountsForItemUpdate(cond : Bool) : Unit {
+    mutable ops = new Int[][5];
+    if (cond) {
+        set ops w/= 0 <- new Int[3];
+    }
+}
+========================================
+function TestResults (a : Result, b : Result) : Result
+{
+    if (a == b)
+    {
+        return One;
+    }
+    elif (a == One)
+    {
+        return b;
+    }
+    return Zero;
+}
+========================================
+operation ArbitraryAllocation (max : Int, q : Qubit) : Unit {
+    using ((a, (b, c), d) = (Qubit(), (Qubit[max], Qubit()), Qubit[2])) {
+
+        let x = b[1];
+        borrowing (z = Qubit()) {
+
+            let y = b[0..2..max];
+            if (Length(y) == max) {
+                return ();
+            }
+        }
+    }
+}
+========================================
+function TestWhile (a : Int, b : Int) : Int
+{
+    mutable n = a;
+    while (n < b)
+    {
+        set n = n * 2;
+    }
+    return n;
+}
+========================================
+ operation StringInterpolationOpenBraceTest4 () : Unit {
+    let str = "{}";
+}
+========================================
+operation StringParsingTest1 () : Unit {
+    let str = "";
+}
+========================================
+operation StringParsingTest2 () : Unit {
+    let str = "Hello";
+}
+========================================
+operation StringParsingTest3 () : Unit {
+    let str = "\"";
+}
+========================================

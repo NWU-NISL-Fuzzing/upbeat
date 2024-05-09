@@ -1,0 +1,6 @@
+**/__pycache__/
+data/result/*.db
+src/ParseAPI/data/origin
+src/ParseAPI/data/compare.py
+src/Fuzzing/qsharpPattern/bin
+src/Fuzzing/qsharpPattern/obj

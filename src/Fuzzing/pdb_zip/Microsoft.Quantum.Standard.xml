@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Quantum.Standard</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Quantum.Canon.ApplyAnd.Native">
+            <summary>
+            Uses CCNOT implementation when executed using ToffoliSimulator.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Quantum.Canon.ApplyLowDepthAnd.Native">
+            <summary>
+            Uses CCNOT implementation when executed using ToffoliSimulator.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Quantum.Characterization.EstimateFrequencyA.Native">
+            <summary>
+             Provides a native emulation of the EstimateFrequency operation for adjointable operations when
+             the operation is executed using the full-state QuantumSimulator and the given
+             state preparation function does not contain any captured qubits via partial application.
+             
+            The way the emulation works is to invoke the state-preparation only once, and then look 
+            into the resulting QuantumSimulator's state to get the JointProbability and then
+            use a classical binomial sampling to get a sample for the resulting probability.
+            This is typically faster compared to run the state-preparation operation n-times and
+            calculate the binomial estimation from it.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Quantum.Characterization.EstimateFrequencyA.Native.__Body__">
+            <summary>
+            Overrides the body to do the emulation when possible. If emulation is not possible, then
+            it just invokes the default Q# implementation.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Quantum.Characterization.EstimateFrequencyA.Native.FindPaulis(Microsoft.Quantum.Simulation.Core.ICallable,System.Int64)">
+            <summary>
+             Helper method to extract the array of Paulis. It requires the measurement operation
+             is a Partial application of Primitive.Measure
+            </summary>
+        </member>
+        <member name="M:Microsoft.Quantum.Characterization.EstimateFrequencyA.Native.CanEmulate(Microsoft.Quantum.Simulation.Core.IAdjointable,Microsoft.Quantum.Simulation.Core.ICallable)">
+            <summary>
+            Determines whether we can do classical emulation for the given preparation and measure operations.
+            Emulation is only possible if:
+            1. If we're running this operation on the full state QuantumSimulator.
+            2. The preparation operation has no captured qubits
+            3. We're using the Primitive.Measure operation for measurement.
+            
+            If all conditions are met, this method returns true.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Quantum.Diagnostics.Emulation.DisplayableUnitaryOperator">
+            <summary>
+                Represents a unitary operator intended for use as a diagnostic
+                display.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Quantum.Diagnostics.Emulation.DisplayableUnitaryOperator.Qubits">
+            <summary>
+                The qubits on which the represented operator acts, or
+                <c>null</c> if there is no specific register associated with
+                this operator.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Quantum.Diagnostics.Emulation.DisplayableUnitaryOperator.Data">
+            <summary>
+                An array of matrix elements for the given unitary operator.
+            </summary>
+            <remarks>
+                For ease of use, this array has a dtype of <c>double</c>, and
+                shape <c>(dim, dim, 2)</c>, where <c>dim</c> is the dimension
+                of the represented unitary operator (i.e.: 2^nQubits), and
+                where the last axis represents the real (index 0) and
+                imaginary parts, respectively.
+            </remarks>
+        </member>
+        <member name="T:Microsoft.Quantum.Diagnostics.Emulation.CallSites">
+            <summary>
+                A diagnostic record of sites where a given operation or function
+                was called.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Quantum.Diagnostics.Emulation.CallSites.Subject">
+            <summary>
+                The name of the operation or function whose calls are
+                represented by this record.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Quantum.Diagnostics.Emulation.CallSites.Sites">
+            <summary>
+                A collection of calls to the given operation or function, each
+                represented as a call stack at the point where the subject was
+                called.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Quantum.Diagnostics.Emulation.SimulatorEventDisposer">
+            <summary>
+                Attaches events to a <see cref="T:Microsoft.Quantum.Simulation.Common.SimulatorBase" />
+                instance, allowing for events to be removed with a disposable pattern.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Quantum.Diagnostics.Emulation.Extensions.RegisterOperationHandlers(Microsoft.Quantum.Simulation.Common.SimulatorBase,System.Action{Microsoft.Quantum.Simulation.Core.ICallable,Microsoft.Quantum.Simulation.Core.IApplyData},System.Action{Microsoft.Quantum.Simulation.Core.ICallable,Microsoft.Quantum.Simulation.Core.IApplyData})">
+            <summary>
+                Attaches given event handlers to a simulator, returning a
+                disposable object that removes handlers when disposed.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Quantum.Standard.Emulation.BinomialDistribution">
+            <summary>
+                 Represents the binomial distribution $\operatorname{Bin}(N, p)$,
+                 and provides samples according to this distribution.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Quantum.Preparation._PrepareAmplitudesFromZeroState.Native">
+            <summary>
+             Provides a native emulation of the ApproximatelyPrepareArbitraryState operation when
+             the operation is executed using the full-state QuantumSimulator.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Quantum.Preparation._PrepareAmplitudesFromZeroState.Native.__Body__">
+            <summary>
+            Overrides the body to do the emulation when possible. If emulation is not possible, then
+            it just invokes the default Q# implementation.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Quantum.Synthesis.MatrixUtils.IsMatrixUnitary(System.Numerics.Complex[0:,0:],System.Double)">
+            <summary>
+            Checks whether given matrix is unitary.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Quantum.Synthesis.MatrixUtils.MatrixToQs(System.Numerics.Complex[0:,0:])">
+            <summary>
+            Converts matrix from C# array to Q# array.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Quantum.Synthesis.MatrixUtils.MatrixFromQs(Microsoft.Quantum.Simulation.Core.IQArray{Microsoft.Quantum.Simulation.Core.IQArray{Microsoft.Quantum.Math.Complex}})">
+            <summary>
+            Converts matrix from Q# array to C# array.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Quantum.Synthesis.TwoLevelUnitary">
+            <summary>
+            Represents a square matrix which is an identity matrix with elements on positions
+            (i1, i1), (i1, i2), (i2, i1), (i2, i2) replaced with elements from unitary matrix <c>mx</c>. 
+            </summary>
+        </member>
+    </members>
+</doc>
