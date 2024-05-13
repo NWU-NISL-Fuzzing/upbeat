@@ -64,8 +64,4 @@ pip install six numpy
 
 **6.Download the Q# compiler build from source**
 
-We upload the instrumented repository
-
-```
-wget 
-```
+We upload the instrumented repository on [this link](https://drive.google.com/file/d/112cRelito9MXYyzeL_ofwUUSUqaCRfKP/view?usp=drive_link), please download it and unzip it into `/root`.

@@ -38,26 +38,29 @@ def bound_value_testing(index: int, testcase_content: str):
     else:
         flag = -1
     # 运行
-    output = execute(index, testcase_content, "dotnet run", True)
+    output = execute(index, testcase_content, ["dotnet", "run"], False)
     # 添加原始用例执行结果
     targetDB.insertToTotalResult(output, "originResult_cw")
     targetDB.commit()
     # 对边界值测试结果进行分析
     if  ((flag == 1 and output.returnCode != 0) or 
         (flag == 0 and output.returnCode == 0) or 
-        (flag == -1 and output.outputClass in ["timout", "crash"]) or
-        (flag == -1 and "Overflow" in output.stderr) or 
-        (flag == -1 and "OutOfMemory" in output.stderr)):
-        print("!!!find wrong cons")
+        output.outputClass in ["timout", "crash"]):
+        print("\033[91m!!!find wrong cons\033[0m")
         susp_flag = True
         targetDB.insertToDifferentialResult(output, "differentialResult_cw")
     else:
-        print("nothing happened")
+        print("\033[92mnothing happened\033[0m")
     # 如果边界值测试结果不可疑，进行差分测试
     if not susp_flag and output.returnCode not in [134, 137]:
-        diff_testing(index, output)
+        print("im here")
+        # diff_testing(index, output)
 
 def main():
+    # 检查覆盖率文件是否存在，不存在就创建
+    if not os.path.exists("cov"):
+        os.makedirs("cov")
+        print("Create the coverage folder.")
     # 创建剩余三个表
     targetDB.createTable("originResult_cw")
     targetDB.createTable("differentialResult_cw")
@@ -65,7 +68,7 @@ def main():
     targetDB.createTable("differentialResult_sim")
     # 遍历所有生成的程序
     testcaseList = targetDB.selectAll("select Content from corpus;")
-    print("totoally:"+str(len(testcaseList)))
+    print("Here are "+str(len(testcaseList))+" test cases.")
     for index, testcase_content in enumerate(testcaseList, start=1):
         # print(testcase_content)
         bound_value_testing(index, testcase_content[0])

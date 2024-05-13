@@ -32,7 +32,7 @@ def vote(outputs, testcase_content):
     if outputs is None:
         return []
     majority_stdout, stdout_majority_size = get_majority_output(outputs)
-    print("majority_stdout: ", majority_stdout, " stdout_majority_size:", stdout_majority_size)
+    # print("majority_stdout: ", majority_stdout, " stdout_majority_size:", stdout_majority_size)
     for output in outputs:
         # print("check output:\n"+output.stdout+"--end--\n")
         if "NotImplementedException" in output.stdout or "The Toffoli simulator" in output.stdout:
@@ -40,7 +40,7 @@ def vote(outputs, testcase_content):
         elif output.stdout != majority_stdout:
             # output.stdout != "" and 
             if check_strings_in_db(history_db_path, testcase_content, output.stdout) and check_outputs(outputs):
-                print("find one!!!")
+                print("\033[91m!!!find inconsistency\033[0m")
                 targetDB.insertToDifferentialResult(output, "differentialResult_sim")
                 targetDB.commit()
 
@@ -87,7 +87,7 @@ def run_and_get_cov(temp_proj: pathlib.Path, testcaseId: int, testcaseContent: s
         pro.terminate()
     # 移动覆盖率文件
     if os.path.exists("output.coverage"):
-        new_file_name = "./cov/output"+str(testcaseId)+".coverage"
+        new_file_name = "../cov/output"+str(testcaseId)+".coverage"
         shutil.move("output.coverage", new_file_name)
     end_time = labdate.getUtcMillisecondsNow()
     duration_ms = int(round((end_time - start_time).total_seconds() * 1000))

@@ -41,7 +41,7 @@ class DifferentialTest:
 
 
 def main():
-    start_time = getUtcMillisecondsNow()
+    # start_time = getUtcMillisecondsNow()
     tester = DifferentialTest()
     tester.targetDB.createTable("differentialResult_sim")
     # tester.targetDB.createTable("originResult_sim")
@@ -50,13 +50,13 @@ def main():
             "testcase_id not in (select testcase_id from differentialResult_cw);"
     result = tester.targetDB.selectAll(sql)
     # result = result[:1]
-    print("totally:" + str(len(result)))
+    print("Here are " + str(len(result))+" test cases.")
     for index, item in enumerate(result, start=1):
         print(index)
         tester.execute_and_analysis(item)
     tester.targetDB.finalize()
-    end_time = getUtcMillisecondsNow()
-    print("Spending time:"+str(end_time-start_time))
+    # end_time = getUtcMillisecondsNow()
+    # print("Spending time:"+str(end_time-start_time))
 
 
 if __name__ == "__main__":
