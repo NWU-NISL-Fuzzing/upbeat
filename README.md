@@ -21,7 +21,7 @@ projectPattern: Path to the Q# projects used during the testing phase.
 boundaryValue:  Special values for random input generation.
 ```
 
-## Run
+## Basic Usage
 
 Step1. Generate test cases.
 
@@ -30,7 +30,7 @@ cd src/Generate
 python main.py
 ```
 
-There are two steps of test case generation: (1) assemble code segments and (2) generate callable inputs. Generated test cases are stored in `result_db`.
+There are two steps in test case generation: (1) assemble code segments and (2) generate callable inputs. All generated test cases are stored in `result_db`.
 
 Step2. Execute test cases.
 
@@ -39,9 +39,9 @@ cd src/Fuzzing
 python hybrid_testing.py
 ```
 
-Each test case will first be applied on language-level testing, with execution information stored in table `originResult_cw`. In case of any anomalies, relevant information will be logged in table `differentialResult_cw`. 
+Each test case will first be applied on language-level testing, with execution information stored in table `originResult_cw`. If any anomalies occurred, relevant information will be logged in table `differentialResult_cw`. 
 
-If no anomalies are detected, the test case proceeds to the differential testing, where results are stored in table `originResult_sim` and `differentialResult_sim`.
+If no anomalies are detected, the test case proceeds to differential testing, where results are stored in table `originResult_sim` and `differentialResult_sim`.
 
 Users can also execute these two steps separately by running the following command:
 
@@ -57,8 +57,24 @@ cd src/Fuzzing
 python history_bug_filter.py
 ```
 
-UPBEAT are capable of filtering the anomalies into three types: (1) bugs that already analized (save in `bug.txt`), (2) faulty that already analized (save in `faulty.txt`), (3) new anomalies awaiting verification (save in `new_anomalies.txt`). 
+UPBEAT is capable of filtering the anomalies into three types: (1) bugs that have already been analyzed (save in `bug.txt`), (2) faulty that have already been analyzed (save in `faulty.txt`), (3) new anomalies awaiting verification (save in `new_anomalies.txt`). 
+
+## Jupyter Notebook
+
+You can utilize our notebook in two convenient ways: either by launching it on your local machine or by exploring it online.
+
+### Local Usage
+To run the notebook on your computer, follow these simple steps:
+
+```
+cd jupyter
+jupyter notebook
+```
+
+This will open the notebook in your default web browser, allowing you to interact with it seamlessly.
 
 ## Reproduction
 
-The bug data is located in [this page](data/result/BugList.mdresult). 
+The bug data is located in [this page](data/result/BugList.md). 
+
+

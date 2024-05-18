@@ -4,7 +4,7 @@ namespace NISLNameSpace {
     open Microsoft.Quantum.Math;
     open Microsoft.Quantum.Oracles;
     open Microsoft.Quantum.Arrays;
-    open Microsoft.Quantum.Core;
+    open Microsoft.Quantum.MachineLearning;
     open Microsoft.Quantum.Logical;
     open Microsoft.Quantum.Convert;
     open Microsoft.Quantum.Intrinsic;
@@ -16,17 +16,22 @@ namespace NISLNameSpace {
     operation main() : Unit {
         //no cons
         //no cons
-        mutable nDatabaseQubits6373 = 1;
-                let databaseSize6373 = 2 ^ nDatabaseQubits6373;
-                let markedElements6373 = [0, 39, 101, 234];
-                let nMarkedElements6373 = Length(markedElements6373);
-                let nIterations6373 = 3;
-                let queries6373 = nIterations6373 * 2 + 1;
-                let classicalSuccessProbability6373 = IntAsDouble(nMarkedElements6373) / IntAsDouble(databaseSize6373);
-                let quantumSuccessProbability6373 = Sin((2.0 * IntAsDouble(nIterations6373) + 1.0) * ArcSin(Sqrt(IntAsDouble(nMarkedElements6373)) / Sqrt(IntAsDouble(databaseSize6373)))) ^ 2.0;
-        let nItems5106 = databaseSize6373;
-                let angle5106 = ArcSin(1. / Sqrt(IntAsDouble(nItems5106)));
-        Message($"{angle5106}");
+        mutable samples2968 = [LabeledSample(([0.510784, 0.475476, 0.453884, 0.554087], 0)),LabeledSample(([0.581557, 0.562824, 0.447721, 0.380219], 1))];
+        mutable options2968 = TrainingOptions(0.1, 0.005, 15, 10000, 16, 8, 0.01, 1,Ignore<String>);
+        mutable optimizedModel2968 = SequentialModel([ControlledRotation((2, [0]), PauliX, 0),ControlledRotation((0, [1, 2]), PauliZ, 1)],[1.234, 2.345],0.0);
+        mutable validationSchedule2968 = SamplingSchedule([4..-10..5,-4..-5..7,-5..4..-8,-1..-2..-3]);
+                let features2968 = Mapped(_Features, samples2968);
+        let probabilities2968 = EstimateClassificationProbabilities(options2968::Tolerance,optimizedModel2968,Sampled(validationSchedule2968, features2968),options2968::NMeasurements);
+        let count4069 = probabilities2968;
+        mutable Nruns4069 = -2^63;
+        mutable sin_2piPhi4069 = 1.2620648877763516;
+                let p0_cos4069 = count4069[1]/IntAsDouble(Nruns4069);
+                let cos_2piPhi4069 = 2.0*p0_cos4069-1.0;
+                if (cos_2piPhi4069 > 0.0) {if (sin_2piPhi4069 >0.0) {let phi = ArcTan(sin_2piPhi4069/cos_2piPhi4069)/(2.0*PI());                let returnVar = phi;}else {let phi = ArcTan(sin_2piPhi4069/cos_2piPhi4069)/(2.0*PI());
+                        let returnVar = 1.0+phi; }}else {if (sin_2piPhi4069 > 0.0) {let phi = ArcTan(sin_2piPhi4069/cos_2piPhi4069)/(2.0*PI());
+                        let returnVar = 0.5+phi; }else {let phi = ArcTan(sin_2piPhi4069/cos_2piPhi4069)/(2.0*PI());
+                        let returnVar = 0.5+phi; }}Message($"{p0_cos4069}");
+        Message($"{cos_2piPhi4069}");
         
     }
 }

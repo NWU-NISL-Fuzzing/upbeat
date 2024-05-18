@@ -29,6 +29,7 @@ def get_majority_output(outputs):
 def vote(outputs, testcase_content):
     """ 使用投票机制选出正确结果，将错误结果存入可疑用例表中 """
 
+    is_susp = False
     if outputs is None:
         return []
     majority_stdout, stdout_majority_size = get_majority_output(outputs)
@@ -43,6 +44,9 @@ def vote(outputs, testcase_content):
                 print("\033[91m!!!find inconsistency\033[0m")
                 targetDB.insertToDifferentialResult(output, "differentialResult_sim")
                 targetDB.commit()
+                is_susp = True
+    if not is_susp:
+        print("\033[92mnothing happened\033[0m")
 
 def execute(index: int, testcase_content: str, command: str, need_coverage: bool):
     """ 执行,获取结果,存入数据库 """
@@ -50,6 +54,7 @@ def execute(index: int, testcase_content: str, command: str, need_coverage: bool
     print("cmd:" + " ".join(command))
     if need_coverage:
         output = run_and_get_cov(temp_proj, index, testcase_content)
+        output.stdout = remove_cov_info(output.stdout)
     else:
         output = run_testcase(temp_proj, index, testcase_content, command)
     output.stdout = get_prob_distribution(output.stdout)
@@ -57,6 +62,12 @@ def execute(index: int, testcase_content: str, command: str, need_coverage: bool
     #     if check_strings_in_db(history_db_path,testcase_content, output.stdout):
     #         targetDB.insertToTotalResult(output, "originResult_sim")
     return output
+
+def remove_cov_info(output: str):
+    """ 在使用dotnet run时截取覆盖率部分的输出 """
+
+    lines = output.split("\n")
+    return lines[0]+"\n"+"\n".join(output[4:-1])
 
 def run_and_get_cov(temp_proj: pathlib.Path, testcaseId: int, testcaseContent: str):
     """ 该函数用于构建、运行并获取一个Q#测试用例的覆盖率结果 """

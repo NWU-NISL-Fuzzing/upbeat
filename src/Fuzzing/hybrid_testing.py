@@ -28,7 +28,7 @@ def diff_testing(index: int, output):
 def bound_value_testing(index: int, testcase_content: str):
     """ 边界值测试主函数 """
 
-    print("running "+str(index))
+    print("==running "+str(index)+"th test case==")
     susp_flag = False
     # 获取flag
     if "//correct" in testcase_content:
@@ -53,8 +53,7 @@ def bound_value_testing(index: int, testcase_content: str):
         print("\033[92mnothing happened\033[0m")
     # 如果边界值测试结果不可疑，进行差分测试
     if not susp_flag and output.returnCode not in [134, 137]:
-        print("im here")
-        # diff_testing(index, output)
+        diff_testing(index, output)
 
 def main():
     # 检查覆盖率文件是否存在，不存在就创建

@@ -11,7 +11,7 @@ from Generate.basic_operation.file_operation import initParams
 params = initParams("../config.json")
 
 def run_and_analysis(targetDB, index: int, testcaseContent: str):
-    print("running "+str(index))
+    print("==running "+str(index)+"th test case==")
     tempProj = pathlib.Path(params["projectPattern"])
     # 获取flag
     if "//correct" in testcaseContent:

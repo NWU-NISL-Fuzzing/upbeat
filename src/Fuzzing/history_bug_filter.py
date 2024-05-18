@@ -6,10 +6,11 @@ from DBOperation.dboperation_sqlite import DataBaseHandle
 def filter_boundary(result_db, history_db):
     """ 查询history-bugs.db，过滤掉已经发现的bug """
 
-    suspicious_results = result_db.selectAll("select * from differentialResult_cw where stderr not like '%build failed%'")
+    suspicious_results = result_db.selectAll("select * from differentialResult_cw")
+    #  where stderr not like '%build failed%'
     # 获取已经分析过的bug信息
     history_bugs = history_db.selectAll("select * from bug_list_boundary")
-    print(len(history_bugs))
+    print("There are",len(history_bugs),"historical bugs in database. Start to filter. ")
     # add_rules(history_bugs)
     # print(len(history_bugs))
     # 筛选带有合理值的误报
@@ -21,9 +22,11 @@ def filter_boundary(result_db, history_db):
                         "BitSizeL", "BitSizeI", "TrotterSimulationAlgorithm"]
     # 存放已被发现的bug，最后展示计数
     histotical_bugs, root_bugs = [], []
+    count1, count2, count3 = 0, 0, 0
     # 打开文件，开始遍历
     with open("new_anomalies.txt", "w") as f1, open("bug.txt", "w") as f2, open("faulty.txt", "w") as f3:
-        for res in suspicious_results:
+        for i, res in enumerate(suspicious_results, start=1):
+            print("=="+str(i)+"==")
             # 1-需要分析的 2-已经分析过的bug 3-已经分析过的误报
             is_suspicious = 1
             # 筛选掉返回值为134和137的
@@ -57,14 +60,20 @@ def filter_boundary(result_db, history_db):
                 is_suspicious = 3
             if is_suspicious == 1:
                 f1.write(str(res[1])+"\n")
+                count1 += 1
             elif is_suspicious == 2:
                 histotical_bugs.append(bug_info)
                 f2.write(str(res[1])+str(bug_info)+"\n")
+                count2 += 1
             else:
                 histotical_bugs.append(bug_info)
                 f3.write(str(res[1])+str(bug_info)+"\n")
-    print("totally:", len(set(histotical_bugs)))
-    print("root:", len(set(root_bugs)))
+                count3 += 1
+    print(count1, "anomalous await to analyze. ", 
+          count2, "anomalous are historical bugs. ",
+          count3, "anomalous are recorded faulties. ")
+    # print("totally:", len(set(histotical_bugs)))
+    # print("root:", len(set(root_bugs)))
 
 
 def filter_differential(result_db):
@@ -75,7 +84,7 @@ def filter_differential(result_db):
                     "EstimateClassificationProbability", 
                     "IncrementByModularInteger"]
     faulty = ["EvaluateOddPolynomialFxP", "ComputeReciprocalFxP", "MeasureAllZ", "MaybeChooseElement", "Exp", "ExpFrac"]
-    with open("new_anomalies.txt", "w") as f1, open("bug.txt", "w") as f2, open("faulty.txt", "w") as f3:
+    with open("new_anomalies.txt", "a+") as f1, open("bug.txt", "a+") as f2, open("faulty.txt", "a+") as f3:
         for res in suspicious_results:
             # 1-需要分析的 2-已经分析过的bug
             is_suspicious = 1
