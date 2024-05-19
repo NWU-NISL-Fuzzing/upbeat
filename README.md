@@ -61,9 +61,8 @@ UPBEAT is capable of filtering the anomalies into three types: (1) bugs that hav
 
 ## Jupyter Notebook
 
-You can utilize our notebook in two convenient ways: either by launching it on your local machine or by exploring it online.
+Users can use our notebook in two ways: launching it on your local machine or exploring it [online]().
 
-### Local Usage
 To run the notebook on your computer, follow these simple steps:
 
 ```
