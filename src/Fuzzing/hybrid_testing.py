@@ -31,10 +31,10 @@ def bound_value_testing(index: int, testcase_content: str):
     print("==running "+str(index)+"th test case==")
     susp_flag = False
     # 获取flag
-    if "//correct" in testcase_content:
-        flag = 1
-    elif "//wrong" in testcase_content:
+    if "//wrong" in testcase_content or "//invalid" in testcase_content:
         flag = 0
+    elif "//correct" in testcase_content or "//valid" in testcase_content:
+        flag = 1
     else:
         flag = -1
     # 运行

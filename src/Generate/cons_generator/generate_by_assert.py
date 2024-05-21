@@ -139,7 +139,7 @@ def query_and_generate():
     api_list = reference_db.selectAll(sql)
     # 遍历每个含有量子约束的API
     for api in api_list:
-        correct_stmt, wrong_stmt = "//correct\n", "//wrong\n"
+        correct_stmt, wrong_stmt = "//valid\n", "//invalid\n"
         func_name, assert_stmt, arg_info = api[1], api[2], api[3]
         arg_name, arg_type = ast.literal_eval(arg_info)
         # 从标准文档中获取API信息

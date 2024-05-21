@@ -72,20 +72,18 @@ def get_arg_dict(arg_name, needful_variables):
     match_access2 = re.fullmatch(r"(\w+)::\w+", arg_name)
     if match_access2 and match_access2.group(1) in needful_variables:
         return {match_access2.group(1):needful_variables[match_access2.group(1)]}
-    with open("20240115.txt", "a+") as f:
-        f.write("arg_name:"+arg_name+" needful_variables:"+str(needful_variables)+"\n")
     return None
 
 def replace_param_with_arg(param_dict, real_args_list, needful_variables, bool_expr_list, func_ret_list, quan_param):
     """ 将约束语句中的形参转换为实参 """
 
-    print("===start to replace===")
+    # print("===start to replace===")
     # print("param_dict:",param_dict,"arg_dict:",arg_dict)
     arg_dict, new_quan_param, reset_stmt = {}, [], ""
     # 先将bool_expr_list和func_ret_list拼接为字符串，避免再加一层循环
     bool_expr = " and ".join(bool_expr_list)
     func_ret = " and ".join(func_ret_list)
-    print("bool_expr:"+bool_expr+" func_ret:"+func_ret)
+    # print("bool_expr:"+bool_expr+" func_ret:"+func_ret)
     # 开始检查和替换
     for param_name, param_type, arg_name in zip(param_dict.keys(), param_dict.values(), real_args_list):
         # print("param_name:"+param_name)
@@ -133,7 +131,7 @@ def replace_param_with_arg(param_dict, real_args_list, needful_variables, bool_e
                 reset_stmt += "ResetAll("+real_arg_name+");\n"
             elif arg_type in need_a_qubit_array and real_arg_name+"QubitArray" not in reset_stmt:
                 reset_stmt += "ResetAll("+real_arg_name+"QubitArray);\n"
-    print("=== finish to replace===")
+    # print("=== finish to replace===")
     # print("bool_expr:",bool_expr," func_ret:",func_ret," new_quan_param:",new_quan_param)
     new_bool_expr_list = bool_expr.split(" and ")
     new_func_ret_list = func_ret.split(" and ")
@@ -154,7 +152,7 @@ def get_contained_cons(frag_content: str, needful_variables: dict):
         # print("match:"+match_call.group())
         # api_name = match_call.group(1)
         api_name = api_call_info.api_name
-        print("api:"+api_name+"-")
+        # print("api:"+api_name+"-")
         param_str = api_call_info.api_param
         # 将复杂情况排除
         # if "(" in param_str or "[" in param_str or "!" in param_str or "_" in param_str:
@@ -182,7 +180,7 @@ def get_contained_cons(frag_content: str, needful_variables: dict):
         real_args_list = get_real_args_list(re.split(r",(?![^<]*>)", param_str))
         # 获取形参
         param_dict = api.get_api_args()
-        print(">>>real_args_list:",real_args_list,"param_dict:", param_dict)
+        # print(">>>real_args_list:",real_args_list,"param_dict:", param_dict)
         # 开始替换
         if len(param_dict) == len(real_args_list):
             result = replace_param_with_arg(param_dict, real_args_list, needful_variables, 
@@ -214,7 +212,7 @@ class CodeFragmentGenerator:
         if self.level <= 0:
             tmp_fragment = self.rand_gen.generate_random(var_name, var_type)
             if tmp_fragment is None:
-                print("can not gen1:"+var_name+" "+var_type)
+                # print("can not gen1:"+var_name+" "+var_type)
                 return None, None, None, None
             else:
                 final_fragment += tmp_fragment
@@ -264,7 +262,6 @@ class CodeFragmentGenerator:
                     last_fragment = last_fragment.replace(match.group(), "")
             # 生成拼接的代码片段所需的参数
             needful_variables = ast.literal_eval(added_fragment[3])
-            # ！！！检查这里
             bool_expr_list, func_ret_list, quanternion_list, needful_args, partial_reset_stmt = \
                 get_contained_cons(added_fragment_content, needful_variables)
             # ***仅拼接代码片段时使用下面语句
@@ -276,7 +273,7 @@ class CodeFragmentGenerator:
                     generate_if_cons_exist(bool_expr_list, func_ret_list, quanternion_list, needful_args)
             else:
                 correct_stmt, wrong_stmt = "//no cons\n", "//no cons\n"
-            print("correct_stmt",correct_stmt,"wrong_stmt",wrong_stmt)
+            # print("correct_stmt",correct_stmt,"wrong_stmt",wrong_stmt)
             # 如果生成失败
             if correct_stmt is None:
                 return  None, None, None, None
@@ -303,7 +300,7 @@ class CodeFragmentGenerator:
                 else:
                     tmp_reset = ""
                 if not tmp_fragment:
-                    print("can not gen2:"+a_var_name+" "+a_var_type)
+                    # print("can not gen2:"+a_var_name+" "+a_var_type)
                     return None, None, None, None
                 final_fragment += tmp_fragment
                 final_reset += tmp_reset
@@ -339,11 +336,7 @@ class CodeFragmentGenerator:
             sql = "SELECT * FROM CodeFragment ORDER BY RANDOM() LIMIT 1;"
         else:
             sql = "SELECT * FROM CodeFragment WHERE ID ="+str(n)+";"
-        # print(self.corpus_handler.selectAll(sql))
         one_fragment = self.corpus_handler.selectAll(sql)[0]
-        # print(one_fragment)
-        # print("n:",n)
-        # one_fragment = all_fragment_record[n]
         # 新表
         if len(one_fragment) == 7:
             one_fragment_info = CodeFragmentInfo(one_fragment[1], ast.literal_eval(one_fragment[2]),
@@ -378,7 +371,7 @@ class CodeFragmentGenerator:
             if not this_fragment:
                 return None, None
             # 如果是Qubit、Qubit[]或者需要量子比特数组的类型，添加reset操作
-            print("===var_name:"+var_name+" var_type:"+var_type)
+            # print("===var_name:"+var_name+" var_type:"+var_type)
             if var_type == "Qubit":
                 final_reset += "Reset(" + var_name + ");\n"
             elif var_type == "Qubit[]":

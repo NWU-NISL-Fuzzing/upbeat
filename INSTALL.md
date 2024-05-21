@@ -1,3 +1,11 @@
+## Docker image
+
+We provide a [docker image]() to run "out of box". 
+
+## Setup environment without Docker
+
+To set up Upbeat in your environment, ensure the following prerequisites are met:
+
 **1.Install dotnet.**
 
 (1)Download dotnet-install.sh.

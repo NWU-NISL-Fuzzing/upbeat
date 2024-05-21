@@ -51,7 +51,7 @@ def vote(outputs, testcase_content):
 def execute(index: int, testcase_content: str, command: str, need_coverage: bool):
     """ 执行,获取结果,存入数据库 """
 
-    print("cmd:" + " ".join(command))
+    print("\033[1mcmd:\033[0m" + " ".join(command))
     if need_coverage:
         output = run_and_get_cov(temp_proj, index, testcase_content)
         output.stdout = remove_cov_info(output.stdout)

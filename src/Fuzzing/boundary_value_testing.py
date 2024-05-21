@@ -14,10 +14,10 @@ def run_and_analysis(targetDB, index: int, testcaseContent: str):
     print("==running "+str(index)+"th test case==")
     tempProj = pathlib.Path(params["projectPattern"])
     # 获取flag
-    if "//correct" in testcaseContent:
-        flag = 1
-    elif "//wrong" in testcaseContent:
+    if "//wrong" in testcase_content or "//invalid" in testcase_content:
         flag = 0
+    elif "//correct" in testcase_content or "//valid" in testcase_content:
+        flag = 1
     else:
         flag = -1
     # 运行

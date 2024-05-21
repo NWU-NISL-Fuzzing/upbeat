@@ -50,7 +50,7 @@ def cl_cwvp_by_tree(bool_expr: str, args_dict: dict):
     """ 根据经典约束表达式以及参数信息生成正确/错误声明语句 """
 
     generator = GenerateCorrectAndWrong()
-    correct_stmt, wrong_stmt = "//correct\n", "//wrong\n"
+    correct_stmt, wrong_stmt = "//valid\n", "//invalid\n"
     # correct_stmt, wrong_stmt = "", ""
 
     # Get the ConstraintTreeList instance.
@@ -115,7 +115,7 @@ def qt_cwvp_by_quaternion(assert_stmt: str, arg_name: str, arg_type: str, alread
 
     # 如果变量没有在经典约束部分被声明，在此处生成
     # print(">>>already_gen:",already_gen,"arg_name:",arg_name,"arg_type:",arg_type)
-    correct_stmt, wrong_stmt = "//correct\n", "//wrong\n"
+    correct_stmt, wrong_stmt = "//valid\n", "//invalid\n"
     if arg_name in already_gen.keys() and arg_type == already_gen[arg_name]:
         pass
     else:
@@ -147,7 +147,7 @@ def generate_if_cons_exist(bool_expr_list, func_ret_list, qt_cons, arg_dict):
     # print("===bool_expr_list:",bool_expr_list,"\n===func_ret_list",func_ret_list)
     # print("===arg_dict:",arg_dict)
     # 存放最终代码片段的变量
-    # correct_stmt, wrong_stmt = "//correct\n", "//wrong\n"
+    # correct_stmt, wrong_stmt = "//valid\n", "//invalid\n"
     correct_stmt, wrong_stmt = "", ""
     # 存放已声明变量，如果同时存在经典和量子约束，避免重复声明部分变量
     already_gen = {}

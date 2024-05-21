@@ -394,38 +394,38 @@ def generate_value_pair(bool_expr_list: list, func_ret_list: list, arg_dict: dic
             final_dec_stmt = front_dec_stmt+back_dec_stmt+still_not_generated
             # print("final_valid:\n"+final_dec_stmt)
             final_mid_vars = {**front_mid_vars, **back_mid_vars}
-            final_valid_list.append(("//correct\n"+final_dec_stmt, final_mid_vars))
+            final_valid_list.append(("//valid\n"+final_dec_stmt, final_mid_vars))
     # 如果只有布尔表达式
     elif len(back_valid_list) > 0:
         for back_dec_stmt, back_defined_vars, back_mid_vars in back_valid_list:
-            final_valid_list.append(("//correct\n"+back_dec_stmt, back_mid_vars))
+            final_valid_list.append(("//valid\n"+back_dec_stmt, back_mid_vars))
     if len(front_invalid_back_valid_list) > 0:
         for (front_dec_stmt, front_defined_vars, front_mid_vars), (back_dec_stmt, back_defined_vars, back_mid_vars) in zip(front_invalid_list, front_invalid_back_valid_list):
             still_not_generated = generate_by_mid_vars(front_mid_vars, back_defined_vars, arg_dict)
             final_dec_stmt = front_dec_stmt+back_dec_stmt+still_not_generated
             # print("final_invalid:\n"+final_dec_stmt)
             final_mid_vars = {**front_mid_vars, **back_mid_vars}
-            final_invalid_list.append(("//wrong\n"+final_dec_stmt, final_mid_vars))
+            final_invalid_list.append(("//invalid\n"+final_dec_stmt, final_mid_vars))
     if len(back_invalid_list) > 0 and len(front_valid_list) > 0:
         still_not_generated = generate_by_mid_vars(front_valid_list[0][2], front_valid_list[0][1], arg_dict)
         for back_dec_stmt, back_defined_vars, back_mid_vars in back_invalid_list:
             final_dec_stmt = back_dec_stmt+front_valid_list[0][0]+still_not_generated
             # print("final_invalid:\n"+final_dec_stmt)
             final_mid_vars = {**back_mid_vars, **front_valid_list[0][1]}
-            final_invalid_list.append(("//wrong\n"+final_dec_stmt, final_mid_vars))
+            final_invalid_list.append(("//invalid\n"+final_dec_stmt, final_mid_vars))
     elif len(back_invalid_list) > 0:
         for back_dec_stmt, back_defined_vars, back_mid_vars in back_invalid_list:
-            final_invalid_list.append(("//wrong\n"+back_dec_stmt, back_mid_vars))
+            final_invalid_list.append(("//invalid\n"+back_dec_stmt, back_mid_vars))
     # 否则，把still_not_generated的内容加在front_valid_list和front_invalid_list中
     if len(back_valid_list) == 0 and len(back_invalid_list) == 0:
         for front_dec_stmt, front_defined_vars, front_mid_vars in front_valid_list:
             still_not_generated = generate_by_mid_vars(front_mid_vars, front_defined_vars, arg_dict)
             final_dec_stmt = front_dec_stmt+still_not_generated
-            final_valid_list.append(("//correct\n"+final_dec_stmt, front_mid_vars))
+            final_valid_list.append(("//valid\n"+final_dec_stmt, front_mid_vars))
         for front_dec_stmt, front_defined_vars, front_mid_vars in front_invalid_list:
             still_not_generated = generate_by_mid_vars(front_mid_vars, front_defined_vars, arg_dict)
             final_dec_stmt = front_dec_stmt+still_not_generated
-            final_invalid_list.append(("//wrong\n"+final_dec_stmt, front_mid_vars))
+            final_invalid_list.append(("//invalid\n"+final_dec_stmt, front_mid_vars))
     return final_valid_list, final_invalid_list
 
 def merge_cl_cons(result_list: list):
