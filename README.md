@@ -74,6 +74,8 @@ This will open the notebook in your default web browser, allowing you to interac
 
 ## Experimental Result
 
-+ The bug data can be found in [this page](data/result/BugList.md). 
-+ The coverage data is organized into two folders, [one](data/experiment/cov-result-origin) stores the original coverage values of four libraries, and [another](data/experiment/cov-result-calculated) stores the calculated weighted averages of coverage.
-+ The anomalous behaviors found by baseline methods and Upbeat are stored in [this folder](data/experiment/anomalies).
++ (RQ1) The bug data can be found in [this page](data/result/BugList.md). 
++ (RQ2) The coverage data is organized into two folders, [one](data/experiment/cov-result-origin) stores the original coverage values of four libraries, and [another](data/experiment/cov-result-calculated) stores the calculated weighted averages of coverage.
++ (RQ2) The anomalous behaviors found by baseline methods and Upbeat. Anomalous detected via language-level testing are stored in [this folder](data/experiment/anomalies-lang), and ones via differential testing are stored in [this folder](data/experiment/anomalies-diff).
++ (RQ3) The results of ablation study can be found in [this folder](data/experiment/ablation-study)
++ (RQ4) The evaluation of constraint extraction can be found in [this folder](data/experiment/constraint-extraction)
