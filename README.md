@@ -61,7 +61,7 @@ UPBEAT is capable of filtering the anomalies into three types: (1) bugs that hav
 
 ## Jupyter Notebook
 
-Users can use our notebook in two ways: launching it on your local machine or exploring it [online]().
+We provide two notebooks, a [demo notebook](jupyter/demo.ipynb) for a quick insight of all steps in Upbeat, and a [reproduction notebook](jupyter/reproduction.ipynb) to reproduce our experiment. Users can use our notebooks in two ways: launching it on your local machine or exploring it [online]().
 
 To run the notebook on your computer, follow these simple steps:
 
@@ -72,8 +72,8 @@ jupyter notebook
 
 This will open the notebook in your default web browser, allowing you to interact with it seamlessly.
 
-## Reproduction
+## Experimental Result
 
-The bug data is located in [this page](data/result/BugList.md). 
-
-
++ The bug data can be found in [this page](data/result/BugList.md). 
++ The coverage data is organized into two folders, [one](data/experiment/cov-result-origin) stores the original coverage values of four libraries, and [another](data/experiment/cov-result-calculated) stores the calculated weighted averages of coverage.
++ The anomalous behaviors found by baseline methods and Upbeat are stored in [this folder](data/experiment/anomalies).

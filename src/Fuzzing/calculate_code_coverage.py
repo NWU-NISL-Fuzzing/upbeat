@@ -20,7 +20,7 @@ def calculate_coverage(file_path, output_file):
             total_block_coverage += block_coverage * weights[j][0]
             total_line_coverage += line_coverage * weights[j][1]
 
-        with open(output_file, 'a') as out_file:
+        with open(output_file, 'w') as out_file:
             out_file.write(f" {total_block_coverage:.2f} {total_line_coverage:.2f}\n")
 
 if __name__ == "__main__":
