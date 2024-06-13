@@ -2,10 +2,21 @@
 
 UPBEAT is a fuzzing tool to generate random test cases for bugs related to input checking in Q# libraries.
 
-## Getting Started
+## Build Pre-requisites
 
-1. Check that your setup meets the REQUIREMENTS.md.
-2. Follow the installation instructions in INSTALL.md.
+### Using Docker
+
+We offer a ready-to-use [image]() that runs "out of the box". Additionly, you can also use the [Dockerfile](build/Dockerfile) to build the environment and clone Upbeat. 
+
+```
+docker build -t upbeat:v1 .
+docker run -it upbeat:v1 bash
+```
+
+### Build Environment Locally
+
+1. Check that your setup meets the [REQUIREMENTS.md](build/REQUIREMENTS.md).
+2. Follow the installation instructions in [INSTALL.md](build/INSTALL.md).
 3. Adjust [the configuration file](src/config.json) to align with your specific requirements. Below are the configurable parameters and their descriptions:
 
 ```
@@ -79,3 +90,7 @@ This will open the notebook in your default web browser, allowing you to interac
 + (RQ2) The anomalous behaviors found by baseline methods and Upbeat. Anomalous detected via language-level testing are stored in [this folder](data/experiment/anomalies-lang), and ones via differential testing are stored in [this folder](data/experiment/anomalies-diff).
 + (RQ3) The results of ablation study can be found in [this folder](data/experiment/ablation-study)
 + (RQ4) The evaluation of constraint extraction can be found in [this folder](data/experiment/constraint-extraction)
+
+## Troubleshooting
+
+Here are some issues we've encountered when installing Upeat on different devices. We hope [this page](build/CommonIssues.md) can help you resolve them.
