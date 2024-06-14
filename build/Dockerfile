@@ -25,7 +25,7 @@ RUN apt-get update
 RUN apt-get install -y dotnet-sdk-6.0
 
 RUN git clone https://github.com/NWU-NISL-Fuzzing/UPBEAT.git
-RUN pip install qdown
+RUN pip install qdown numpy
 RUN gdown --id 112cRelito9MXYyzeL_ofwUUSUqaCRfKP
 RUN unzip -q qsharp-compiler-28.zip
 

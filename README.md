@@ -4,20 +4,24 @@ UPBEAT is a fuzzing tool to generate random test cases for bugs related to input
 
 ## Build Pre-requisites
 
-### Using Docker
+### Use Docker
 
-We offer a ready-to-use [image]() that runs "out of the box". Additionly, you can also use the [Dockerfile](build/Dockerfile) to build the environment and clone Upbeat. 
+We offer a ready-to-use [image]() that runs "out of the box". Alternatively, you can also run the [Dockerfile](build/Dockerfile). 
 
 ```
 docker build -t upbeat:v1 .
 docker run -it upbeat:v1 bash
 ```
 
-### Build Environment Locally
+### Setup Locally
 
-1. Check that your setup meets the [REQUIREMENTS.md](build/REQUIREMENTS.md).
+1. Ensure your Python environment meets the dependencies listed in [requirements.txt](build/requirements.txt).
 2. Follow the installation instructions in [INSTALL.md](build/INSTALL.md).
-3. Adjust [the configuration file](src/config.json) to align with your specific requirements. Below are the configurable parameters and their descriptions:
+3. Clone the repository.
+
+## Basic Usage
+
+(Optional) Adjust [the configuration file](src/config.json) to align with your specific requirements. Below are the configurable parameters and their descriptions:
 
 ```
 work_dir:       The directory path where the repository is located.
@@ -32,21 +36,19 @@ projectPattern: Path to the Q# projects used during the testing phase.
 boundaryValue:  Special values for random input generation.
 ```
 
-## Basic Usage
-
-Step1. Generate test cases.
+**Step1. Generate test cases.**
 
 ```
-cd src/Generate
+cd UPBEAT/src/Generate
 python main.py
 ```
 
 There are two steps in test case generation: (1) assemble code segments and (2) generate callable inputs. All generated test cases are stored in `result_db`.
 
-Step2. Execute test cases.
+**Step2. Execute test cases.**
 
 ```
-cd src/Fuzzing
+cd ../Fuzzing
 python hybrid_testing.py
 ```
 
@@ -61,7 +63,7 @@ python boundary_value_testing.py
 python differential_testing.py
 ```
 
-Step3. Filter anomalies.
+**Step3. Filter anomalies.**
 
 ```
 cd src/Fuzzing
@@ -88,8 +90,8 @@ This will open the notebook in your default web browser, allowing you to interac
 + (RQ1) The bug data can be found in [this page](data/result/BugList.md). 
 + (RQ2) The coverage data is organized into two folders, [one](data/experiment/cov-result-origin) stores the original coverage values of four libraries, and [another](data/experiment/cov-result-calculated) stores the calculated weighted averages of coverage.
 + (RQ2) The anomalous behaviors found by baseline methods and Upbeat. Anomalous detected via language-level testing are stored in [this folder](data/experiment/anomalies-lang), and ones via differential testing are stored in [this folder](data/experiment/anomalies-diff).
-+ (RQ3) The results of ablation study can be found in [this folder](data/experiment/ablation-study)
-+ (RQ4) The evaluation of constraint extraction can be found in [this folder](data/experiment/constraint-extraction)
++ (RQ3) The results of ablation study can be found in [this folder](data/experiment/ablation-study).
++ (RQ4) The evaluation of constraint extraction can be found in [this folder](data/experiment/constraint-extraction).
 
 ## Troubleshooting
 
