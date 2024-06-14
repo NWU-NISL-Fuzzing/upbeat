@@ -73,8 +73,8 @@ def cl_cwvp_by_tree(bool_expr: str, args_dict: dict):
         rand = len(cons.treeList) - 1
         one_cons_tree = cons.treeList[rand]
         # 针对该约束树进行生成，只在生成最后一棵树时生成复杂变量
-        print("generate cw tree:")
-        one_cons_tree.printAll()
+        # print("generate cw tree:")
+        # one_cons_tree.printAll()
         if rand == 0:
             tmp_correct_stmt, tmp_wrong_stmt = generator.generate_value_pair(one_cons_tree, cons.argsDict, 
                                                                              False, True)
@@ -86,8 +86,8 @@ def cl_cwvp_by_tree(bool_expr: str, args_dict: dict):
         # 已针对树列表中的一棵进行生成，接下来只需要生成正确的值
         i = 0
         for one_cons_tree in reversed(cons.treeList[:-1]):
-            print("generate always true tree:")
-            one_cons_tree.printAll()
+            # print("generate always true tree:")
+            # one_cons_tree.printAll()
             # 只在生成最后一棵树时生成复杂变量
             if i == len(cons.treeList) - 2:
                 tmp_correct_stmt, tmp_wrong_stmt = generator.generate_value_pair(one_cons_tree, cons.argsDict, True,
@@ -160,7 +160,7 @@ def generate_if_cons_exist(bool_expr_list, func_ret_list, qt_cons, arg_dict):
         if "SequenceI" in bool_expr:
             arg_dict.clear()
         elif "?" in bool_expr or "<<" in bool_expr or "::" in bool_expr or "**" in bool_expr:
-            print("^^^old method")
+            # print("^^^old method")
             tmp_correct_stmt, tmp_wrong_stmt = cl_cwvp_by_tree(bool_expr, arg_dict)
             correct_stmt += tmp_correct_stmt
             wrong_stmt += tmp_wrong_stmt
@@ -169,7 +169,7 @@ def generate_if_cons_exist(bool_expr_list, func_ret_list, qt_cons, arg_dict):
                 correct_stmt += final_valid_list[0][0]
                 wrong_stmt += final_invalid_list[0][0]
         else:
-            print("^^^new method")
+            # print("^^^new method")
             final_valid_list, final_invalid_list, already_gen = cl_cwvp_by_z3(bool_expr_list, func_ret_list, arg_dict)
             if len(final_valid_list) > 0:
                 correct_stmt += final_valid_list[0][0]
@@ -333,7 +333,7 @@ def generate_fragment_cs(api_info):
         final_stmt = correct_stmt+call_stmt+reset_stmt+concrete_reset_stmt+output_stmt
         code_fragment = CodeFragmentInfo(final_stmt, standard_api_args, {}, open_stmt,
                                     defined_call_str, "QuantumConsStmt").format_to_save()
-        print("code_fragment:\n",final_stmt,"\n",defined_call_str)
+        # print("code_fragment:\n",final_stmt,"\n",defined_call_str)
         result_list.append(code_fragment)
     else:
         final_stmt1 = correct_stmt+call_stmt+reset_stmt+concrete_reset_stmt+output_stmt
@@ -342,8 +342,8 @@ def generate_fragment_cs(api_info):
                                     defined_call_str, "QuantumConsStmt").format_to_save()
         code_fragment2 = CodeFragmentInfo(final_stmt2, standard_api_args, {}, open_stmt,
                                     defined_call_str, "QuantumConsStmt").format_to_save()
-        print("code_fragment1:\n",final_stmt1,"\n",defined_call_str)
-        print("code_fragment2:\n",final_stmt2,"\n",defined_call_str)
+        # print("code_fragment1:\n",final_stmt1,"\n",defined_call_str)
+        # print("code_fragment2:\n",final_stmt2,"\n",defined_call_str)
         result_list.append(code_fragment1)
         result_list.append(code_fragment2)
     # 对成功生成代码片段的API进行计数
@@ -360,7 +360,7 @@ def select_all():
         result_list.extend(generate_fragment_cs(api_info))
         # break
     save_into_db(params["corpus_db"], "CodeFragment_CS", result_list)
-    print("Finish!api count:"+str(api_count)+" api cons count:"+str(api_cons_count))
+    # print("Finish!api count:"+str(api_count)+" api cons count:"+str(api_cons_count))
 
 if __name__ == "__main__":
     select_all()

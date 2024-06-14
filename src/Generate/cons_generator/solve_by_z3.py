@@ -93,7 +93,7 @@ def inverse_bool_exprs(input_str: str):
 def get_symbol_type(word: str, arg_dict: dict):
     """ 确定z3输入中变量的类型 """
 
-    print("1word:"+word+" arg_dict:"+str(arg_dict))
+    # print("1word:"+word+" arg_dict:"+str(arg_dict))
     if word in arg_dict:
         word_type = arg_dict[word]
         if word_type == "Int" or  word_type == "BigInt":
@@ -121,14 +121,14 @@ def replace_words(bool_expr_list: list, arg_dict: dict):
                     # print("sub_bool_expr:"+sub_bool_expr)
                     new_sub_bool_expr_list.append(sub_bool_expr)
             expr = "Or("+", ".join(new_sub_bool_expr_list)+")"
-            print("expr:"+expr)
+            # print("expr:"+expr)
         new_bool_expr_list.append(expr)
     # 如果只有永真表达式，直接返回
     if len(new_bool_expr_list) == 0:
         return None, None, None, None
     # 将所有布尔表达式连接为And语句
     input_str = ", ".join(new_bool_expr_list)
-    print("input_str:"+input_str)
+    # print("input_str:"+input_str)
     # 临时操作，简化数据库之后不需要下面的替换步骤
     input_str = input_str.replace("^", "**")
     # print("input_str1:"+input_str)
@@ -137,7 +137,7 @@ def replace_words(bool_expr_list: list, arg_dict: dict):
     match_for_word = re.finditer(r"[\w\(\)!:]+", input_str)
     for idx, item in enumerate(match_for_word):
         word = item.group()
-        print("0word:"+word)
+        # print("0word:"+word)
         # 对Not连接的表达式特殊处理
         if word.startswith("Or("):
             word = word[3:]
@@ -164,7 +164,7 @@ def replace_words(bool_expr_list: list, arg_dict: dict):
             new_constraint += letter+" != model["+letter+"], "
             processed_word.append(word)
     new_constraint = "Or("+new_constraint[:-2]+")"
-    print("input_str2:"+input_str)
+    # print("input_str2:"+input_str)
     return input_str, symbols_str, new_constraint, extra_input_str
 
 def construct_single_solution(input_str: str, symbols_str: str, new_constraint: str, extra_input_str: str):
@@ -214,7 +214,7 @@ def get_solver_from_z3(solver_code: str):
     sys.stdout = sys.__stdout__
     output = stdout.getvalue()
     # print("===end solve===\n")
-    print("output:"+output+"-")
+    # print("output:"+output+"-")
     return output
 
 def process_single_solution(output: str, arg_dict: dict):
@@ -280,7 +280,7 @@ def generate_by_z3(bool_expr_list: list, arg_dict: dict):
     if input_str is None:
         return [], []
     # 生成合理的参数值
-    print("===valid===")
+    # print("===valid===")
     constructed_list = construct_bool_exprs(input_str)
     for constructed in constructed_list:
         solver_code = construct_multiple_solutions(constructed, symbols_str, new_constraint, extra_input_str)
@@ -289,10 +289,10 @@ def generate_by_z3(bool_expr_list: list, arg_dict: dict):
         valid_dec_stmt_list.extend(dec_stmt_list)
         # print("valid_dec_stmt_list:",valid_dec_stmt_list)
     # 生成不合理的参数值
-    print("===invalid===")
+    # print("===invalid===")
     constructed_list = inverse_bool_exprs(input_str)
     for constructed in constructed_list:
-        print("constructed:"+constructed)
+        # print("constructed:"+constructed)
         solver_code = construct_single_solution(constructed, symbols_str, new_constraint, extra_input_str)
         # print("solver_code:\n"+solver_code)
         output = get_solver_from_z3(solver_code)
@@ -378,9 +378,9 @@ def generate_value_pair(bool_expr_list: list, func_ret_list: list, arg_dict: dic
         # 但是也需要根据front_invalid_list（不满足布尔表达式的值）生成满足特殊函数的值
         for front_invalid in front_invalid_list:
             tmp_back_valid_list, tmp_back_invalid_list = generate_by_func_ret(func_ret_list, front_invalid[1], front_invalid[2])
-            print("===front_invalid_back_valid_list:\n",tmp_back_valid_list[0])
+            # print("===front_invalid_back_valid_list:\n",tmp_back_valid_list[0])
             front_invalid_back_valid_list.append(tmp_back_valid_list[0])
-        print("===size of front_invalid_back_valid_list:",len(front_invalid_back_valid_list))
+        # print("===size of front_invalid_back_valid_list:",len(front_invalid_back_valid_list))
         # 可能没有布尔表达式
         if len(front_valid_list) == 0 and len(front_invalid_list) == 0:
             back_valid_list, back_invalid_list = generate_by_func_ret(func_ret_list, {}, {})
@@ -437,7 +437,7 @@ def merge_cl_cons(result_list: list):
     arg_dict = {}
     # 合并布尔表达式以及需要生成的参数信息
     for result in result_list:
-        print("result:",result)
+        # print("result:",result)
         fact_stmt = result[2]
         arg_dict.update(ast.literal_eval(result[3]))
         if fact_stmt.startswith("Is") or fact_stmt.startswith("PNorm"):
@@ -455,12 +455,12 @@ def cl_cwvp_by_z3(bool_expr_list: list, func_ret_list: list, arg_dict: dict):
     # 开始生成
     final_valid_list, final_invalid_list = generate_value_pair(bool_expr_list, func_ret_list, arg_dict)
     # 打印输出
-    print("===valid===")
-    for idx, (final_dec_stmt, final_mid_vars) in enumerate(final_valid_list):
-        print(str(idx)+"final_dec_stmt:\n"+final_dec_stmt)
-    print("===invalid===")
-    for idx, (final_dec_stmt, final_mid_vars) in enumerate(final_invalid_list):
-        print(str(idx)+"final_dec_stmt:\n"+final_dec_stmt)
+    # print("===valid===")
+    # for idx, (final_dec_stmt, final_mid_vars) in enumerate(final_valid_list):
+    #     print(str(idx)+"final_dec_stmt:\n"+final_dec_stmt)
+    # print("===invalid===")
+    # for idx, (final_dec_stmt, final_mid_vars) in enumerate(final_invalid_list):
+    #     print(str(idx)+"final_dec_stmt:\n"+final_dec_stmt)
     return final_valid_list, final_invalid_list, arg_dict
 
 def main():
@@ -472,7 +472,7 @@ def main():
         api_name = api_name[0]
         if api_name in standard_api_dict:
             result_list = targetDB.selectAll("select * from ClConsStmt_sim where func_name = '"+api_name+"';")
-            print("result_list:\n",result_list)
+            # print("result_list:\n",result_list)
             bool_expr_list, func_ret_list, arg_dict = merge_cl_cons(result_list)
             cl_cwvp_by_z3(bool_expr_list, func_ret_list, arg_dict)
 

@@ -97,7 +97,7 @@ def get_real_args_list(args_list: list):
     real_args_list = []
     one_arg = ""
     start_to_merge = False
-    print("args_list:",args_list)
+    # print("args_list:",args_list)
     for word in args_list:
         word = word.replace("Adjoint ", "")
         word = word.strip()
@@ -112,17 +112,17 @@ def get_real_args_list(args_list: list):
             one_arg = word + ", "
         else:
             real_args_list.append(word)
-    print("real_args_list:",real_args_list)
+    # print("real_args_list:",real_args_list)
     return real_args_list
 
 
 def parse_dec_content(content: str, outmost_type: str, needful_variables: dict, known_dict: dict, middle_dict: dict):
     """ 这里处理的是只包含变量和API调用的，用，或者算术符号连接的句子 """
 
-    print("content:"+content)
+    # print("content:"+content)
     for match_var in re.finditer(r"[\w\(\)\[\]]+", content):
         var = match_var.group()
-        print("var:"+var)
+        # print("var:"+var)
         # idxFermions[1]
         match_sub_arr = re.match(r"(\w+)\[[0-9]+\]", var)
         if match_sub_arr:
@@ -143,7 +143,7 @@ def parse_dec_content(content: str, outmost_type: str, needful_variables: dict, 
             if api_name in standard_api_dict:
                 args_list = get_real_args_list(re.split(", |,", api_args))
                 args_type = standard_api_dict[api_name].requireTypes
-                print("args_list:",args_list,"args_type:",args_type)
+                # print("args_list:",args_list,"args_type:",args_type)
                 for arg_name, arg_type in zip(args_list, args_type):
                     if "[" in arg_name and arg_name.endswith("]"):
                         arg_name = arg_name[:arg_name.index("[")]
@@ -367,7 +367,7 @@ def get_all_call_name(one_block: CodeBlockInfo, stmt: str, known_dict: dict):
     for index, api_call in enumerate(api_call_list, start=1):
         # 排除掉常用API以及newtype
         this_api_name = api_call.api_name
-        print("api_name:"+this_api_name+"-")
+        # print("api_name:"+this_api_name+"-")
         if "::" in this_api_name or this_api_name in known_dict:
             pass
         # 这里过滤的话不会影响下面识别变量么？
@@ -407,7 +407,7 @@ def get_all_call_name(one_block: CodeBlockInfo, stmt: str, known_dict: dict):
                     arg_name = arg_name[1:]
                 elif not arg_name.endswith("(") and not has_closed_brackets(arg_name):
                     arg_name = arg_name[:-1]
-                print("arg name:" + arg_name + " arg type:" + arg_type)
+                # print("arg name:" + arg_name + " arg type:" + arg_type)
                 needful_variables.update(
                     get_needful_var(arg_name, arg_type, one_block.var_dec_dict, known_dict, one_block.middle_dict, needful_variables))
                 if arg_name in standard_api_dict:
@@ -424,7 +424,7 @@ def get_all_call_name(one_block: CodeBlockInfo, stmt: str, known_dict: dict):
             args_list = re.split(r",(?![^(]*\))", api_call.api_param)
             inputs_list = re.split(r",(?![^(]*\))", remove_redundant_brackets(op_inputs))
             for arg, input_str in zip(args_list, inputs_list):
-                print("arg:"+arg+" input_str:"+input_str)
+                # print("arg:"+arg+" input_str:"+input_str)
                 # add_item(needful_variables, arg, input_str, one_block.middle_dict)
                 needful_variables.update(
                     get_needful_var(arg, input_str, one_block.var_dec_dict, known_dict, one_block.middle_dict, needful_variables))
@@ -488,7 +488,7 @@ def parse_dec_stmt(one_block: CodeBlockInfo, known_dict: dict):
         match_arr_item = re.match(regex_for_arr_item, var_dec_content)
         if match_arr_item:
             arr_name, arr_index = match_arr_item.group(1), match_arr_item.group(2)
-            print("match_arr_item:"+match_arr_item.group())
+            # print("match_arr_item:"+match_arr_item.group())
             if arr_name == "Qubit":
                 var_dec_dict[var_name_content] = "Qubit[]"
             else:
@@ -540,7 +540,7 @@ def parse_dec_stmt(one_block: CodeBlockInfo, known_dict: dict):
                 #     args_list.append(item.group())
                 # 20230723:修改结束，尝试失败，因为参数变量和参数类型需要一对一对应
                 if len(args_type) > 0 and len(args_type) == len(args_list):
-                    print("---args_type:", args_type, " args_list:", args_list)
+                    # print("---args_type:", args_type, " args_list:", args_list)
                     for arg_name, arg_type in zip(args_list, args_type):
                         if arg_name in standard_api_dict:
                             tmp_import = "open " + standard_api_dict[arg_name].namespace + ";\n"
@@ -549,7 +549,7 @@ def parse_dec_stmt(one_block: CodeBlockInfo, known_dict: dict):
                             continue
                         needful_variables.update(
                             get_needful_var(arg_name, arg_type, var_dec_dict, known_dict, one_block.middle_dict, needful_variables))
-                        print("+++needful_variables:",needful_variables)
+                        # print("+++needful_variables:",needful_variables)
                 else:
                     print("解析参数失败，参数名与参数类型不匹配")
                     one_block.var_dec_dict = None
@@ -613,7 +613,7 @@ def parse_dec_stmt(one_block: CodeBlockInfo, known_dict: dict):
     else:
         one_block.middle_dict.update(var_dec_dict)
         one_block.var_use_dict.update(minus_dict(needful_variables, var_dec_dict))
-    print("---check after parse:", one_block.var_dec_dict, one_block.var_use_dict, api_list)
+    # print("---check after parse:", one_block.var_dec_dict, one_block.var_use_dict, api_list)
     # 20230905:为什么是new_block_content?
     # return new_block_content, api_list
     return block_content, api_list
