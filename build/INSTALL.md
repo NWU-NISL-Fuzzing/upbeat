@@ -1,9 +1,3 @@
-## Docker image
-
-We provide a [docker image]() to run "out of box". 
-
-## Setup environment without Docker
-
 To set up Upbeat in your environment, ensure the following prerequisites are met:
 
 **1.Install dotnet.**
@@ -64,7 +58,7 @@ source ~/.bashrc
 
 **5.Install pip tools.**
 
-Before using UPBEAT, some pip tools are necessary.
+Before using Upbeat, some pip tools are necessary.
 
 ```
 pip install six numpy 

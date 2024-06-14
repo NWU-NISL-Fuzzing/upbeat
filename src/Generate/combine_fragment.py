@@ -38,7 +38,7 @@ def api_call_in_arg(api_name: str, arg_name: str, needful_variables: dict):
 def get_arg_dict(arg_name, needful_variables):
     """ 对于IntAsBoolArray(F, Length(register))，arg_dict中存放的是F和register，但是arg_name需要是F和Length(register) """
 
-    print("arg_name:",arg_name,"needful_variables:",needful_variables)
+    # print("arg_name:",arg_name,"needful_variables:",needful_variables)
     # 情况1.实参是一个变量
     if arg_name in needful_variables:
         return {arg_name:needful_variables[arg_name]}

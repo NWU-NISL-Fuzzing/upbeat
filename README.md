@@ -4,19 +4,20 @@ UPBEAT is a fuzzing tool to generate random test cases for bugs related to input
 
 ## Build Pre-requisites
 
-### Using Docker
+### Use Docker
 
-We offer a ready-to-use [image]() that runs "out of the box". Additionly, you can also use the [Dockerfile](build/Dockerfile) to build the environment and clone Upbeat. 
+We offer a ready-to-use [image]() that runs "out of the box". Alternatively, you can also run the [Dockerfile](build/Dockerfile). 
 
 ```
 docker build -t upbeat:v1 .
 docker run -it upbeat:v1 bash
 ```
 
-### Build Environment Locally
+### Setup Locally
 
-1. Check that your setup meets the [REQUIREMENTS.md](build/REQUIREMENTS.md).
+1. Ensure your Python environment meets the dependencies listed in [requirements.txt](build/requirements.txt).
 2. Follow the installation instructions in [INSTALL.md](build/INSTALL.md).
+3. Clone the repository.
 
 ## Basic Usage
 
