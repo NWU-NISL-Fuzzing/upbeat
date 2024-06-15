@@ -86,7 +86,7 @@ def rotate_by_calculated_angle(flag: bool, base: str, prob: str, tol: str, var_n
         angle = 2 * math.asin(math.sqrt(float(prob)+float(tol)))
     else:
         angle = 2 * math.asin(math.sqrt(float(prob)+float(tol))) + 0.1
-    print("angle:",angle)
+    # print("angle:",angle)
     op = random.choice(effective_rotation[base])
     if var_type == "Qubit":
         dec_stmt += op+"("+str(angle)+", "+var_name+");}\n"
@@ -97,7 +97,7 @@ def rotate_by_calculated_angle(flag: bool, base: str, prob: str, tol: str, var_n
 def add_gate(flag: bool, base: str, var_name: str, var_type: str):
     """ 添加门操作以改变量子比特状态 """
 
-    print("var_name:"+var_name+" var_type:"+var_type)
+    # print("var_name:"+var_name+" var_type:"+var_type)
     # 判断是否为FixedPoint类型，是则修改变量名
     if var_type in ["FixedPoint", "LittleEndian", "BigEndian", "SignedLittleEndian"]:
         var_name += "QubitArray"
@@ -153,7 +153,7 @@ def query_and_generate():
         other_arg_dec = ""
         for var_name, var_type in rest_args.items():
             # 生成变量声明语句
-            print("generate rest args:" + var_name + " " + var_type)
+            # print("generate rest args:" + var_name + " " + var_type)
             other_arg_dec = randomVal.generate_random(var_name, var_type)
             # print("==check other_arg_dec:" + other_arg_dec)
             if other_arg_dec:
@@ -212,7 +212,7 @@ def query_and_generate():
             output_stmt = "Message($\"{APIResult}\");\n"
         correct_stmt += call_stmt + output_stmt + reset_stmt
         wrong_stmt += call_stmt + output_stmt + reset_stmt
-        print("--correct:\n" + correct_stmt + "\n--wrong:\n" + wrong_stmt)
+        # print("--correct:\n" + correct_stmt + "\n--wrong:\n" + wrong_stmt)
         # 实例化
         correct_item = CodeFragmentInfo(correct_stmt, standard_api_args, {}, open_stmt,
                                         "", "QuantumConsStmt").format_to_save()

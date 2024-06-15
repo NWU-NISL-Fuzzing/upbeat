@@ -62,7 +62,7 @@ class GenerateCorrectAndWrong:
     def process_newtype_attr(self, var_name: str, relatedArgDict: dict):
         """ 处理特殊情况：当访问的是newtype的属性时，需要在relatedArgDict中添加一项指明其类型 """
 
-        print("before process newtype attr:"+var_name+" "+str(relatedArgDict))
+        # print("before process newtype attr:"+var_name+" "+str(relatedArgDict))
         if "::" in var_name:
             relatedArgDict = add_items_from_newtype(relatedArgDict, var_name)
             var_type = relatedArgDict[var_name]
@@ -72,8 +72,8 @@ class GenerateCorrectAndWrong:
             if tmp_match:
                 var_name = tmp_match.group(1)
                 var_type = relatedArgDict[var_name]
-            else:
-                print("===special situation:"+var_name)
+            # else:
+            #     print("===special situation:"+var_name)
         elif "Length(LittleEndian(" in var_name:
             tmp_match = re.search("Length\(LittleEndian\((\w+)!*\)!\)", var_name)
             if tmp_match:
@@ -81,7 +81,7 @@ class GenerateCorrectAndWrong:
                 var_type = relatedArgDict[var_name]
         else:
             var_type = relatedArgDict[var_name]
-        print("after process newtype attr:"+var_name+" "+var_type+" "+str(relatedArgDict))
+        # print("after process newtype attr:"+var_name+" "+var_type+" "+str(relatedArgDict))
         return var_name, var_type
 
     def generate_random_value(self, one_cons_tree: ConstraintTree, select_node: ConstraintTree, relatedArgDict: dict):
@@ -120,7 +120,7 @@ class GenerateCorrectAndWrong:
             size = random.choice([2, 4, 6])
             value, self.var_num = assign.generateArrayWithFixedSize(params, var_type.replace("[]", ""), 1,
                                                                         size, self.var_num)
-            print("check value:"+value)
+            # print("check value:"+value)
             self.defined_var_dict[var_name] = DefinedVar(raw_var_name, var_type, size, value)
             one_cons_tree.setRightNode(ConstraintTree(str(size)), "True")
         else:
@@ -130,7 +130,7 @@ class GenerateCorrectAndWrong:
         
         # 构建变量声明语句
         final_fragment += self.generate_declaration(var_name, var_type, value)
-        print("check after generate random:\n"+final_fragment)
+        # print("check after generate random:\n"+final_fragment)
         
         return final_fragment
 
@@ -197,7 +197,7 @@ class GenerateCorrectAndWrong:
     def equal(self, certain_value, uncertain_value, var_type, former_stmt: str):
         """ 对=certain_value的情况取合理值 """
 
-        print("var_type:"+var_type+" uncertain_value:"+uncertain_value)
+        # print("var_type:"+var_type+" uncertain_value:"+uncertain_value)
         if var_type in ["Int", "Double", "BigInt"]:
             final_stmt = "let "+uncertain_value+" = "+certain_value + ";\n"
             self.defined_var_dict[uncertain_value] = DefinedVar(uncertain_value, var_type, 0, certain_value)
@@ -279,10 +279,10 @@ class GenerateCorrectAndWrong:
     def generate_complex(self, one_cons_tree: ConstraintTree, relatedArgDict: dict):
         """ 对复杂表达式中的变量进行生成并计算结果 """
 
-        print("---In generate_complex---")
+        # print("---In generate_complex---")
         complext_stmt = ""
         node_content = one_cons_tree.rootNode
-        print("node_content:"+node_content)
+        # print("node_content:"+node_content)
         # 开始对变量进行生成和替换
         tmp_stmt = ""
         regex_for_var = r"([A-Za-z_:]+)"
@@ -316,19 +316,19 @@ class GenerateCorrectAndWrong:
             self.defined_var_dict[arg_name] = DefinedVar(real_var, arg_type, 0, value)
         complext_stmt += tmp_stmt
         new_cons_tree = ConstraintTree(calculate_math_expr(node_content))
-        print("---Out generate_complex---")
-        print("check complex:\n"+complext_stmt)
+        # print("---Out generate_complex---")
+        # print("check complex:\n"+complext_stmt)
 
         return new_cons_tree, complext_stmt
     
     def cover_defined_var(self, expr: str):
         """ 查找是否存在Length(var!)、Length(var)或者var，如果有的话，将其替换成值/长度 """
 
-        print("check expr:"+expr)
+        # print("check expr:"+expr)
         if "?" in expr:
             return expr, True
         for real_var_name, var_info in self.defined_var_dict.items():
-            print("check covered defined:"+real_var_name+" "+var_info.var_value+" "+str(var_info.var_size))
+            # print("check covered defined:"+real_var_name+" "+var_info.var_value+" "+str(var_info.var_size))
             if "Length("+real_var_name+"!)" in expr:
                 expr = expr.replace("Length("+real_var_name+"!)", str(var_info.var_size))
             elif "Length("+real_var_name+")" in expr:
@@ -338,13 +338,13 @@ class GenerateCorrectAndWrong:
                 # expr = self.var_to_value(expr, real_var_name, var_info.var_value)
         # print(">>>expr:"+expr)
         for var_name, var_value in self.correct_mid_dict.items():
-            print("check covered mid:"+var_name+" "+var_value)
+            # print("check covered mid:"+var_name+" "+var_value)
             var_name = var_name.replace("QubitArrayLen", "").replace("ArrayLen", "")
             if "Length("+var_name+"!)" in expr:
                 expr = expr.replace("Length("+var_name+"!)", var_value)
             elif "Length("+var_name+")" in expr:
                 expr = expr.replace("Length("+var_name+")", var_value)
-        print("after cover:"+expr)
+        # print("after cover:"+expr)
         try:
             expr = calculate_math_expr(expr)
             return expr, True
@@ -355,9 +355,9 @@ class GenerateCorrectAndWrong:
     def refresh_node_content(self, one_cons_tree: ConstraintTree):
         """ 使用defined_var_dict覆盖已生成变量 """
 
-        print("---In refresh_node_content---")
+        # print("---In refresh_node_content---")
         if not (one_cons_tree.leftNode or one_cons_tree.rightNode):
-            print("---No need refresh---")
+            # print("---No need refresh---")
             return one_cons_tree
         # print(">>>0expr:"+one_cons_tree.leftNode.rootNode)
         expr, all_covered = self.cover_defined_var(one_cons_tree.leftNode.rootNode)
@@ -373,7 +373,7 @@ class GenerateCorrectAndWrong:
             one_cons_tree.setNode(ConstraintTree(expr), True, "right")
         else:
             one_cons_tree.setNode(ConstraintTree(expr), False, "right")
-        print("---Out refresh_node_content---")
+        # print("---Out refresh_node_content---")
         return one_cons_tree
 
     def change_op(self, op: str):
@@ -451,7 +451,7 @@ class GenerateCorrectAndWrong:
             if selected_node.isLeafNode() and countOp(selected_node.rootNode) == 0:
                 correct_stmt = self.generate_random_value(one_cons_tree, selected_node, relatedArgDict)
                 certain_value = one_cons_tree.rightNode.rootNode
-                print("check certain_value if leaf:"+certain_value)
+                # print("check certain_value if leaf:"+certain_value)
             # 否则需要进一步处理，生成随机值，并更新右节点表达式
             else:
                 new_cons_tree, complex_stmt = self.generate_complex(one_cons_tree.rightNode, relatedArgDict)
@@ -459,7 +459,7 @@ class GenerateCorrectAndWrong:
                 certain_value = new_cons_tree.rootNode
                 correct_stmt = complex_stmt
                 # print("check certain_value if not leaf:"+certain_value)
-            print("after generate one:correct_stmt:\n"+correct_stmt+"complex_stmt:\n"+complex_stmt)
+            # print("after generate one:correct_stmt:\n"+correct_stmt+"complex_stmt:\n"+complex_stmt)
             # 检查一下生成是否成功
             if correct_stmt is None or correct_stmt == "":
                 return "", ""
@@ -475,7 +475,7 @@ class GenerateCorrectAndWrong:
         # print("middle correct_stmt:\n"+correct_stmt+"middle wrong_stmt:\n"+wrong_stmt)
         # print("certain_value:"+certain_value)
         # print("only_generate_correct:",only_generate_correct)
-        print("after generate one:correct_stmt:\n"+correct_stmt+"complex_stmt:\n"+complex_stmt)
+        # print("after generate one:correct_stmt:\n"+correct_stmt+"complex_stmt:\n"+complex_stmt)
         
         # 开始生成正确错误声明语句
         # 如果左节点是变化值，右节点是固定值
@@ -501,7 +501,7 @@ class GenerateCorrectAndWrong:
                 wrong_stmt = correct_stmt
         # 如果右节点是变化值，左节点是固定值
         elif one_cons_tree.leftIsCertain and not one_cons_tree.rightIsCertain:
-            print("left is certain:"+one_cons_tree.rightNode.rootNode)
+            # print("left is certain:"+one_cons_tree.rightNode.rootNode)
             op = self.change_op(one_cons_tree.rootNode)
             selected_node = one_cons_tree.rightNode
             tmp_stmt = self.generate_correct(op, certain_value, one_cons_tree.rightNode, relatedArgDict, 

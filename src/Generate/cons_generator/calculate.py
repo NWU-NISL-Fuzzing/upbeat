@@ -48,7 +48,7 @@ def calculate_sub_tree(selected_tree: ConstraintTree, final_stmt: str):
 
 def calculate_math_expr(expr: str):
 
-    print("calculating expr:"+expr)
+    # print("calculating expr:"+expr)
     if "?" in expr and "|" in expr:
         return expr
     expr = expr.replace("<<<", "<<").replace(">>>", ">>").replace("^", "**")

@@ -8,7 +8,6 @@ class DataBaseHandle:
         self.connection = None
         self.tableName = None
 
-    # clear database table
     def createTable(self, tableName: str):
         self.tableName = tableName
         if tableName == "corpus":
@@ -145,40 +144,6 @@ class DataBaseHandle:
         result = cursor.fetchall()
         return result[0][0] == 0
 
-    # def query(self, field="Content"):
-    #     conn = self.getConnection()
-    #     cursor = conn.cursor()
-    #     sql = f"SELECT {field} FROM {self.tableName}"
-    #     cursor.execute(sql)
-    #     result = cursor.fetchall()
-    #     return result
-
-    # def queryAll(self, columns: list, tableName: str):
-    #     conn = self.getConnection()
-    #     cursor = conn.cursor()
-
-    #     sql = "SELECT "
-    #     if columns.__len__() > 0:
-    #         sql += columns[0]
-    #     for i in range(1, columns.__len__()):
-    #         sql += ", "
-    #         sql += columns[i]
-    #     sql += " FROM " + tableName
-
-    #     cursor.execute(sql)
-    #     result = cursor.fetchall()
-    #     return result
-
-    # def queryId(self, id: int, tableName: str):
-    #     conn = self.getConnection()
-    #     cursor = conn.cursor()
-
-    #     sql = f"SELECT * FROM {tableName} where id = {id}"
-
-    #     cursor.execute(sql)
-    #     result = cursor.fetchall()
-    #     return result
-
     def selectAll(self, sql: str):
         conn = self.getConnection()
         cursor = conn.cursor()
@@ -201,21 +166,6 @@ class DataBaseHandle:
         sql = sql + ") VALUES (" + paramList + ")"
         cursor.execute(sql, values)
 
-    # def insertToMutation(self, columnNames: list, value: str):
-    #     conn = self.getConnection()
-    #     cursor = conn.cursor()
-    #     sql = "INSERT INTO " + "mutation" + " ("
-    #     paramList = ""
-    #     if columnNames.__len__() > 0:
-    #         sql += columnNames[0]
-    #         paramList += "?"
-    #     for i in range(1, columnNames.__len__()):
-    #         sql += ","
-    #         sql += columnNames[i]
-    #         paramList += ",?"
-    #     sql = sql + ") VALUES (" + paramList + ")"
-    #     cursor.execute(sql, (value,))
-
     def insertToTotalResult(self, result, tableName="originResult"):
         conn = self.getConnection()
         cursor = conn.cursor()
@@ -236,23 +186,12 @@ class DataBaseHandle:
                        (result.testcaseId, result.testcaseContent, result.command, result.returnCode, result.stdout,
                         result.stderr, result.duration_ms))
 
-    # def insertToJudgmentResult(self, result):
-    #     conn = self.getConnection()
-    #     cursor = conn.cursor()
-    #     sql = f"INSERT OR ignore INTO " + "differentialResult" \
-    #                                       f"(testcase_id,Content,Command,returncode,stdout,stderr,duration_ms) " \
-    #                                       f"VALUES(?,?,?,?,?,?,?)"
-    #     cursor.execute(sql,
-    #                    (result.testcaseId, result.testcaseContent, result.command, result.returnCode, result.stdout,
-    #                     result.stderr, result.duration_ms))
-
     def insertToCodeFragment(self, table_name, result):
         conn = self.getConnection()
         cursor = conn.cursor()
         sql = f"INSERT OR ignore INTO " + table_name + \
                                           f"(Fragment_content, Available_variables, Needful_variables, Needful_imports, Defined_callables, Source_file) " \
                                           f"VALUES(?,?,?,?,?,?)"
-        # print(type(result[0]),type(result[1]), type(result[2]), type(result[3]), type(result[4]))
         cursor.execute(sql, (result[0], result[1], result[2], result[3], result[4], result[5]))
 
     def insertToClCons(self, boundary_info):
@@ -261,8 +200,6 @@ class DataBaseHandle:
         sql = f"INSERT OR ignore INTO " + "ClConsStmt" \
                                           f"(func_name, fact_stmt, arg_dict)" \
                                           f"VALUES(?,?,?)"
-        # cursor.execute(sql,
-        #                (boundary_info.api, boundary_info.boolStmt, str(boundary_info.args)))
         for fact_stmt in boundary_info.bool_expr_list:
             cursor.execute(sql, (boundary_info.api, fact_stmt, str(boundary_info.arg_dict)))
         for fact_stmt in boundary_info.func_ret_list:
@@ -274,8 +211,6 @@ class DataBaseHandle:
         sql = f"INSERT OR ignore INTO " + "QtConsStmt" \
                                           f"(func_name, quaternion, arg_info)" \
                                           f"VALUES(?,?,?)"
-        # cursor.execute(sql,
-        #                (boundary_info.api, boundary_info.boolStmt, str(boundary_info.args)))
         for fact_stmt in boundary_info.bool_expr_list:
             cursor.execute(sql, (boundary_info.api, fact_stmt, str(boundary_info.arg_dict)))
         for fact_stmt in boundary_info.func_ret_list:

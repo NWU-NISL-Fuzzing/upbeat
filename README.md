@@ -15,9 +15,15 @@ docker run -it upbeat:v1 bash
 
 ### Setup Locally
 
-1. Ensure your Python environment meets the dependencies listed in [requirements.txt](build/requirements.txt).
+1. Ensure you have downloaded the following pip tools.
+```
+pip install qdown numpy z3-solver jupyter matplotlib scipy tabulate
+```
 2. Follow the installation instructions in [INSTALL.md](build/INSTALL.md).
 3. Clone the repository.
+```
+git clone https://github.com/NWU-NISL-Fuzzing/UPBEAT.git
+```
 
 ## Basic Usage
 
@@ -25,7 +31,7 @@ docker run -it upbeat:v1 bash
 
 ```
 work_dir:       The directory path where the repository is located.
-testcaseCount:  The number of test cases to be generated and executed.
+fragment_num:  The number of code fragments to generate test cases.
 level:          Time to combine code fragments. Default is set to 1.
 ingredient_table_name : Table name of code fragments,
 reference_db:   Path to the API constraint database.
@@ -44,6 +50,8 @@ python main.py
 ```
 
 There are two steps in test case generation: (1) assemble code segments and (2) generate callable inputs. All generated test cases are stored in `result_db`.
+
+PS. `fragment_num` does not necessarily correspond to the number of test cases. For example, if a fragment contains constraints, Upbeat will generate two test cases. If there are no constraints, only one test case will be generated.
 
 **Step2. Execute test cases.**
 
@@ -66,7 +74,6 @@ python differential_testing.py
 **Step3. Filter anomalies.**
 
 ```
-cd src/Fuzzing
 python history_bug_filter.py
 ```
 
@@ -74,13 +81,13 @@ UPBEAT is capable of filtering the anomalies into three types: (1) bugs that hav
 
 ## Jupyter Notebook
 
-We provide two notebooks, a [demo notebook](jupyter/demo.ipynb) for a quick insight of all steps in Upbeat, and a [reproduction notebook](jupyter/reproduction.ipynb) to reproduce our experiment. Users can use our notebooks in two ways: launching it on your local machine or exploring it [online]().
+We provide two lightweight notebooks, a [demo notebook](jupyter/demo.ipynb) for a quick insight of all steps in Upbeat, and a [reproduction notebook](jupyter/reproduction.ipynb) to reproduce our experiment. Users can use our notebooks in two ways: launching it on your local machine or exploring it [online]().
 
 To run the notebook on your computer, follow these simple steps:
 
 ```
 cd jupyter
-jupyter notebook
+jupyter notebook --ip=[YOUR IP] --port=8888 --allow-root
 ```
 
 This will open the notebook in your default web browser, allowing you to interact with it seamlessly.

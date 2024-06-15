@@ -51,68 +51,39 @@ def get_basic_cons_tree(sub_expr: str):
     # 如果左节点为复杂表达式，将多于一个的变量挪至右侧
     match_for_left = re.match(regex_for_cal, match.group(1).replace(" ", ""))
     if match_for_left:
-        print("left item:"+match_for_left.group(1))
+        # print("left item:"+match_for_left.group(1))
         if not is_certain_value(match_for_left.group(1)):
             new_left_node = match_for_left.group(1)
             new_right_node = match.group(3) + change_calculate_op(match_for_left.group(2)) + match_for_left.group(3)
             if match_for_left.group(2) == "%":
                 new_right_node += "+1"
-            print("new left:"+new_left_node+" new right:"+new_right_node)
+            # print("new left:"+new_left_node+" new right:"+new_right_node)
             one_cons_tree.setLeftNode(ConstraintTree(new_left_node), False)
             one_cons_tree.setRightNode(ConstraintTree(new_right_node), False)
         else:
             new_left_node = match_for_left.group(3)
             new_right_node = match.group(3) + change_calculate_op(match_for_left.group(2)) + match_for_left.group(1)
-            print("new left:"+new_left_node+" new right:"+new_right_node)
+            # print("new left:"+new_left_node+" new right:"+new_right_node)
             one_cons_tree.setLeftNode(ConstraintTree(new_left_node), False)
             one_cons_tree.setRightNode(ConstraintTree(new_right_node), False)
     else:
         one_cons_tree.setLeftNode(ConstraintTree(match.group(1)), is_certain_value(match.group(1)))
         one_cons_tree.setRightNode(ConstraintTree(match.group(3)), is_certain_value(match.group(3)))
 
-    one_cons_tree.printAll()
+    # one_cons_tree.printAll()
     cons_tree_list.append(one_cons_tree)
     return cons_tree_list
 
 def process_bool_expr(bool_expr: str):
     """ 对bool表达式进行处理，获取约束树 """
 
-    # 获取逻辑运算符号
-    # if ' or ' in bool_expr:
-    #     logicalOp = "or"
-    # elif ' and ' in bool_expr:
-    #     logicalOp = "and"
-    # else:
-    #     logicalOp = ""
     cons_tree_list = []
     # 获取具体的变量约束表达式，存入列表
     for sub_expr in re.split(' and ', bool_expr):
-        print("sub_expr:"+sub_expr)
-        # if "Is" in sub_expr:
-        #     one_cons_tree = ConstraintTree(sub_expr)
-        #     cons_tree_list.append(one_cons_tree)
-        # else:
         if " ^ " in sub_expr:
             continue
         cons_tree_list.extend(get_basic_cons_tree(sub_expr))
     return ConstraintTreeList("and", cons_tree_list)
-
-
-# def parse_boundary_expr(select_expr: str):
-#     cons_list = []
-#     # fail 语句
-#     data_list = handler.selectall("select * from FailStmt "+select_expr)
-#     # fact 语句
-#     data_list = handler.selectall("select * from FactStmt "+select_expr)
-#     for data in data_list:
-#         # print(data)
-#         func_name = data[1]
-#         file_path = data[4]
-#         cons = process_bool_expr(data[2])
-#         cons.argsDict = change_generic(ast.literal_eval(data[3]))
-#         cons_list.append(cons)
-#         # break
-#     return cons_list
 
 
 if __name__ == "__main__":

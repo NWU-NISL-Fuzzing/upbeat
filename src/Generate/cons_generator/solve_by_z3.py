@@ -23,7 +23,7 @@ def assemble_dec_stmt(var_name, var_type, value):
 
     global var_num
 
-    print("var_name:",var_name,"var_type:",var_type,"value:",value)
+    # print("var_name:",var_name,"var_type:",var_type,"value:",value)
     if var_type in ["Int", "Double", "BigInt"]:
         return "mutable "+var_name+" = "+value+";\n"
     elif var_type == "Qubit[]":

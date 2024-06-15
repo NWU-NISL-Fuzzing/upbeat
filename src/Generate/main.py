@@ -1,12 +1,12 @@
-import re
+# import re
 import ast
 import random
 
-from basic_operation.file_operation import delete_existing, initParams
+from basic_operation.file_operation import initParams
 from basic_operation.dict_operation import get_rest_args
-from grammar_pattern.APIOperator import APIOperator
-from code_extractor.process_expr import cut_proper_bracket
-from code_extractor.process_stmt import is_basic_type, get_real_args_list
+# from grammar_pattern.APIOperator import APIOperator
+# from code_extractor.process_expr import cut_proper_bracket
+# from code_extractor.process_stmt import is_basic_type, get_real_args_list
 from cons_generator.cwvp import generate_if_cons_exist
 from class_for_info.fragment_info import CodeFragmentInfo
 from combine_fragment import CodeFragmentGenerator, get_contained_cons
@@ -15,13 +15,16 @@ from DBOperation.dboperation_sqlite import DataBaseHandle
 from grammar_pattern.array_process import array_process
 
 params = initParams("../config.json")
-api_op = APIOperator()
-standard_api_dict = api_op.init_api_dict("../ParseAPI/data/content.json")
-regex_for_call = r"([A-Za-z0-9_:]+)\((.*)\)"
-count=0
+# api_op = APIOperator()
+# standard_api_dict = api_op.init_api_dict("../ParseAPI/data/content.json")
+# regex_for_call = r"([A-Za-z0-9_:]+)\((.*)\)"
+testcase_num = 0
 
 def complete_frag_by_cons(frag, targetDB):
-    global count
+    """ Generate test cases using specific fragment. """
+
+    global testcase_num
+
     generate = Generate("../config.json")
     # 初始化代码片段拼接使用的class
     fragment = CodeFragmentGenerator(params["level"], params["ingredient_table_name"])
@@ -39,7 +42,7 @@ def complete_frag_by_cons(frag, targetDB):
         correct_stmt, wrong_stmt = "//no cons\n", "//no cons\n"
     # 如果生成失败
     if correct_stmt is None:
-        # print("bool expr:", bool_expr, " needful args:", needful_args)
+        # print("correct_stmt is None")
         return
     # 如果没有问题，从needful_variables中删去已经生成的变量
     # print("===needful_args:",needful_args)
@@ -74,9 +77,10 @@ def complete_frag_by_cons(frag, targetDB):
     # 组装测试用例
     correct_testcase = generate.assemble_testcase(correct_fragment, correct_import, [defined_callables])
     # 存入数据库
-    correct_testcase, count = array_process(correct_testcase,count)
+    correct_testcase, count = array_process(correct_testcase, 0)
     # print("===correct_testcase:\n",correct_testcase)
     targetDB.insertToCorpus(["fragment_id", "Content"], [frag[0], correct_testcase])
+    testcase_num += 1
     # ==处理错误语句==
     # 如果correct_stmt和wrong_stmt相等，不再组装wrong_stmt
     if wrong_stmt is None or wrong_stmt == correct_stmt:
@@ -85,12 +89,15 @@ def complete_frag_by_cons(frag, targetDB):
     wrong_fragment = wrong_stmt+combined_fragment+partial_reset_stmt
     wrong_import = combined_import
     wrong_testcase = generate.assemble_testcase(wrong_fragment, wrong_import, [defined_callables])
-    wrong_testcase, count = array_process(wrong_testcase,count)
+    wrong_testcase, count = array_process(wrong_testcase, 0)
     # print("===wrong_testcase:\n"+wrong_testcase)
     targetDB.insertToCorpus(["fragment_id", "Content"], [frag[0], wrong_testcase])
+    testcase_num += 1
     # print("correct testcase:\n"+correct_testcase+"\nwrong testcase:\n"+wrong_testcase)
 
 def main():
+    global testcase_num
+
     # 初始化结果表
     targetDB = DataBaseHandle(params["result_db"])
     targetDB.createTable("corpus")
@@ -98,12 +105,15 @@ def main():
     frag_db = DataBaseHandle(params["corpus_db"])
     frag_list = frag_db.selectAll("select * from CodeFragment")
     # 获取配置文件中的次数
-    count = params["testcaseCount"]
-    if count < len(frag_list):
-        frag_list = random.sample(frag_list, count)
-    for frag in frag_list:
+    fragment_num = params["fragment_num"]
+    if fragment_num < len(frag_list):
+        frag_list = random.sample(frag_list, fragment_num)
+    print(f"\033[94mTotally get {fragment_num} fragment. Start to generate testcase.\033[0m")
+    for i, frag in enumerate(frag_list):
+        print(f"--{i}--")
         complete_frag_by_cons(frag, targetDB)
     targetDB.finalize()
+    print(f"\033[94mFinished. Totally get {testcase_num} test cases.\033[0m")
 
 
 if __name__ in "__main__":
