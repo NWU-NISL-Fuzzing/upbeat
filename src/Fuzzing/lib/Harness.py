@@ -15,7 +15,7 @@ from Generate.basic_operation.file_operation import initParams
 params = initParams("../config.json")
 history_db_path = params["history_db"]
 targetDB = DataBaseHandle(params["result_db"])
-temp_proj = pathlib.Path(params["projectPattern"])
+temp_proj = pathlib.Path(params["temp_project"])
 
 def get_majority_output(outputs):
     """ 选出数目最多的输出 """

@@ -12,7 +12,7 @@ params = initParams("../config.json")
 
 def run_and_analysis(targetDB, index: int, testcaseContent: str):
     print("==running "+str(index)+"th test case==")
-    tempProj = pathlib.Path(params["projectPattern"])
+    tempProj = pathlib.Path(params["temp_project"])
     # 获取flag
     if "//wrong" in testcase_content or "//invalid" in testcase_content:
         flag = 0

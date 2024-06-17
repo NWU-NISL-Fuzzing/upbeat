@@ -252,17 +252,17 @@ for idxPower in 0 .. power - 1 {
         return str(random.randint(width, -width))
 
     def generateBoundaryInteger(self):
-        boundaries = self.params["boundaryValue"]["Int"]
+        boundaries = self.params["boundary_value"]["Int"]
         num = random.choice(boundaries)
         return str(num)
 
     def generateBoundaryBigInt(self):
-        boundaries = self.params["boundaryValue"]["BigInt"]
+        boundaries = self.params["boundary_value"]["BigInt"]
         num = random.choice(boundaries)
         return str(num)
 
     def generateBoundaryDouble(self):
-        boundaries = self.params["boundaryValue"]["Double"]
+        boundaries = self.params["boundary_value"]["Double"]
         num = random.choice(boundaries)
         return str(num)
 

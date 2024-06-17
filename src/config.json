@@ -7,8 +7,8 @@
   "corpus_db": "/root/UPBEAT/data/query/corpus-v3.db",
   "history_db": "/root/UPBEAT/data/query/history-bugs.db",
   "result_db": "/root/UPBEAT/data/result/UPBEAT.db",
-  "projectPattern": "/root/UPBEAT/src/Fuzzing/qsharpPattern",
-  "boundaryValue": {
+  "temp_project": "/root/UPBEAT/src/Fuzzing/qsharpPattern",
+  "boundary_value": {
     "Int": [0, 63, 64, 1, -1, "-2^63", "2^63-1"],
     "BigInt": ["0L", "1L", "-1L", "0x07FFFFFFFFFFFFFFEL", "0x07FFFFFFFFFFFFFFFL", "-2L^63", "2L^63-1L"],
     "Double": [0.0, -1.79769313486232e308, 1.79769313486232e308, "1.0/0.0", "-1.0/0.0", "NaN"]

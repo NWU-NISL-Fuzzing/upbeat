@@ -38,8 +38,8 @@ reference_db:   Path to the API constraint database.
 corpus_db:      Path to the code fragment database.
 history_db:     Path to the historical bug database.
 result_db:      Path of the result database.
-projectPattern: Path to the Q# projects used during the testing phase.
-boundaryValue:  Special values for random input generation.
+temp_project: Path to the Q# projects used during the testing phase.
+boundary_value:  Special values for random input generation.
 ```
 
 **Step1. Generate test cases.**
