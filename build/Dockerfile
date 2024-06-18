@@ -7,7 +7,7 @@ WORKDIR /root
 
 ENV http_proxy="http://10.15.22.49:7810"
 ENV https_proxy="http://10.15.22.49:7810"
-RUN apt-get -y update && apt-get install -y python3-pip git openssh-server curl nodejs npm
+RUN apt-get -y update && apt-get install -y python3-pip git openssh-server curl nodejs npm zip
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
 RUN mkdir /var/run/sshd
