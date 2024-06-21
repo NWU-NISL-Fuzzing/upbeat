@@ -6,7 +6,7 @@ UPBEAT is a fuzzing tool to generate random test cases for bugs related to input
 
 ### Use Docker
 
-We offer a ready-to-use [image]() that runs "out of the box". Alternatively, you can also run the [Dockerfile](build/Dockerfile). 
+We offer a ready-to-use [image]() that runs "out of the box". Alternatively, users can also run the [Dockerfile](build/Dockerfile). 
 
 ```
 docker build -t upbeat:v1 .
@@ -17,7 +17,7 @@ docker run -it upbeat:v1 bash
 
 1. Ensure you have downloaded the following pip tools.
 ```
-pip install qdown numpy z3-solver jupyter matplotlib scipy tabulate
+pip install gdown numpy z3-solver jupyter matplotlib scipy tabulate
 ```
 2. Follow the installation instructions in [INSTALL.md](build/INSTALL.md).
 3. Clone the repository.
@@ -27,12 +27,12 @@ git clone https://github.com/NWU-NISL-Fuzzing/UPBEAT.git
 
 ## Basic Usage
 
-(Optional) Adjust [the configuration file](src/config.json) to align with your specific requirements. Below are the configurable parameters and their descriptions:
+(Optional) Adjust [the configuration file](src/config.json) to align with users' specific requirements. Below are the configurable parameters and their descriptions:
 
 ```
 work_dir:       The directory path where the repository is located.
 fragment_num:  The number of code fragments to generate test cases.
-level:          Time to combine code fragments. Default is set to 1.
+level:          Time to combine code fragments. The default is set to 1.
 ingredient_table_name : Table name of code fragments,
 reference_db:   Path to the API constraint database.
 corpus_db:      Path to the code fragment database.
@@ -60,9 +60,9 @@ cd ../Fuzzing
 python hybrid_testing.py
 ```
 
-Each test case will first be applied on language-level testing, with execution information stored in table `originResult_cw`. If any anomalies occurred, relevant information will be logged in table `differentialResult_cw`. 
+Each test case will first be applied on language-level testing, with execution information stored in table `originResult_cw`. If any anomalies occur, relevant information will be logged in table `differentialResult_cw`. 
 
-If no anomalies are detected, the test case proceeds to differential testing, where results are stored in table `originResult_sim` and `differentialResult_sim`.
+If no anomalies are detected, the test case proceeds to differential testing, where results are stored in table `differentialResult_sim`.
 
 Users can also execute these two steps separately by running the following command:
 
@@ -81,23 +81,23 @@ UPBEAT is capable of filtering the anomalies into three types: (1) bugs that hav
 
 ## Jupyter Notebook
 
-We provide two lightweight notebooks, a [demo notebook](jupyter/demo.ipynb) for a quick insight of all steps in Upbeat, and a [reproduction notebook](jupyter/reproduction.ipynb) to reproduce our experiment. Users can use our notebooks in two ways: launching it on your local machine or exploring it [online]().
+We provide two lightweight notebooks, a [demo notebook](jupyter/demo.ipynb) for a quick insight into all steps in Upbeat, and a [reproduction notebook](jupyter/reproduction.ipynb) to reproduce our experiment. Users can use our notebooks in two ways: launching it on their local machine or exploring it [online]().
 
 To run the notebook on your computer, follow these simple steps:
 
 ```
 cd jupyter
-jupyter notebook --ip=[YOUR IP] --port=8888 --allow-root
+jupyter notebook --ip=[YOUR_IP] --port=8888 --allow-root
 ```
 
-This will open the notebook in your default web browser, allowing you to interact with it seamlessly.
+Then you can visit the notebook on the website `http:\\127.0.0.1:8888`. This will open the notebook in your default web browser, allowing you to interact with it seamlessly.
 
 ## Experimental Result
 
 + (RQ1) The bug data can be found in [this page](data/result/BugList.md). 
 + (RQ2) The coverage data is organized into two folders, [one](data/experiment/cov-result-origin) stores the original coverage values of four libraries, and [another](data/experiment/cov-result-calculated) stores the calculated weighted averages of coverage.
 + (RQ2) The anomalous behaviors found by baseline methods and Upbeat. Anomalous detected via language-level testing are stored in [this folder](data/experiment/anomalies-lang), and ones via differential testing are stored in [this folder](data/experiment/anomalies-diff).
-+ (RQ3) The results of ablation study can be found in [this folder](data/experiment/ablation-study).
++ (RQ3) The results of the ablation study can be found in [this folder](data/experiment/ablation-study).
 + (RQ4) The evaluation of constraint extraction can be found in [this folder](data/experiment/constraint-extraction).
 
 ## Troubleshooting
