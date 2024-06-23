@@ -1,4 +1,4 @@
-// can be detected by upbeat-r
+// can be detected by upbeat-r&upbeat
 
 namespace NISLNameSpace {
     open Microsoft.Quantum.Math;
