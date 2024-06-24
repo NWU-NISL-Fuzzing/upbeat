@@ -5,8 +5,6 @@ ENV LANG C.UTF-8
 
 WORKDIR /root
 
-ENV http_proxy="http://10.15.22.49:7810"
-ENV https_proxy="http://10.15.22.49:7810"
 RUN apt-get -y update && \
     apt-get install -y python3-pip git openssh-server curl nodejs npm zip
 RUN ln -s /usr/bin/python3 /usr/bin/python
@@ -34,5 +32,3 @@ RUN gdown --id 112cRelito9MXYyzeL_ofwUUSUqaCRfKP && \
     rm qsharp-compiler-28.zip
 
 RUN echo "export PYTHONPATH=$PYTHONPATH:/root/UPBEAT/src/:/root/UPBEAT/src/Generate:/root/UPBEAT/src/Fuzzing" >> ~/.bashrc
-
-RUN unset http_proxy && unset https_proxy
