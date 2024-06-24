@@ -1,12 +1,5 @@
 # coding=utf-8
 
-"""
-@author: xing
-@contact: 1059252359@qq.com
-@file: APIOperator.py
-@date: 2021/11/25 16:23
-@desc: 实现与API相关的操作
-"""
 import os
 import json
 import random
@@ -19,10 +12,6 @@ qfuzz_path = current_path[:current_path.find("UPBEAT")+6]
 class APIOperator:
 
     def init_api_list(self, path = qfuzz_path+"/src/ParseAPI/data/content.json"):
-        """
-        :param path: API文件存储地址，为json文件格式
-        :return: 返回json格式的API信息
-        """
         with open(path, "r", encoding="utf-8") as f:
             content = f.read()
         data = json.loads(content)
@@ -43,10 +32,6 @@ class APIOperator:
         return apiList
 
     def init_api_dict(self, path = qfuzz_path+"/src/ParseAPI/data/content.json"):
-        """
-        :param path: API文件存储地址，为json文件格式
-        :return: 返回json格式的API信息
-        """
         with open(path, "r", encoding="utf-8") as f:
             content = f.read()
         data = json.loads(content)
@@ -93,12 +78,3 @@ class APIOperator:
     def init_newtype_dict(self):
         path = qfuzz_path+"/src/ParseAPI/data/newtype.json"
         return self.init_api_dict(path)
-
-    def randomChooseApi(self, apiList):
-        api = random.choice(apiList)
-        return api
-
-
-# if __name__ == "__main__":
-#     t = APIOperator()
-#     b = t.init_api_list()

@@ -15,14 +15,10 @@ regex_for_cal = r"([\S ]+)(\+|-|\*|\/|\%|\^|>>>|<<<)([\S ]+)"
 regex_for_sub_expr = r"(?<=\().*(?=\))"
 
 def is_certain_value(node_content: str):
-    """ 确定值的类型：整数、浮点数、Pauli """
-
     node_content = node_content.replace('.', '').replace('L', '')
     return (node_content.isdigit()) or (node_content in ['PauliX', 'PauliY', 'PauliZ', 'PauliI']) or (node_content.startswith('0x'))
 
 def change_generic(arg_dict: dict):
-    """ 如果存在参数的类型为泛型，随机选择一种可生成的具体类型进行替换 """
-
     selected_type = random.choice(["Int", "BigInt", "Double", "Pauli", "Bool", "Range"])
     for var_name, var_type in arg_dict.items():
         if "'" in var_type:
@@ -33,13 +29,9 @@ def change_generic(arg_dict: dict):
     return arg_dict
 
 def countOp(expr: str):
-    """ 对表达式中的运算符进行计数 """
-
     return expr.count('+')+expr.count('-')+expr.count('/')+expr.count('%')+expr.count('^')+expr.count('<<<')+expr.count('>>>')
 
 def change_calculate_op(op: str):
-    """ 将部分项从左式移到右式时，改变操作符 """
-    
     op = " " + change_dict[op.strip()] + " "
 
     return op
@@ -48,7 +40,6 @@ def get_basic_cons_tree(sub_expr: str):
     cons_tree_list = []
     match = re.match(regex_for_bool, sub_expr)
     one_cons_tree = ConstraintTree(match.group(2).strip())
-    # 如果左节点为复杂表达式，将多于一个的变量挪至右侧
     match_for_left = re.match(regex_for_cal, match.group(1).replace(" ", ""))
     if match_for_left:
         # print("left item:"+match_for_left.group(1))
@@ -75,10 +66,7 @@ def get_basic_cons_tree(sub_expr: str):
     return cons_tree_list
 
 def process_bool_expr(bool_expr: str):
-    """ 对bool表达式进行处理，获取约束树 """
-
     cons_tree_list = []
-    # 获取具体的变量约束表达式，存入列表
     for sub_expr in re.split(' and ', bool_expr):
         if " ^ " in sub_expr:
             continue

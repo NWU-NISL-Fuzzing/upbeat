@@ -12,37 +12,26 @@ tempProj = pathlib.Path("./qsharpPattern").absolute()
 
 
 def diff_testing(index: int, output):
-    """ 差分测试主函数 """
-
     outputs = [output]
     command_list = [["dotnet", "run", "-s", "SparseSimulator"],
                     ["dotnet", "run", "-s", "ToffoliSimulator"]]
-    # 使用另外两个模拟器执行测试用例
     for cmd in command_list:
         outputs.append(execute(index, output.testcaseContent, cmd, False))
-    # 分析
     vote(outputs, output.testcaseContent)
-    # 每执行完一个测试用例就提交一次修改
     targetDB.commit()
 
 def bound_value_testing(index: int, testcase_content: str):
-    """ 边界值测试主函数 """
-
     print("==running "+str(index)+"th test case==")
     susp_flag = False
-    # 获取flag
     if "//wrong" in testcase_content or "//invalid" in testcase_content:
         flag = 0
     elif "//correct" in testcase_content or "//valid" in testcase_content:
         flag = 1
     else:
         flag = -1
-    # 运行
     output = execute(index, testcase_content, ["dotnet", "run"], False)
-    # 添加原始用例执行结果
     targetDB.insertToTotalResult(output, "originResult_cw")
     targetDB.commit()
-    # 对边界值测试结果进行分析
     if  ((flag == 1 and output.returnCode != 0) or 
         (flag == 0 and output.returnCode == 0) or 
         output.outputClass in ["timout", "crash"]):
@@ -51,21 +40,17 @@ def bound_value_testing(index: int, testcase_content: str):
         targetDB.insertToDifferentialResult(output, "differentialResult_cw")
     else:
         print("\033[92mnothing happened\033[0m")
-    # 如果边界值测试结果不可疑，进行差分测试
     if not susp_flag and output.returnCode not in [134, 137]:
         diff_testing(index, output)
 
 def main():
-    # 检查覆盖率文件是否存在，不存在就创建
     if not os.path.exists("cov"):
         os.makedirs("cov")
         print("Create the coverage folder.")
-    # 创建剩余三个表
     targetDB.createTable("originResult_cw")
     targetDB.createTable("differentialResult_cw")
     # targetDB.createTable("originResult_sim")
     targetDB.createTable("differentialResult_sim")
-    # 遍历所有生成的程序
     testcaseList = targetDB.selectAll("select Content from corpus;")
     print("Here are "+str(len(testcaseList))+" test cases.")
     for index, testcase_content in enumerate(testcaseList, start=1):

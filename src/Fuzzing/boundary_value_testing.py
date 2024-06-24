@@ -13,20 +13,20 @@ params = initParams("../config.json")
 def run_and_analysis(targetDB, index: int, testcaseContent: str):
     print("==running "+str(index)+"th test case==")
     tempProj = pathlib.Path(params["temp_project"])
-    # 获取flag
+    # Get flag.
     if "//wrong" in testcase_content or "//invalid" in testcase_content:
         flag = 0
     elif "//correct" in testcase_content or "//valid" in testcase_content:
         flag = 1
     else:
         flag = -1
-    # 运行
+    # Run.
     command = ["dotnet", "run"]
     output = run_testcase(tempProj, index, testcaseContent, command)
-    # 添加原始用例执行结果
+    # Insert result of original test case.
     targetDB.insertToTotalResult(output, "originResult_cw")
     targetDB.commit()
-    # 对结果进行分析
+    # Analysis. 
     if  ((flag == 1 and output.returnCode != 0) or 
         (flag == 0 and output.returnCode == 0) or 
         output.outputClass in ["timout", "crash"]):
@@ -38,13 +38,12 @@ def run_and_analysis(targetDB, index: int, testcaseContent: str):
 
 def main():
     # start_time = getUtcMillisecondsNow()
-    # 获取数据库
+    # Init the database. 
     targetDB = DataBaseHandle(params["result_db"])
-    # 创建剩余三个表
-    # differentialResult表存放可疑用例执行结果，mutation表存放变异后测试用例，originResult表存放所有用例执行结果
+    # Create other three tables.
     targetDB.createTable("differentialResult_cw")
     targetDB.createTable("originResult_cw")
-    # 遍历所有生成的程序
+    # Start to walk all test cases.
     testcaseList = targetDB.selectAll("select Content from corpus;")
     # testcaseList = targetDB.selectAll("select Content from corpus limit 0,1;")
     print("Here are "+str(len(testcaseList))+" test cases.")

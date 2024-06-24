@@ -3,7 +3,6 @@
 import re
 import math
 import random
-# import json
 
 from six import unichr
 
@@ -46,8 +45,6 @@ class Assignment:
         self.unit_type = ["Unit  is Adj", "Unit  is Ctl", "Unit  is Adj + Ctl"]
     
     def find_from_self_def(self, input_str, output_str, func_type):
-        """ 从selfDefinedOperations.txt中查找可以使用的API """
-
         opLoad = OperationLoad()
         selfDefinedFunctions, selfDefinedOperations = opLoad.loadCallables(self.params["work_dir"]+"/Generate/data/selfDefinedOperations.txt")
         func_name = ""
@@ -76,11 +73,7 @@ class Assignment:
         return None
     
     def find_from_doc(self, input_str, output_str):
-        """ 从标准文档中查找可以使用的API """
-
-        # 在json文件中查找
         res = [item for item in standard_api_list if str(item.requireTypes) == input_str and item.returnType == output_str]
-        # 如果存在多个匹配项，随机选择一个
         if len(res) > 0:
             r = random.choice(res)
             self.needful_namespace += "open "+r.namespace+";\n"
@@ -90,25 +83,19 @@ class Assignment:
             return None
 
     def generateAPIName(self, var_type:str):
-        """ 根据参数类型和返回类型获取合适的API """
-
         local_generic_to_concrete = []
         unit_dict = {"Unit is Adj":"Unit  is Adj", "Unit is Ctl":"Unit  is Ctl", "Unit is Adj + Ctl":"Unit  is Adj + Ctl"}
-        # 获取API的输入和输出
         if var_type.startswith("(") and var_type.endswith(")"):
             var_type = var_type[1:-1]
-        # TODO.有可能->和=>同时存在
         if "->" in var_type:
             tmp = re.split("->| -> ", var_type)
             func_type = "function"
         else:
             tmp = re.split("=>| => ", var_type)
             func_type = "operation"
-        # 获取输入
         input_str = "['"
         input_list = tmp[0].split(",")
         for i in input_list:
-            # print("i:"+i)
             if "'" in i:
                 if "=>" in var_type:
                     tmp_type = "Qubit"
@@ -119,7 +106,6 @@ class Assignment:
             else:
                 input_str += i+","
         input_str = input_str[:-1] + "']"
-        # 获取输出
         if "'" in tmp[1]:
             if len(local_generic_to_concrete) > 0:
                 output_str = "'"+random.choice(local_generic_to_concrete)+"'"
@@ -129,20 +115,12 @@ class Assignment:
             output_str = unit_dict[tmp[1]]
         else:
             output_str = tmp[1]
-        # print("input_str:"+input_str+" output_str:"+output_str)
         api_name = self.find_from_doc(input_str, output_str)
-        # 有的返回值为Unit  is Adj可以使用Unit进行查找
         if api_name is None and output_str == "Unit":
             output_str = random.choice(self.unit_type)
-            # print("find again:"+input_str+" "+output_str)
             api_name = self.find_from_doc(input_str, output_str)
-        # elif api_name is None and output_str in self.unit_type:
-        #     output_str = "Unit"
-        #     # print("find again:"+input_str+" "+output_str)
-        #     api_name = self.find_from_doc(input_str, output_str)
         if not api_name:
             api_name = self.find_from_self_def(input_str, output_str.replace("  ", " "), func_type)
-        # print("api_name:"+api_name)
         return api_name
     
     def generateRange(self):
@@ -338,14 +316,14 @@ for idxPower in 0 .. power - 1 {
                         value = "[" + value[0:-1] + "]"
                         values += value + ","
                     values = "[" + values[0:-1] + "]"
-        # newtype类型数组的生成
+        # newtype
         elif type in new_type_list:
             if braceCount == 1:
                 n = random.randint(1, 2)
                 values = "[" + self.generateNewtypeElem(n, var_name, type) + "]"
             elif braceCount == 2:
                 values = "[[" + self.generateNewtypeElem(2, var_name, type) + "], [" + self.generateNewtypeElem(2, var_name, type) + "]]"
-        # 泛型生成
+        # generic
         elif "'" in type:
             type = random.choice(generic_to_concrete)
             time = random.randint(1, 5)
@@ -353,7 +331,7 @@ for idxPower in 0 .. power - 1 {
                 value = self.generate_a_param("",  type)
                 values += str(value) + ","
             values = "[" + values[0:-1] + "]"
-        # 否则赋空数组
+        # empty arrays
         else:
             # values = "new "+type+"[]"
             values = "EmptyArray<"+type+">()"
@@ -365,9 +343,7 @@ for idxPower in 0 .. power - 1 {
             return "EmptyArray<"+var_type+">()", var_num
         assign = Assignment(params)
         values = ""
-        # 常规类型数组的生成
         if var_type in assign.type_mapping.keys():
-            #ToDo:根据braceCount生成二维qubit数组
             if var_type.lower() == 'qubit':
                     values += "Qubit[" + str(time) + "]"
             else:
@@ -383,19 +359,16 @@ for idxPower in 0 .. power - 1 {
                         value = "[" + value[0:-1] + "]"
                         values += value + ","
                     values = "[" + values[0:-1] + "]"
-        # newtype类型数组的生成
         elif var_type in new_type_list:
             for i in range(time):
                 values += assign.generateNewType(var_num, var_type) + ","
             values = "[" + values[0:-1] + "]"
-        # 泛型生成
         elif "'" in var_type:
             var_type = random.choice(generic_to_concrete)
             for i in range(time):
                 value = assign.generate_a_param("", var_type)
                 values += str(value) + ","
             values = "[" + values[0:-1] + "]"
-        # 否则类型不能生成，赋空数组
         else:
             values = "EmptyArray<"+var_type+">()"
         return values, var_num
@@ -416,7 +389,6 @@ for idxPower in 0 .. power - 1 {
         else:
             left_brace = var_type.count("[")
             right_brace = var_type.count("]")
-            # 一维和二维数组生成
             if left_brace == right_brace == 1:
                 var_type = var_type.replace('[', '')
                 var_type = var_type.replace(']', '')

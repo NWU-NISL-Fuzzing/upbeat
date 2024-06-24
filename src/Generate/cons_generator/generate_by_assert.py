@@ -8,7 +8,6 @@ from DBOperation.save import save_into_db
 from grammar_pattern.APIOperator import APIOperator
 from grammar_pattern.RandomGenerator import RandomGenerator
 from basic_operation.dict_operation import get_rest_args
-# from cons_generator.parse_boundary_expr import change_generic
 from class_for_info.fragment_info import CodeFragmentInfo
 
 
@@ -44,9 +43,6 @@ false_gate = {"Z-axis":["X","Y"],
               "PauliY":["X", "Z"]}
 
 def rotate_by_fixed_angle(flag: bool, base: str, var_name: str, var_type: str):
-    """ 添加指定的旋转操作以改变量子比特状态 """
-
-    # 判断是否为FixedPoint类型，是则修改变量名
     if var_type in ["FixedPoint", "LittleEndian", "BigEndian", "SignedLittleEndian"]:
         var_name += "QubitArray"
     # generate true value
@@ -64,13 +60,9 @@ def rotate_by_fixed_angle(flag: bool, base: str, var_name: str, var_type: str):
         return op+"("+angle+","+var_name+"[0]);\n"
 
 def rotate_by_calculated_angle(flag: bool, base: str, prob: str, tol: str, var_name: str, var_type: str):
-    """ 添加计算的旋转操作以改变量子比特状态 """
-
     dec_stmt = ""
-    # 判断是否为FixedPoint类型，是则修改变量名
     if var_type in ["FixedPoint", "LittleEndian", "BigEndian", "SignedLittleEndian"]:
         var_name += "QubitArray"
-    # 移动到base轴的0状态
     if base == "X-axis":
         if var_type == "Qubit":
             dec_stmt += "Ry(PI()/2.0, "+var_name+");\n"
@@ -95,10 +87,6 @@ def rotate_by_calculated_angle(flag: bool, base: str, prob: str, tol: str, var_n
     return dec_stmt
 
 def add_gate(flag: bool, base: str, var_name: str, var_type: str):
-    """ 添加门操作以改变量子比特状态 """
-
-    # print("var_name:"+var_name+" var_type:"+var_type)
-    # 判断是否为FixedPoint类型，是则修改变量名
     if var_type in ["FixedPoint", "LittleEndian", "BigEndian", "SignedLittleEndian"]:
         var_name += "QubitArray"
     # generate true value
@@ -114,8 +102,6 @@ def add_gate(flag: bool, base: str, var_name: str, var_type: str):
         return "ApplyToEach("+gate+","+var_name+");\n"
 
 def generate_qubit_dec(var_name, var_type):
-    """ 生成与Qubit有关类型的变量声明语句（没有随机旋转/门操作） """
-
     if var_type == "Qubit":
         return "use "+var_name+" = Qubit();\n"
     elif var_type == "Qubit[]":
@@ -134,25 +120,18 @@ def generate_qubit_dec(var_name, var_type):
 
 def query_and_generate():
     frag_list = []
-    # 获取QuantumConsStmt里面的内容
     sql = "select * from QtConsStmt"
     api_list = reference_db.selectAll(sql)
-    # 遍历每个含有量子约束的API
     for api in api_list:
         correct_stmt, wrong_stmt = "//valid\n", "//invalid\n"
         func_name, assert_stmt, arg_info = api[1], api[2], api[3]
         arg_name, arg_type = ast.literal_eval(arg_info)
-        # 从标准文档中获取API信息
         api_info = standard_api_dict[func_name]
-        # 构建open语句
         open_stmt = "open " + api_info.namespace + ";\n"
-        # 获取API所需的参数
         standard_api_args = api_info.get_api_args()
-        # 不在数据库中的其他参数随机生成初始值
         rest_args = get_rest_args(standard_api_args, {arg_name: arg_type})
         other_arg_dec = ""
         for var_name, var_type in rest_args.items():
-            # 生成变量声明语句
             # print("generate rest args:" + var_name + " " + var_type)
             other_arg_dec = randomVal.generate_random(var_name, var_type)
             # print("==check other_arg_dec:" + other_arg_dec)
@@ -161,20 +140,16 @@ def query_and_generate():
                 wrong_stmt += other_arg_dec
             else:
                 break
-        # 如果生成失败，直接跳过
         if other_arg_dec is None:
             continue
-        # 生成约束中使用的变量声明语句
         this_arg_dec = generate_qubit_dec(arg_name, arg_type)
         correct_stmt += this_arg_dec
         wrong_stmt += this_arg_dec
-        # 获取四元组
         base, result, prob, tol = ast.literal_eval(assert_stmt)
         if (result == "One" and prob == "0.0") or (result == "Zero" and prob == "1.0"):
             flag = True
         else:
             flag = False
-        # 生成正确和错误的语句
         rotation_or_gate = random.choice([0,1,2])
         if rotation_or_gate == 0:
             correct_stmt += rotate_by_fixed_angle(flag, base, arg_name, arg_type)
@@ -185,7 +160,6 @@ def query_and_generate():
         else:
             correct_stmt += add_gate(flag, base, arg_name, arg_type)
             wrong_stmt += add_gate(not flag, base, arg_name, arg_type)
-        # 如果存在Qubit、Qubit[]或者可生成的newtype类型，添加Reset操作以及所需的open语句
         reset_stmt, tmp_stmt = "", ""
         for var_name, var_type in standard_api_args.items():
             if var_type == "Qubit":
@@ -197,7 +171,6 @@ def query_and_generate():
             elif (var_type in available_newtype) and (
                     standard_api_dict[var_type].namespace not in open_stmt):
                 open_stmt += "open " + standard_api_dict[var_type].namespace + ";\n"
-        # 开始构造调用语句
         if len(standard_api_args) > 0:
             call_stmt = "mutable APIResult = " + func_name + "("
             for var_name in standard_api_args.keys():
@@ -205,15 +178,12 @@ def query_and_generate():
             call_stmt = call_stmt[:-2] + ");\n"
         else:
             call_stmt = "mutable APIResult = " + func_name + "();"
-        # 对结果进行输出
         if "Unit" in api_info.returnType:
             output_stmt = "DumpMachine();\n"
         else:
             output_stmt = "Message($\"{APIResult}\");\n"
         correct_stmt += call_stmt + output_stmt + reset_stmt
         wrong_stmt += call_stmt + output_stmt + reset_stmt
-        # print("--correct:\n" + correct_stmt + "\n--wrong:\n" + wrong_stmt)
-        # 实例化
         correct_item = CodeFragmentInfo(correct_stmt, standard_api_args, {}, open_stmt,
                                         "", "QuantumConsStmt").format_to_save()
         wrong_item = CodeFragmentInfo(wrong_stmt, standard_api_args, {}, open_stmt,

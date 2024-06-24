@@ -10,7 +10,6 @@ class Generate:
         self.params = initParams(config_path)
     
     def generate_main_content(self, n=-1):
-        # NOTE.这里没有使用配置文件中的表
         fragment = CodeFragmentGenerator(self.params["level"], "CodeFragment")
         one_fragment_info = fragment.select_corpus(n)
         this_stmt, this_namespace = fragment.generate_a_code_frag(one_fragment_info)
@@ -26,7 +25,6 @@ class Generate:
         if not this_stmt:
             return None
         statements.append(this_stmt)
-        # print("检查需要引入的命名空间："+this_namespace)
         for one_namespace in this_namespace.split('\n'):
             if one_namespace not in namespaces and len(one_namespace) > 0:
                 namespaces.append(one_namespace)
@@ -81,23 +79,18 @@ class Generate:
         frag_num = corpusDB.selectAll("select count(id) from CodeFragment")[0][0]
         targetDB.createTable("corpus")
         count = min(self.params["testcaseCount"], frag_num)
-        # 这里需要从1开始，表CodeFragment的索引是从1开始的
-        # 如果要使用其他表，需要注意索引不是连续的
         for i in range(1, count):
             print(i)
             this_stmt, this_namespace, this_def_callables = self.generate_main_content(i)
-            # ***仅拼接代码片段时使用下面语句
+            # ***Only combine
             # if this_stmt is None:
             #     continue
             # elif "//correct" in this_stmt or "//wrong" in this_stmt:
             #     continue
-            # 组装成完整的测试用例
             testcase = self.assemble_testcase(this_stmt, this_namespace, this_def_callables)
             # print(testcase)
             if testcase is None:
                 fail_count += 1
-                # continue
-                # TODO.为什么不是跳过？
                 targetDB.insertToCorpus(["fragment_id", "Content"], [str(i+1), ""])
             else:
                 targetDB.insertToCorpus(["fragment_id", "Content"], [str(i+1), testcase])

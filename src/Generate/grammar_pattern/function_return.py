@@ -23,10 +23,10 @@ def generate_permutation(arr_size: int):
     return value[:-2]+"]"
 
 def generate_not_permutation(arr_size: int):
-    # 如果数组长度为0
+    # If array length = 0
     if arr_size == 0:
         return None
-    # 如果数组长度>0
+    # If array length > 0
     value = "["
     arr = np.arange(arr_size)
     random.shuffle(arr)
@@ -46,11 +46,11 @@ def generate_rectangle(arr_size: int):
     return value
 
 def generate_not_rectangle(arr_size: int):
-    # 如果数组长度为0
+    # If array length = 0
     print("===arr_size:",arr_size)
     if arr_size in [0, 1]:
         return None
-    # 如果数组长度>0
+    # If array length > 0
     value = "["
     n = random.randint(2,10)
     for i in range(arr_size-1):
@@ -75,10 +75,10 @@ def generate_square(arr_size: int):
     return value
 
 def generate_not_square(arr_size: int):
-    # 如果数组长度为0
+    # If array length = 0
     if arr_size == 0:
         return None
-    # 如果数组长度>0
+    # If array length > 0
     value = "["
     for i in range(arr_size-1):
         value += "["
@@ -106,21 +106,15 @@ def generate_head(arr_size: int):
 
 def generate_coprime():
     while True:
-        # 生成两个随机整数
         num1 = random.randint(1, 100)
         num2 = random.randint(1, 100)
-
-        # 检查它们是否互质
         if math.gcd(num1, num2) == 1:
             return str(num1), str(num2)
 
 def generate_not_coprime():
     while True:
-        # 生成两个随机整数
         num1 = random.randint(1, 100)
         num2 = random.randint(1, 100)
-
-        # 检查它们是否互质
         if math.gcd(num1, num2) != 1:
             return str(num1), str(num2)
 
@@ -143,11 +137,6 @@ def generate_not_pnorm():
         return "["+s[:-2]+"]"
 
 def generate_func_return(expr: str, mid_var_dict: dict, defined_var_dict: dict, generate_correct: bool):
-    """ 生成特殊函数的返回值 """
-
-    # for var_name, var_info in defined_var_dict.items():
-    #     print("var_name:",var_name,"var_value",var_info.var_value)
-    # print("===mid_var_dict:",mid_var_dict)
     value = ""
     if "IsPermutation" in expr:
         match = re.match("IsPermutation\((\w+)\)", expr)
@@ -216,15 +205,11 @@ def generate_func_return(expr: str, mid_var_dict: dict, defined_var_dict: dict, 
         var_name1, var_name2 = match.group(1), match.group(2)
         if var_name1 in defined_var_dict and var_name2 in defined_var_dict:
             value1, value2 = defined_var_dict[var_name1].var_value, defined_var_dict[var_name2].var_value
-            print("value1:"+value1+" value2:"+value2+" "+str(is_coprime(value1, value2)))
             if generate_correct and is_coprime(value1, value2):
-                print("生成合理值且value1和value2互质")
                 return ""
             elif not generate_correct and not is_coprime(value1, value2):
-                print("生成不合理值且value1和value2不互质")
                 return ""
             else:
-                print("不符合预期")
                 return None
         if generate_correct:
             value1, value2 = generate_coprime()

@@ -18,7 +18,7 @@ targetDB = DataBaseHandle(params["result_db"])
 temp_proj = pathlib.Path(params["temp_project"])
 
 def get_majority_output(outputs):
-    """ 选出数目最多的输出 """
+    """ Select the most frequent of outputs. """
 
     majority_stdout, stdout_majority_size = collections.Counter([
         output.stdout for output in outputs
@@ -27,7 +27,7 @@ def get_majority_output(outputs):
 
 
 def vote(outputs, testcase_content):
-    """ 使用投票机制选出正确结果，将错误结果存入可疑用例表中 """
+    """ Vote scheme. """
 
     is_susp = False
     if outputs is None:
@@ -49,7 +49,7 @@ def vote(outputs, testcase_content):
         print("\033[92mnothing happened\033[0m")
 
 def execute(index: int, testcase_content: str, command: str, need_coverage: bool):
-    """ 执行,获取结果,存入数据库 """
+    """ Run test case and store results in the database. """
 
     print("\033[1mcmd:\033[0m" + " ".join(command))
     if need_coverage:
@@ -64,22 +64,22 @@ def execute(index: int, testcase_content: str, command: str, need_coverage: bool
     return output
 
 def remove_cov_info(output: str):
-    """ 在使用dotnet run时截取覆盖率部分的输出 """
+    """ Extract the coverage outputs when running `dotnet run`. """
 
     lines = output.split("\n")
     return lines[0]+"\n"+"\n".join(output[4:-1])
 
 def run_and_get_cov(temp_proj: pathlib.Path, testcaseId: int, testcaseContent: str):
-    """ 该函数用于构建、运行并获取一个Q#测试用例的覆盖率结果 """
+    """ Run and get coverage results. """
 
     os.chdir(temp_proj)
-    # 更新测试用例内容
+    # Write down.
     update_content(temp_proj, testcaseContent)
-    # 前期准备
+    # Prepare.
     os.system("rm -rf obj bin")
     os.system("dotnet build")
     os.system("cp ../pdb_zip/* bin/Debug/net6.0/")
-    # 运行并收集覆盖率
+    # Collect.
     cmd = ["dotnet-coverage", "collect", "./bin/Debug/net6.0/qsharpPattern"]
     # cmd = ["dotnet-coverage", "collect", "dotnet run"]
     start_time = labdate.getUtcMillisecondsNow()
@@ -96,7 +96,7 @@ def run_and_get_cov(temp_proj: pathlib.Path, testcaseId: int, testcaseContent: s
         returnCode = -9
     except KeyboardInterrupt:
         pro.terminate()
-    # 移动覆盖率文件
+    # Move coverage files.
     if os.path.exists("output.coverage"):
         new_file_name = "../cov/output"+str(testcaseId)+".coverage"
         shutil.move("output.coverage", new_file_name)
@@ -108,20 +108,18 @@ def run_and_get_cov(temp_proj: pathlib.Path, testcaseId: int, testcaseContent: s
 
 
 def run_testcase(temp_proj: pathlib.Path, testcaseId: int, testcaseContent: str, cmd: list):
-    """ 该函数用于执行一个Q#测试用例 """
+    """ Run a test case. """
     
     # print("temp_proj:",temp_proj)
     os.chdir(temp_proj)
-    # 需要删除bin和obj目录
-    # 否则对于相同的测试用例，会抛出错误：Program does not contain a static 'Main' method suitable for an entry point
+    # Fresh the bin and obj folders.
+    # Or error thrown：Program does not contain a static 'Main' method suitable for an entry point
     for root, dirs, files in os.walk(temp_proj):
         for dirName in dirs:
             if dirName == "bin" or dirName == "obj":
                 shutil.rmtree(os.path.join(temp_proj, dirName), ignore_errors=True)
     update_content(temp_proj, testcaseContent)
     start_time = labdate.getUtcMillisecondsNow()
-    # 在windows下，命令行的默认编码格式是gbk
-    # 在linux下，命令行的编码格式是utf-8
     # encoding_str = "gbk"
     encoding_str = "utf-8"
     pro = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, shell=False,
@@ -144,7 +142,7 @@ def run_testcase(temp_proj: pathlib.Path, testcaseId: int, testcaseContent: str,
     return output
 
 def update_content(temp_proj: pathlib.Path, testcaseContent: str):
-    """ 将当前测试用例内容写到临时项目中 """
+    """ Write content into temp project. """
 
     tempQsharpPath = temp_proj.joinpath("Program.qs")
     # encoding_str = "gbk"

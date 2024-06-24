@@ -12,7 +12,7 @@ def calculate_coverage(file_path, output_file):
 
         for j, line in enumerate(hour_data):
             parts = line.strip().split(': ')
-            timestamp = parts[0]  # 时间戳
+            timestamp = parts[0]
             coverage_data = parts[1].split()
             block_coverage = float(coverage_data[0])
             line_coverage = float(coverage_data[1])

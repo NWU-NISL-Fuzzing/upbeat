@@ -28,10 +28,10 @@ def read_coverage(path: str):
 
     regex = "<module block_coverage=\"([0-9.]+)\" line_coverage=\"([0-9.]+)\".* path=\"(.*?)\"\>"
     # regex = r"path=\"(.*?)\" block_coverage=\"([\d\.]+)\" line_coverage=\"([\d\.]+)\""
-    # 读取覆盖率.xml文件
+    # Read .xml files.
     with open(path+"/final.xml", "r") as f:
         content = f.read()
-    # 识别其中Standard、Numerics、Chemistry和Machine四个模块的覆盖率
+    # Identify blocks (`Standard`、`Numerics`、`Chemistry` and `Machine`)
     for match in re.finditer(regex, content):
         print("match:"+match.group())
         if "microsoft.quantum.standard.dll" in match.group():
@@ -73,30 +73,29 @@ def read_coverage(path: str):
 
 
 def run_all(targetDB: DataBaseHandle, testcaseList: list):
-    """ 对所有测试用例执行边界值测试，同时进行覆盖率统计 """
+    """ Apply language-level testing and obtain coverage results. """
 
     last_coverage_check = time.time() 
     file_path = os.path.join('/root/UPBEAT/src/Fuzzing/qsharpPattern', 'qfuzz.txt')
-    tempXml = "./qsharpPattern/cov" # 存放.xml文件的文件夹
+    tempXml = "./qsharpPattern/cov"
     count =0 
     for index, testcase in enumerate(testcaseList, start=1):
         print(index)
         testcaseContent = testcase[0]
-        # TMP.array_processor的错误替换
         if " inf" in testcaseContent:
             continue
-        # 获取flag
+        # Get flag. 
         if "//correct" in testcaseContent:
             flag = 1
         elif "//wrong" in testcaseContent:
             flag = 0
         else:
             flag = -1
-        # 执行
+        # Run
         output = run_and_get_cov(tempProj, index, testcaseContent)
         targetDB.insertToTotalResult(output, "originResult_cw")
         targetDB.commit()
-        # 对结果进行分析
+        # Analysis
         if  ((flag == 1 and output.returnCode != 0) or 
             (flag == 0 and output.returnCode == 0) or 
             output.outputClass in ["timout", "crash"]):
@@ -104,18 +103,15 @@ def run_all(targetDB: DataBaseHandle, testcaseList: list):
             targetDB.insertToDifferentialResult(output, "differentialResult_cw")
         else:
             print("nothing happened")
-        # 合并覆盖率
+        # Merge the coverage results.
         if time.time() - last_coverage_check >= 3600:
             count += 1
-            # 合并并读取覆盖率
             merge_coverage(tempXml)
             result_list = read_coverage(str(tempProj))
-            # 获取当前时间，写入结果文件中
             current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
             for i in range(0, 12, 2):
                 with open(file_path, 'a') as file:
                     file.write(f"{current_time}: {result_list[i]:.2f} {result_list[i + 1]:.2f}\n")
-            # 用于下一轮计算什么时候统计覆盖率
             last_coverage_check = time.time()
         if count == 24:
             break
@@ -124,17 +120,14 @@ def run_all(targetDB: DataBaseHandle, testcaseList: list):
 def main():
     print("Clean the 'cov' folder and ensure you have enough test cases:D")
     params = initParams("../config.json")
-    # 获取数据库
+    # Init the database. 
     targetDB = DataBaseHandle(params["result_db"])
     targetDB.createTable("differentialResult_cw")
     targetDB.createTable("originResult_cw")
-    # 遍历所有可以正确执行的程序
     # sql_str = "select Content from originResult_cw where stderr not like '%build failed%' and Content not like '%//wrong%';"
-    # 边界值测试和覆盖率统计同时进行
     sql_str = "select Content from corpus where Content not like '%//wrong%';"
     # sql_str = "select Content from corpus where Content not like '%//wrong%' limit 0,1;"
     testcaseList = targetDB.selectAll(sql_str)
-    # 打乱顺序，避免出现两次平缓
     random.shuffle(testcaseList)
     print("totally:",len(testcaseList))
     run_all(targetDB, testcaseList)

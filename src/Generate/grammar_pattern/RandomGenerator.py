@@ -40,12 +40,12 @@ class RandomGenerator:
         """ Generate qubit array declaration for type that need Qubit[] """
 
         dec_stmt = ""
-        # 如果是newtype数组
+        # newtype array
         if "[]" in var_type and var_type != "Qubit[]":
             for i in range(2):
                 array_size = random.choice([2, 4, 6])
                 dec_stmt += "use " + var_name + str(i) + "QubitArray" + " = Qubit[" + str(array_size) + "];\n"
-        # 如果是newtype
+        # newtype
         else:
             array_size = random.choice([2, 4, 6])
             dec_stmt += "use " + var_name + "QubitArray" + " = Qubit[" + str(array_size) + "];\n"
@@ -56,20 +56,15 @@ class RandomGenerator:
         """ Generate variable declaration statements, and assign values randomly. """
 
         assign = Assignment(self.params)
-        # 添加使用特殊值的概率
         if var_type in ["Int", "BigInt", "Double"]:
             prob = random.choice([0,1])
             if prob:
                 var_type = "Boundary"+var_type
-        # 如果是元组类型，直接调用generate_tuple
         if "(" in var_type and ")" in var_type and "=>" not in var_type and "->" not in var_type:
             return self.generate_tuple(assign, var_name, var_type)
-        # 否则再进行以下步骤
         dec_stmt = ""
-        # 部分类型需要声明量子比特数组
         if var_type.replace("[]", "") in self.need_a_qubit_array:
             dec_stmt += self.generate_qubit_array(var_name, var_type)
-        # 生成变量值
         value = assign.generate_a_param(var_name, var_type)
         if value is None:
             with open("can_not_gen.txt", "a") as f:
@@ -79,15 +74,11 @@ class RandomGenerator:
             self.defined_call.extend(assign.defined_call)
         if len(assign.needful_namespace) > 0:
             self.needful_namespace += assign.needful_namespace
-        # 构建变量声明语句
         dec_stmt += self.generate_random_dec(var_name, var_type, value)
         # print("===dec_stmt:\n"+dec_stmt)
         return dec_stmt
         
     def generate_random_dec(self, var_name: str, var_type: str, var_value: str):
-        """ 根据传入的值构建变量声明语句 """
-
-        # tmp_dec_stmt = ""
         if var_type == "Qubit[][]":
             tmp_dec_stmt = "use qs1 = Qubit[1];\nuse qs2 = Qubit[2];\nmutable "+var_name+" = [qs1, qs2];\n"
         elif var_type in ["Qubit", "Qubit[]"]:
@@ -95,19 +86,15 @@ class RandomGenerator:
             tmp_dec_stmt += self.modify_init_state(var_name, var_type)
         else:
             tmp_dec_stmt = "mutable " + var_name + " = " + var_value + ";\n"
-        # print("check after generate random:\n"+tmp_dec_stmt)
         return tmp_dec_stmt
 
     def generate_tuple(self, assign: Assignment, var_name: str, var_type: str):
-        """ 生成元组类型的值 """
-
         value = var_type
         record = []
         i = 0
         dec_stmt = ""
         for match in re.finditer("[\w\[\]]+", var_type):
             sub_var_type = match.group()
-            # 如果是元组列表，例如(Int, Int)[]，将[]跳过
             # print("sub_var_type:"+sub_var_type)
             if sub_var_type == "[]":
                 continue

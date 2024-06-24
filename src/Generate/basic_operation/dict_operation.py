@@ -8,12 +8,11 @@ standard_api_dict = api_op.init_api_dict("/root/UPBEAT/src/ParseAPI/data/content
 
 
 def get_key_by_value(d, value):
-    """ 根据值查找键 """
     return [k for k, v in d.items() if v == value][0]
 
 
 def merge_two_dict(d1: dict, d2: dict):
-    """合并两个字典"""
+    """ d1 + d2 """
 
     d = {}
     d.update(d1)
@@ -22,7 +21,8 @@ def merge_two_dict(d1: dict, d2: dict):
 
 
 def minus_dict(d1: dict, d2: dict):
-    """ 从d1中删除d2中存在的元素 """
+    """ d2 - d1 """
+
     for key in d2.keys():
         if key in d1:
             d1.pop(key)
@@ -42,7 +42,7 @@ def get_rest_args(dict1: dict, dict2: dict):
 
 
 def get_undefined_args(dict1: dict, dict2: dict):
-    """  """
+    """ Get all undefined arguments. """
 
     dict3 = {}
     flag = True
@@ -62,8 +62,6 @@ def get_undefined_args(dict1: dict, dict2: dict):
 
 
 def add_item(d: dict, var_name: str, var_type: str, middle_dict: dict):
-    """ 构建needfule_variables时使用，将需要生成的变量存入字典 """
-
     if var_name not in d and not var_name.isdigit() and var_name not in middle_dict and var_name not in standard_api_dict:
         d[var_name] = var_type
     return d
@@ -81,7 +79,7 @@ def random_select_dict(d: dict, n):
 
 
 def is_subset(dict1, dict2):
-    """ 判断dict1是否在dict2中 """
+    """ Check if dict1 is in dict2. """
 
     return all(item in dict2.items() for item in dict1.items())
 

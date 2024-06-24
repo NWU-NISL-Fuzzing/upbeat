@@ -21,22 +21,21 @@ class DifferentialTest:
                         ["dotnet", "run", "-s", "ToffoliSimulator"]]
 
     def execute_and_analysis(self, result):
-        """ 进行差分测试 """
+        """ Differential testing. """
 
         # print("result:",result)
-        # 从边界值测试结果中获取dotnet run的输出
+        # Get output from language-level testing. 
         outputs = []
         output = Output(testcaseId=result[1], testcaseContent=result[2], command=result[3], returncode=result[4],
                         stdout=result[5], stderr=result[6], duration_ms=result[7])
         output.stdout = get_prob_distribution(output.stdout)
         outputs.append(output)
-        # 运行
+        # Run. 
         command_list = self.command
         for cmd in command_list:
             outputs.append(execute(result[1], result[2], cmd, False))
-        # 分析
+        # Analysis. 
         vote(outputs, result[2])
-        # 每执行完一个测试用例就提交一次修改
         self.targetDB.commit()
 
 
@@ -45,7 +44,7 @@ def main():
     tester = DifferentialTest()
     tester.targetDB.createTable("differentialResult_sim")
     # tester.targetDB.createTable("originResult_sim")
-    # 遍历每个可以正确运行的生成片段
+    # Walk all grammarly correct test cases. 
     sql =   "select * from originResult_cw where stderr not like '%build failed%' and "+\
             "testcase_id not in (select testcase_id from differentialResult_cw);"
     result = tester.targetDB.selectAll(sql)

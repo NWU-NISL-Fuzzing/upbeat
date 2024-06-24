@@ -3,7 +3,7 @@ import sqlite3
 
 
 def check_outputs(outputs):  
-    """ 如果输出中出现Zero/One/True/False，不进行比较（返回False） """   
+    """ If `Zero/One/True/False` exists in the output, do not compare. (Random output) """   
     
     first_output_found_zero, first_output_found_true = True, True
     for output in outputs:
@@ -14,36 +14,34 @@ def check_outputs(outputs):
 
 
 def is_digit_space_format(line):
-    """ 检查一行是否为 'xxxx   xxxx' 格式（数字和空格） """
+    """ xxxx   xxxx """
     
     parts = line.split()
     return len(parts) == 2 and all(part.isdigit() for part in parts)
 
 
 def get_prob_distribution(output_content: str):
-    """ 只获取概率分布 """
+    """ Get probabilities. """
 
     if "The method or operation is not implemented" in output_content:
         return output_content
 
     classical_results = ""
     prob_list = []
-    skip_lines = 0  # 添加一个计数器来跳过特定行数
-    add_one = False  # 标志位，用于检测是否需要添加 '1.000000'
+    skip_lines = 0
+    add_one = False
     lines = output_content.split("\n")
     for i, line in enumerate(lines):
-        # 检查是否包含 "Offset" 和 "State Data"
         if "Offset" in line or "State Data" in line:
-            # 检查第三行是否为纯数字
             if i + 2 < len(lines) and  all(char.isdigit() or char.isspace() for char in lines[i + 2]) \
                     and i + 3 < len(lines) and is_digit_space_format(lines[i + 3]):
-                skip_lines = 4  # 只跳过第三行
+                skip_lines = 4
             elif i + 2 < len(lines) and all(char.isdigit() or char.isspace() for char in lines[i + 2]):
                 skip_lines = 3
             else:
-                skip_lines = 2  # 否则跳过前两行
+                skip_lines = 2
             add_one = True
-        if skip_lines > 0:  # 如果计数器大于0，跳过这一行
+        if skip_lines > 0:
             skip_lines -= 1
             continue
         if len(line) == 0:
@@ -53,11 +51,11 @@ def get_prob_distribution(output_content: str):
             if match.group(2) != "0.000000":
                 prob_list.append(match.group(2))
         else:
-            classical_results += line + "\n"  # 添加换行符以便在结果中区分不同的行
-    if add_one:  # 如果标志位为 True，添加 '1.000000'
+            classical_results += line + "\n"
+    if add_one:
         prob_list.insert(0, '1.000000')
     prob_list.sort()
-    return str(prob_list) + "\n" + classical_results.strip()  # 使用 strip() 去掉最后一个换行符
+    return str(prob_list) + "\n" + classical_results.strip()
 
 
 def check_strings_in_db(database_path, testcase_content, stdout):

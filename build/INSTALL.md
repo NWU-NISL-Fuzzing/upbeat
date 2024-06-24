@@ -61,7 +61,7 @@ source ~/.bashrc
 Before using Upbeat, some pip tools are necessary.
 
 ```
-pip install six numpy 
+pip install numpy gdown z3-solver jupyter matplotlib scipy tabulate
 ```
 
 **6.Download the Q# compiler build from source.**

@@ -1,12 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-@Time ： 2022/1/6 20:20
-@Auth ： Xing
-@File ：selfDefinedOpLoad.py
-@IDE ：PyCharm
-@Description：ABC(Always Be Coding)
-
-"""
 import random
 import re
 
@@ -27,10 +19,7 @@ class OperationLoad:
         else:
             argList = args.split(",")
             for argument in argList:
-                # try:
                 argTypes.append(argument.split(":")[1].strip())
-                # except Exception as e:
-                #     print(argument)
 
         return Callable(callableType, name.strip(), argTypes, returnType.strip(), operationContent.strip())
 
@@ -44,21 +33,20 @@ class OperationLoad:
                     parsedOpration.append(self.parseOperation(op))
         return parsedOpration
 
-    def classifyCallable(self, parsedOperations: list):
-        operations = []
-        functions = []
-        for callable in parsedOperations:
-            if callable.callableType == "function":
-                functions.append(callable)
-            elif callable.callableType == "operation":
-                operations.append(callable)
-        return functions, operations
+    # def classifyCallable(self, parsedOperations: list):
+    #     operations = []
+    #     functions = []
+    #     for callable in parsedOperations:
+    #         if callable.callableType == "function":
+    #             functions.append(callable)
+    #         elif callable.callableType == "operation":
+    #             operations.append(callable)
+    #     return functions, operations
 
-    # 原路径：../Generate/data/selfDefinedOperations.txt
     def loadCallables(self, file_path = r"../data/selfDefinedOperations.txt"):
         parsedOperations = self.loadFile(file_path)
         return self.classifyCallable(parsedOperations)
 
-    def randomChooseCallable(self, callables):
-        callable = random.choice(callables)
-        return callable
+    # def randomChooseCallable(self, callables):
+    #     callable = random.choice(callables)
+    #     return callable

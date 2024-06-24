@@ -137,7 +137,6 @@ def complex_dec_generator(generate_last, mid_var_dict, defined_var_dict):
             tmp_instance = FixedPoint(var_name, pos, arr_len)
             declaration_stmt += tmp_instance.generate_var_dec()
             defined_var_dict[var_name] = DefinedVar(real_var_name, var_type, 0, tmp_instance.generate_var_value())
-        # 添加一些基本生成
         else:
             var_value = assign.generate_a_param(real_var_name, var_type)
             declaration_stmt += rand_gen.generate_random_dec(real_var_name, var_type, var_value)
@@ -151,8 +150,6 @@ def get_item(var_name: str):
     return instance_name, item_name
 
 def add_items_from_newtype(relatedArgDict: dict, var_name: str):
-    """ var_name的格式为xxx::yyy """
-
     instance_name, item_name = get_item(var_name)
     var_type = relatedArgDict[instance_name]
     relatedArgDict[var_name] = newtype_dict[var_type][item_name]
