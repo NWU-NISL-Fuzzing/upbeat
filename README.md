@@ -30,16 +30,16 @@ git clone https://github.com/NWU-NISL-Fuzzing/UPBEAT.git
 (Optional) Adjust [the configuration file](src/config.json) to align with users' specific requirements. Below are the configurable parameters and their descriptions:
 
 ```
-work_dir:       The directory path where the repository is located.
-fragment_num:  The number of code fragments to generate test cases.
-level:          Time to combine code fragments. The default is set to 1.
+work_dir:               The directory path where the repository is located.
+fragment_num:           The number of code fragments to generate test cases.
+level:                  Time to combine code fragments. The default is set to 1.
 ingredient_table_name : Table name of code fragments,
-reference_db:   Path to the API constraint database.
-corpus_db:      Path to the code fragment database.
-history_db:     Path to the historical bug database.
-result_db:      Path of the result database.
-temp_project: Path to the Q# projects used during the testing phase.
-boundary_value:  Special values for random input generation.
+reference_db:           Path to the API constraint database.
+corpus_db:              Path to the code fragment database.
+history_db:             Path to the historical bug database.
+result_db:              Path of the result database.
+temp_project:           Path to the Q# projects used during the testing phase.
+boundary_value:         Special values for random input generation.
 ```
 
 **Step1. Generate test cases.**
