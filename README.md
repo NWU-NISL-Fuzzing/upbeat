@@ -90,7 +90,7 @@ cd jupyter
 jupyter notebook --ip=[YOUR_IP] --port=8888 --allow-root
 ```
 
-Then you can visit the notebook on the website `http:\\127.0.0.1:8888`. This will open the notebook in your default web browser, allowing you to interact with it seamlessly.
+This will open the notebook in your default web browser, allowing you to interact with it seamlessly.
 
 ## Experimental Result
 
