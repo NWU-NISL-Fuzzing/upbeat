@@ -1,14 +1,13 @@
 namespace NISLNameSpace {
-    open Microsoft.Quantum.Arrays;
-    open Microsoft.Quantum.Math;
-    open Microsoft.Quantum.Diagnostics;
-    open Microsoft.Quantum.Intrinsic;
     open Microsoft.Quantum.Canon;
-    open Microsoft.Quantum.Arithmetic;
-    open Microsoft.Quantum.Convert;
     open Microsoft.Quantum.Logical;
+    open Microsoft.Quantum.Arrays;
+    open Microsoft.Quantum.Convert;
+    open Microsoft.Quantum.Intrinsic;
+    open Microsoft.Quantum.Diagnostics;
+    open Microsoft.Quantum.Arithmetic;
     open Microsoft.Quantum.Oracles;
-    open Microsoft.Quantum.ErrorCorrection;
+    open Microsoft.Quantum.Math;
 
 
     
@@ -16,28 +15,17 @@ namespace NISLNameSpace {
     operation main() : Unit {
         //no cons
         //no cons
-        use aux1051 = Qubit[2];
-        Ry(PI() / 4.0, aux1051[1]);
-        let expected1051 = ApplyToEachA(Ry(-PI() / 4.0, _), _);
-        let actual1051 = ApplyToEach(Adjoint InjectPi4YRotation(_, aux1051[1]), _);
-        Reset(aux1051[0]);
+        mutable time6203 = -1.8018458518464863;
+        mutable dt6203 = -1.40339372615444147;
+        let nSteps6203 = Floor(time6203 / dt6203);
         
-        let tempQubits1346 = aux1051;
-        use a11346 = Qubit();
-        // Modify initial state(s) of qubit(s). 
-        T(a11346);
-        // Modify end. 
-        use b11346 = Qubit();
-        // Modify initial state(s) of qubit(s). 
-        Z(b11346);
-        // Modify end. 
-        Sum(tempQubits1346[0],a11346,b11346);
+        let targetRegisterSize4419 = nSteps6203;
+        let indexRegisterSize4419 = Ceiling(Lg(IntAsDouble(targetRegisterSize4419)));
+        use targetRegister4419 = Qubit[targetRegisterSize4419];
         
         DumpMachine();
-        ResetAll(tempQubits1346);
-        Reset(a11346);
-        Reset(b11346);
-        ResetAll(aux1051);
+        Message($"{indexRegisterSize4419}");
+        ResetAll(targetRegister4419);
         
     }
 }

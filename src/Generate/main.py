@@ -84,5 +84,5 @@ def main():
     print(f"\033[94mFinished. Totally get {testcase_num} test cases.\033[0m")
 
 
-if __name__ in "__main__":
+if __name__ == "__main__":
     main()
