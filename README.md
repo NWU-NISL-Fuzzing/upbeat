@@ -6,7 +6,13 @@ UPBEAT is a fuzzing tool to generate random test cases for bugs related to input
 
 ### Use Docker
 
-We offer a ready-to-use [image]() that runs "out of the box". Alternatively, users can also run the [Dockerfile](build/Dockerfile). 
+We offer a ready-to-use [image](https://hub.docker.com/repository/docker/weucodee/upbeat/general) that runs "out of the box". 
+
+```
+docker pull weucodee/upbeat:latest
+```
+
+Alternatively, users can also run the [Dockerfile](build/Dockerfile). 
 
 ```
 docker build -t upbeat:v1 .
