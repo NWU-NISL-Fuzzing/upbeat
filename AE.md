@@ -8,13 +8,15 @@ This document provides instructions for the artifact evaluation of our accepted 
 
 ### 1 Jupyter Notebook
 
-We provide an interactive Jupyter Notebook hosted on a cloud server. The notebook first uses a single case to demonstrate the entire Upbeat pipeline. Then, it conducts small-scale testing (100 test cases) and finally reproduces the evaluation presented in our paper. Please click [this link]() to access our notebook.
+We provide an interactive Jupyter Notebook hosted on a cloud server. The notebook first uses a single case to demonstrate the entire Upbeat pipeline. Then, it conducts small-scale testing (100 test cases) and finally reproduces the evaluation presented in our paper. 
+
+Please click [this link]() to access our notebook.
 
 ### 2 Docker Image
 
-#### 2.1 Create Docker container
+#### 2.1 Create a Docker container
 
-We also offer a ready-to-use [image](https://hub.docker.com/repository/docker/weucodee/upbeat/general), which contains the pre-build environment, a detailed document and the source code of Upbeat. 
+We offer a ready-to-use [image](https://hub.docker.com/repository/docker/weucodee/upbeat/general), which contains the pre-build environment, a detailed document, and the source code of Upbeat. 
 
 ```
 docker pull weucodee/upbeat:latest
@@ -26,7 +28,7 @@ Alternatively, users can also run the [Dockerfile](build/Dockerfile).
 docker build -t upbeat:v1 .
 ```
 
-Then, create a Docker container. There are two ports should be mapped: the 22 port (for ssh) and the 8888 port (for local Jupyter Notebook). 
+Then, create a Docker container. There are two ports that should be mapped: the 22 port (for SSH) and the 8888 port (for local Jupyter Notebook). 
 
 ```
 docker run -d -it -p [XXX]:22 -p [XXX]:8888 upbeat:v1
@@ -52,7 +54,7 @@ boundary_value:         Special values for random input generation.
 **Step1. Generate test cases.**
 
 ```
-cd UPBEAT/src/Generate
+cd upbeat/src/Generate
 python main.py
 ```
 
@@ -96,7 +98,7 @@ UPBEAT is capable of filtering the anomalies into three types: (1) bugs that hav
 
 #### 2.4 Jupyter Notebook
 
-To run the notebook on your computer, follow these simple steps:
+To run the notebook on your computer, follow the following steps:
 
 ```
 cd jupyter
