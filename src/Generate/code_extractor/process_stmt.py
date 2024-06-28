@@ -10,9 +10,9 @@ from class_for_info.api_call_info import APICallInfo
 from code_extractor.process_block import is_first_part
 from code_extractor.process_expr import *
 
-# Get the UPBEAT work directionary, like /.../UPBEAT.
+# Get the upbeat work directionary, like /.../upbeat.
 current_path = os.getcwd()
-qfuzz_path = current_path[:current_path.find("UPBEAT")+6]
+qfuzz_path = current_path[:current_path.find("upbeat")+6]
 # Get reference.
 api_op = APIOperator()
 standard_api_dict = api_op.init_api_dict(qfuzz_path+"/src/ParseAPI/data/content.json")

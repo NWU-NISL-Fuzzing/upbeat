@@ -10,7 +10,7 @@ from Generate.basic_operation.file_operation import initParams
 
 params = initParams("../config.json")
 
-def run_and_analysis(targetDB, index: int, testcaseContent: str):
+def run_and_analysis(targetDB, index: int, testcase_content: str):
     print("==running "+str(index)+"th test case==")
     tempProj = pathlib.Path(params["temp_project"])
     # Get flag.
@@ -22,7 +22,7 @@ def run_and_analysis(targetDB, index: int, testcaseContent: str):
         flag = -1
     # Run.
     command = ["dotnet", "run"]
-    output = run_testcase(tempProj, index, testcaseContent, command)
+    output = run_testcase(tempProj, index, testcase_content, command)
     # Insert result of original test case.
     targetDB.insertToTotalResult(output, "originResult_cw")
     targetDB.commit()
@@ -47,11 +47,11 @@ def main():
     testcaseList = targetDB.selectAll("select Content from corpus;")
     # testcaseList = targetDB.selectAll("select Content from corpus limit 0,1;")
     print("Here are "+str(len(testcaseList))+" test cases.")
-    for index, testcaseContent in enumerate(testcaseList, start=1):
-        # print(testcaseContent)
-        if len(testcaseContent) == 0:
+    for index, testcase_content in enumerate(testcaseList, start=1):
+        # print(testcase_content)
+        if len(testcase_content) == 0:
             continue
-        run_and_analysis(targetDB, index, testcaseContent[0])
+        run_and_analysis(targetDB, index, testcase_content[0])
         # break
     targetDB.finalize()
     # end_time = getUtcMillisecondsNow()

@@ -190,7 +190,7 @@ def query_and_generate():
                                         "", "QuantumConsStmt").format_to_save()
         frag_list.append(correct_item)
         frag_list.append(wrong_item)
-    save_into_db("/root/UPBEAT/data/query/corpus-v3.db", "CodeFragment_CS", frag_list)
+    save_into_db("/root/upbeat/data/query/corpus-v3.db", "CodeFragment_CS", frag_list)
 
 def test():
     rotation_or_gate = random.choice([0,1])

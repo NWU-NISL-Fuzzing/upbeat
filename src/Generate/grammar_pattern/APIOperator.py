@@ -7,7 +7,7 @@ import random
 from grammar_pattern.API import API
 
 current_path = os.getcwd()
-qfuzz_path = current_path[:current_path.find("UPBEAT")+6]
+qfuzz_path = current_path[:current_path.find("upbeat")+6]
 
 class APIOperator:
 

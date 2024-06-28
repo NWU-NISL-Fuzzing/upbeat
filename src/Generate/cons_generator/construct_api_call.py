@@ -3,7 +3,7 @@ from class_for_info.fragment_info import CodeFragmentInfo
 from grammar_pattern.APIOperator import APIOperator
 
 
-standard_api_list = APIOperator().get_func_and_op("/root/UPBEAT/src/ParseAPI/data/content.json")
+standard_api_list = APIOperator().get_func_and_op("/root/upbeat/src/ParseAPI/data/content.json")
 
 
 def single_api_call():
@@ -30,7 +30,7 @@ def single_api_call():
         code_fragment = CodeFragmentInfo(final_stmt, {}, needfule_variables, open_stmt,
                                     "", "").format_to_save()
         result_list.append(code_fragment)
-    save_into_db("/root/UPBEAT/data/query/corpus-v3.db", "CodeFragment_CS", result_list)
+    save_into_db("/root/upbeat/data/query/corpus-v3.db", "CodeFragment_CS", result_list)
 
 
 if __name__ == "__main__":

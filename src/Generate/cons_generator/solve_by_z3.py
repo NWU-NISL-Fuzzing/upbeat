@@ -16,7 +16,7 @@ from code_extractor.process_stmt import is_basic_type
 params = initParams("../config.json")
 assign = Assignment(params)
 var_num = 0
-standard_api_dict = APIOperator().init_api_dict("/root/UPBEAT/src/ParseAPI/data/content_all.json")
+standard_api_dict = APIOperator().init_api_dict("/root/upbeat/src/ParseAPI/data/content_all.json")
 
 def assemble_dec_stmt(var_name, var_type, value):
     global var_num
@@ -386,7 +386,7 @@ def cl_cwvp_by_z3(bool_expr_list: list, func_ret_list: list, arg_dict: dict):
     return final_valid_list, final_invalid_list, arg_dict
 
 def main():
-    db_path = "/root/UPBEAT/data/query/fact_stmt_1.db"
+    db_path = "/root/upbeat/data/query/fact_stmt_1.db"
     targetDB = DataBaseHandle(db_path)
     api_name_list = targetDB.selectAll("select func_name from ClConsStmt where id = 20")
     for api_name in api_name_list:

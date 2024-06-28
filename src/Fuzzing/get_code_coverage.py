@@ -12,8 +12,6 @@ from basic_operation.file_operation import initParams, add_to_write
 tempProj = pathlib.Path("./qsharpPattern").absolute()
 
 def merge_coverage(tempXml: str):
-    """ 默认所有.coverage文件存储在cov子文件夹下，进行合并，最终结果位于final.xml """
-
     res = os.system("dotnet-coverage merge -o final.xml -f xml cov/*.coverage")
     return res
 
@@ -76,7 +74,7 @@ def run_all(targetDB: DataBaseHandle, testcaseList: list):
     """ Apply language-level testing and obtain coverage results. """
 
     last_coverage_check = time.time() 
-    file_path = os.path.join('/root/UPBEAT/src/Fuzzing/qsharpPattern', 'qfuzz.txt')
+    file_path = os.path.join('/root/upbeat/src/Fuzzing/qsharpPattern', 'qfuzz.txt')
     tempXml = "./qsharpPattern/cov"
     count =0 
     for index, testcase in enumerate(testcaseList, start=1):

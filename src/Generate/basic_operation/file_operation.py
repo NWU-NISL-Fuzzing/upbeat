@@ -6,8 +6,6 @@ total_num = 0
 
 
 def get_all_folders(path):
-    """ 获取指定路径下的所有文件夹 """
-
     folders = []
     for root, dirs, files in os.walk(path):
         for dir in dirs:
@@ -16,8 +14,6 @@ def get_all_folders(path):
 
 
 def get_all_qsharp_files(path):
-    """ get all qsharp files."""
-
     # total_num = 0
     global total_num
 

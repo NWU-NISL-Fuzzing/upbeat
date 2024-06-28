@@ -4,7 +4,7 @@ from class_for_info.defined_var_info import DefinedVar
 from grammar_pattern.APIOperator import APIOperator
 
 api_op = APIOperator()
-standard_api_dict = api_op.init_api_dict("/root/UPBEAT/src/ParseAPI/data/content.json")
+standard_api_dict = api_op.init_api_dict("/root/upbeat/src/ParseAPI/data/content.json")
 
 
 def get_key_by_value(d, value):

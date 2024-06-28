@@ -56,6 +56,8 @@ cd UPBEAT/src/Generate
 python main.py
 ```
 
+_(Approximate 2 seconds for 100 test cases.)_
+
 There are two steps in test case generation: (1) assemble code segments and (2) generate callable inputs. All generated test cases are stored in `result_db`.
 
 PS. `fragment_num` does not necessarily correspond to the number of test cases. For example, if a fragment contains constraints, Upbeat will generate two test cases. If there are no constraints, only one test case will be generated.
@@ -66,6 +68,8 @@ PS. `fragment_num` does not necessarily correspond to the number of test cases. 
 cd ../Fuzzing
 python hybrid_testing.py
 ```
+
+_(Approximate 50 minuts for 100 test cases.)_
 
 Each test case will first be applied on language-level testing, with execution information stored in table `originResult_cw`. If any anomalies occur, relevant information will be logged in table `differentialResult_cw`. 
 
