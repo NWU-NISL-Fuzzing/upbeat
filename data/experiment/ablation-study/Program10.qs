@@ -1,4 +1,6 @@
-// can be detected by upbeat
+// Bug Description:
+// Can be detected by upbeat.
+// QuantumSimulator run successfully.
 
 namespace NameSpace {
 	open Microsoft.Quantum.Intrinsic;

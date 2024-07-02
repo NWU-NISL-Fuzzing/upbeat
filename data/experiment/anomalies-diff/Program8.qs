@@ -1,4 +1,6 @@
-// can be detected by upbeat
+// Bug Description:
+// Can be detected by upbeat.
+// QuantumSimulator and SparseSimulator output nothing.
 
 namespace NISLNameSpace {
     open Microsoft.Quantum.Diagnostics;

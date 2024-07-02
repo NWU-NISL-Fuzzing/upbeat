@@ -1,4 +1,6 @@
-// can be detected by upbeat-a&upbeat
+// Bug Description:
+// Can be detected by upbeat-a&upbeat.
+// QuantumSimulator throws an OverflowException exception.
 
 namespace NISLNameSpace {
 	open Microsoft.Quantum.Intrinsic;
@@ -6,7 +8,7 @@ namespace NISLNameSpace {
 
 	@EntryPoint()
 	operation main() : Unit {
-        let a = 2^63-1;
+        let a = 2^63;
 		let _ = Parity(a);
 	}
 }

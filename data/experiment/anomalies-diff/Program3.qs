@@ -1,4 +1,6 @@
-// can be detected by qsharpfuzz&upbeat
+// Bug Description:
+// Can be detected by qsharpfuzz&upbeat.
+// ToffoliSimulator throws a ReleasedQubitsAreNotInZeroState exception, while other two simulators run successfully.
 
 namespace NISLNameSpace {
     open Microsoft.Quantum.Intrinsic;

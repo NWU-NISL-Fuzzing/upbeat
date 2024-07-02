@@ -22,6 +22,7 @@ RUN apt-get update && \
     apt-get install -y apt-transport-https
 RUN apt-get update && \
     apt-get install -y dotnet-sdk-6.0
+RUN dotnet tool install -g dotnet-coverage
 
 RUN git clone https://github.com/NWU-NISL-Fuzzing/UPBEAT.git
 

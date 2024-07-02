@@ -1,4 +1,6 @@
-// can be detected by upbeat-a&upbeat
+// Bug Description:
+// Can be detected by upbeat-a&upbeat.
+// QuantumSimulator throws an OverflowException exception.
 
 namespace NISLNameSpace {
 	open Microsoft.Quantum.Math;

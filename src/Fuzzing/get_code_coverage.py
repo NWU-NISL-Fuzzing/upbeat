@@ -11,8 +11,8 @@ from basic_operation.file_operation import initParams, add_to_write
 
 tempProj = pathlib.Path("./qsharpPattern").absolute()
 
-def merge_coverage(tempXml: str):
-    res = os.system("dotnet-coverage merge -o final.xml -f xml cov/*.coverage")
+def merge_coverage(tool_name: str):
+    res = os.system(f"dotnet-coverage merge -o final.xml -f xml cov_{tool_name}/*.coverage")
     return res
 
 
@@ -24,41 +24,48 @@ def read_coverage(path: str):
     chemistry_block_cov3, chemistry_line_cov3 = 0.00, 0.00
     ml_block_cov, ml_line_cov = 0.00, 0.00
 
-    regex = "<module block_coverage=\"([0-9.]+)\" line_coverage=\"([0-9.]+)\".* path=\"(.*?)\"\>"
-    # regex = r"path=\"(.*?)\" block_coverage=\"([\d\.]+)\" line_coverage=\"([\d\.]+)\""
+    # regex = "<module block_coverage=\"([0-9.]+)\" line_coverage=\"([0-9.]+)\".* path=\"(.*?)\"\>"
+    regex = r"path=\"(.*?)\" block_coverage=\"([\d\.]+)\" line_coverage=\"([\d\.]+)\""
     # Read .xml files.
     with open(path+"/final.xml", "r") as f:
         content = f.read()
     # Identify blocks (`Standard`、`Numerics`、`Chemistry` and `Machine`)
     for match in re.finditer(regex, content):
         print("match:"+match.group())
-        if "microsoft.quantum.standard.dll" in match.group():
-            standard_block_val, standard_line_val = match.group(1), match.group(2)
+        lower_content = match.group().lower()
+        if "microsoft.quantum.standard.dll" in lower_content:
+            # standard_block_val, standard_line_val = match.group(1), match.group(2) # related to the first regex
+            standard_block_val, standard_line_val = match.group(2), match.group(3) # related to the second regex
             # add_to_write("standard_cov.txt", standard_block_val+" "+standard_line_val+"\n")
             standard_block_cov += float(standard_block_val)
             standard_line_cov += float(standard_line_val)
-        elif "microsoft.quantum.numerics.dll" in match.group():
-            numerics_block_val, numerics_line_val = match.group(1), match.group(2)
+        elif "microsoft.quantum.numerics.dll" in lower_content:
+            # numerics_block_val, numerics_line_val = match.group(1), match.group(2) # related to the first regex
+            numerics_block_val, numerics_line_val = match.group(2), match.group(3) # related to the second regex
             # add_to_write("numerics_cov.txt", numerics_block_val+" "+numerics_line_val+"\n")
             numerics_block_cov += float(numerics_block_val)
             numerics_line_cov += float(numerics_line_val)
-        elif "microsoft.quantum.chemistry.datamodel.dll" in match.group():
-            chemistry_block_val1, chemistry_line_val1 = match.group(1), match.group(2)
+        elif "microsoft.quantum.chemistry.datamodel.dll" in lower_content:
+            # chemistry_block_val1, chemistry_line_val1 = match.group(1), match.group(2) # related to the first regex
+            chemistry_block_val1, chemistry_line_val1 = match.group(2), match.group(3) # related to the second regex
             # add_to_write("chemistry_cov1.txt", chemistry_block_val1+" "+chemistry_line_val1+"\n")
             chemistry_block_cov1 += float(chemistry_block_val1)
             chemistry_line_cov1 += float(chemistry_line_val1)
-        elif "microsoft.quantum.chemistry.metapackage.dll" in match.group():
-            chemistry_block_val2, chemistry_line_val2 = match.group(1), match.group(2)
+        elif "microsoft.quantum.chemistry.metapackage.dll" in lower_content:
+            # chemistry_block_val2, chemistry_line_val2 = match.group(1), match.group(2) # related to the first regex
+            chemistry_block_val2, chemistry_line_val2 = match.group(2), match.group(3) # related to the second regex
             # add_to_write("chemistry_cov2.txt", chemistry_block_val2+" "+chemistry_line_val2+"\n")
             chemistry_block_cov2 += float(chemistry_block_val2)
             chemistry_line_cov2 += float(chemistry_line_val2)
-        elif "microsoft.quantum.chemistry.runtime.dll" in match.group():
-            chemistry_block_val3, chemistry_line_val3 = match.group(1), match.group(2)
+        elif "microsoft.quantum.chemistry.runtime.dll" in lower_content:
+            # chemistry_block_val3, chemistry_line_val3 = match.group(1), match.group(2) # related to the first regex
+            chemistry_block_val3, chemistry_line_val3 = match.group(2), match.group(3) # related to the second regex
             # add_to_write("chemistry_cov3.txt", chemistry_block_val3+" "+chemistry_line_val3+"\n")
             chemistry_block_cov3 += float(chemistry_block_val3)
             chemistry_line_cov3 += float(chemistry_line_val3)
-        elif "microsoft.quantum.machinelearning.dll" in match.group():
-            ml_block_val, ml_line_val = match.group(1), match.group(2)
+        elif "microsoft.quantum.machinelearning.dll" in lower_content:
+            # ml_block_val, ml_line_val = match.group(1), match.group(2) # related to the first regex
+            ml_block_val, ml_line_val = match.group(2), match.group(3) # related to the second regex
             # add_to_write("ml_cov.txt", ml_block_val+" "+ml_line_val+"\n")
             ml_block_cov += float(ml_block_val)
             ml_line_cov += float(ml_line_val)
@@ -70,12 +77,12 @@ def read_coverage(path: str):
             ml_block_cov, ml_line_cov]
 
 
-def run_all(targetDB: DataBaseHandle, testcaseList: list):
+def run_all(targetDB: DataBaseHandle, testcaseList: list, total_time = 24, interval = 1, tool_name = "upbeat"):
     """ Apply language-level testing and obtain coverage results. """
 
     last_coverage_check = time.time() 
-    file_path = os.path.join('/root/upbeat/src/Fuzzing/qsharpPattern', 'qfuzz.txt')
-    tempXml = "./qsharpPattern/cov"
+    file_path = os.path.join('/root/upbeat/src/Fuzzing/qsharpPattern', tool_name+'.txt')
+    # tempXml = "./qsharpPattern/cov_"+tool_name
     count =0 
     for index, testcase in enumerate(testcaseList, start=1):
         print(index)
@@ -90,7 +97,7 @@ def run_all(targetDB: DataBaseHandle, testcaseList: list):
         else:
             flag = -1
         # Run
-        output = run_and_get_cov(tempProj, index, testcaseContent)
+        output = run_and_get_cov(tempProj, index, testcaseContent, tool_name)
         targetDB.insertToTotalResult(output, "originResult_cw")
         targetDB.commit()
         # Analysis
@@ -102,21 +109,25 @@ def run_all(targetDB: DataBaseHandle, testcaseList: list):
         else:
             print("nothing happened")
         # Merge the coverage results.
-        if time.time() - last_coverage_check >= 3600:
-            count += 1
-            merge_coverage(tempXml)
+        if time.time() - last_coverage_check >= interval * 3600: # 3600s == 1h
+            count += interval
+            merge_coverage(tool_name)
             result_list = read_coverage(str(tempProj))
             current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
             for i in range(0, 12, 2):
                 with open(file_path, 'a') as file:
                     file.write(f"{current_time}: {result_list[i]:.2f} {result_list[i + 1]:.2f}\n")
             last_coverage_check = time.time()
-        if count == 24:
+            print("count:", count, "total_time:", total_time, "interval:", interval)
+        if count >= total_time:
             break
 
 
 def main():
-    print("Clean the 'cov' folder and ensure you have enough test cases:D")
+    # print("Clean the 'cov' folder and ensure you have enough test cases:D")
+    choice = input("Do you need create 'cov_upbeat' folder? y-yes, n-no.")
+    if choice == "y" or choice == "yes":
+        os.makedirs("cov_upbeat")
     params = initParams("../config.json")
     # Init the database. 
     targetDB = DataBaseHandle(params["result_db"])

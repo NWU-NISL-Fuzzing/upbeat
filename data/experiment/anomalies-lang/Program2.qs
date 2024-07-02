@@ -1,4 +1,6 @@
-// can be detected by upbeat-r&upbeat
+// Bug Description:
+// Can be detected by upbeat-r&upbeat.
+// QuantumSimulator throws a ReleasedQubitsAreNotInZeroState exception.
 
 namespace NISLNameSpace {
     open Microsoft.Quantum.Arithmetic;

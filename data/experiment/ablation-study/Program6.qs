@@ -1,4 +1,6 @@
-// can be detected by upbeat-a&upbeat
+// Bug Description:
+// Can be detected by upbeat-a&upbeat.
+// Time out occurs when running on QuantumSimulator. 
 
 namespace NISLNameSpace {
     open Microsoft.Quantum.Arrays;

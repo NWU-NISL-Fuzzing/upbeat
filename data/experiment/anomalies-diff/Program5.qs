@@ -1,4 +1,6 @@
-// can be detected by upbeat-m
+// Bug Description:
+// Can be detected by upbeat-m.
+// QuantumSimulator throws a InvalidOperationException exception, while other simulators throws a OutOfMemoryException exception.
 
 namespace NISLNameSpace {
     open Microsoft.Quantum.Intrinsic;

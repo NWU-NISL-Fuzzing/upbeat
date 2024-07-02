@@ -69,7 +69,7 @@ def remove_cov_info(output: str):
     lines = output.split("\n")
     return lines[0]+"\n"+"\n".join(output[4:-1])
 
-def run_and_get_cov(temp_proj: pathlib.Path, testcaseId: int, testcaseContent: str):
+def run_and_get_cov(temp_proj: pathlib.Path, testcaseId: int, testcaseContent: str, tool_name = "upbeat"):
     """ Run and get coverage results. """
 
     os.chdir(temp_proj)
@@ -98,7 +98,7 @@ def run_and_get_cov(temp_proj: pathlib.Path, testcaseId: int, testcaseContent: s
         pro.terminate()
     # Move coverage files.
     if os.path.exists("output.coverage"):
-        new_file_name = "../cov/output"+str(testcaseId)+".coverage"
+        new_file_name = f"./cov_{tool_name}/output{testcaseId}.coverage"
         shutil.move("output.coverage", new_file_name)
     end_time = labdate.getUtcMillisecondsNow()
     duration_ms = int(round((end_time - start_time).total_seconds() * 1000))

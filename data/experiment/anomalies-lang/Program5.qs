@@ -1,4 +1,6 @@
-// can be detected by qsharpfuzz
+// Bug Description:
+// Can be detected by qsharpfuzz.
+// QuantumSimulator throws a ReleasedQubitsAreNotInZeroState exception.
 
 namespace NISLNameSpace { 
     open Microsoft.Quantum.Intrinsic; 
@@ -12,7 +14,7 @@ namespace NISLNameSpace {
     
     @EntryPoint() 
     operation main(): Unit { 
-        let q = BadAlloc(); 
+        let q = func1(); 
         H(q); 
         Reset(q); 
     } 

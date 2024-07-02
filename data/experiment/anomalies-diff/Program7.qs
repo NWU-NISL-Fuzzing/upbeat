@@ -1,4 +1,6 @@
-// can be detected by upbeat
+// Bug Description:
+// Can be detected by upbeat.
+// ToffoliSimulator outputs |111>, while other two simulators output |110>.
 
 namespace NISLNameSpace {
     open Microsoft.Quantum.Intrinsic;

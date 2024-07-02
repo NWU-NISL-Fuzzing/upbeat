@@ -1,22 +1,23 @@
 namespace NISLNameSpace {
-    open Microsoft.Quantum.Intrinsic;
+    open Microsoft.Quantum.Canon;
     open Microsoft.Quantum.Convert;
+    open Microsoft.Quantum.Intrinsic;
     open Microsoft.Quantum.Math;
+    open Microsoft.Quantum.Logical;
+    open Microsoft.Quantum.Diagnostics;
     open Microsoft.Quantum.Oracles;
     open Microsoft.Quantum.Arithmetic;
     open Microsoft.Quantum.Arrays;
-    open Microsoft.Quantum.Diagnostics;
-    open Microsoft.Quantum.Logical;
-    open Microsoft.Quantum.Canon;
 
 
     
     @EntryPoint()
     operation main() : Unit {
-        //valid
-        mutable coefficients983 = EmptyArray<Double>();
-        let oneNorm983 = PNorm(1.0, coefficients983);
-        Message($"{oneNorm983}");
-        
-    }
+        // Delete Statement
+        using (qs = Qubit[2]) {
+            SWAP(qs[0], qs[1]);
+            DumpRegister((), qs);
+            DumpMachine();
+            ResetAll(qs);
+        }    }
 }
