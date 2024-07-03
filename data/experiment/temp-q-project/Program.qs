@@ -1,15 +1,14 @@
+// Bug Description:
+// Can be detected by qsharpfuzz&upbeat.
+// ToffoliSimulator throws a ReleasedQubitsAreNotInZeroState exception, while other two simulators run successfully.
+
 namespace NISLNameSpace {
     open Microsoft.Quantum.Intrinsic;
-    open Microsoft.Quantum.Arithmetic;
-
-
-    @EntryPoint()
+    
+    @EntryPoint() 
     operation main() : Unit {
-        // mutable n = 5;
-        use aqs = Qubit[n];
-        use cqs = Qubit[2 * n];
-        ComputeReciprocalI(LittleEndian(aqs), LittleEndian(cqs));
-        ResetAll(aqs);
-        ResetAll(cqs);
+        use qs = Qubit[2] {
+            X(qs[1]);
+        }
     }
 }

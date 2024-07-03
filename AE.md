@@ -10,7 +10,7 @@ This document provides instructions for the artifact evaluation of our accepted 
 
 We provide an interactive Jupyter Notebook hosted on a cloud server. The notebook first uses a single case to demonstrate the entire Upbeat pipeline. Then, it conducts small-scale testing (100 test cases) and finally reproduces the evaluation presented in our paper. 
 
-Please click [this link]() to access our notebook.
+Please click [this link](http://issta2024upbeat.free.idcfengye.com) to access our notebook.
 
 ### 2 Docker Image
 
@@ -111,8 +111,8 @@ jupyter notebook --ip=[YOUR_IP] --port=8888 --allow-root
 
 This will open the notebook in your default web browser, allowing you to interact with it seamlessly.
 
-**Help:** If you are using a Docker container, you can find the IP address by running `cat /etc/hosts`.
+**Tips:** If you are using a Docker container, you can find the IP address by running `cat /etc/hosts`.
 
 # Troubleshooting
 
-Here are some issues we've encountered when installing and running Upeat on different devices. We hope [this page](build/CommonIssues.md) can help you resolve them.
+Here are some issues we've encountered when installing and running Upbeat on different devices. We hope [this page](build/CommonIssues.md) can help you resolve them.

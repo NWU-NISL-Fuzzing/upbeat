@@ -1,6 +1,7 @@
 def calculate_coverage(hour_data: list):
     """ Calculate average coverage in a time period. """
 
+    weights = [(0.718, 0.7565), (0.0815, 0.0316), (0, 0), (0, 0), (0.1157, 0.1226), (0.0839, 0.0894)]
     total_block_coverage = 0.0
     total_line_coverage = 0.0
     timestamp = None
@@ -19,7 +20,6 @@ def calculate_coverage(hour_data: list):
 
 
 def read_and_calculate(input_file: str, output_file: str):
-    weights = [(0.718, 0.7565), (0.0815, 0.0316), (0, 0), (0, 0), (0.1157, 0.1226), (0.0839, 0.0894)]
     with open(input_file, 'r') as file:
         lines = file.readlines()
 
