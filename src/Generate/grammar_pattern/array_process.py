@@ -680,6 +680,11 @@ def array_process(test_case: str, count):
         str: The modified code with addressed issues.
         int: The updated counter of modifications made.
     """
+    
+    # fix the 'inf' issue
+    test_case = re.sub(r'\binf\b', '0.0', test_case)
+    
+    # There is no need to avoid these errors when generating an invalid test case
     if "//wrong" in test_case :
         return test_case,count
     

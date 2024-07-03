@@ -3,12 +3,17 @@
 // Time out occurs when running on QuantumSimulator. 
 
 namespace NISLNameSpace {
-    open Microsoft.Quantum.Arrays;
+    open Microsoft.Quantum.Intrinsic;
+    open Microsoft.Quantum.Arithmetic;
+
 
     @EntryPoint()
     operation main() : Unit {
-        mutable chunkSize = 0;
-		mutable array = [1,2,3];
-		mutable result = Chunks(chunkSize, array);
+        mutable n = 5;
+        use aqs = Qubit[n];
+        use cqs = Qubit[2 * n];
+        ComputeReciprocalI(LittleEndian(aqs), LittleEndian(cqs));
+        ResetAll(aqs);
+        ResetAll(cqs);
     }
 }

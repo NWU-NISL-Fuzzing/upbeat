@@ -6,5 +6,4 @@ src/ParseAPI/data/compare.py
 src/Fuzzing/qsharpPattern/
 src/Fuzzing/run_baselines.py
 data/experiment/database
-data/experiment/temp-q-project/bin
-data/experiment/temp-q-project/obj
+data/experiment/temp-q-project/

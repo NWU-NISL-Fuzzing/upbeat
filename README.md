@@ -26,4 +26,4 @@ See [this document](AE.md).
 
 ## Troubleshooting
 
-Here are some issues we've encountered when installing Upeat on different devices. We hope [this page](build/CommonIssues.md) can help you resolve them.
+Here are some issues we've encountered when installing and running Upeat on different devices. We hope [this page](build/CommonIssues.md) can help you resolve them.

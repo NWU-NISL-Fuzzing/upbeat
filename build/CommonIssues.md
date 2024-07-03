@@ -32,3 +32,17 @@ Verify if Z3 is installed by running `pip show z3-solver`.
 **[Issue]** 
 
 It will take 20~40s when you first running `dotnet`.
+
+**[Solution]**
+
+Run `dotnet --version` to activate dotnet before using Upbeat.
+
+**[Issue]**
+
+All coverage results display as '0.0'.
+
+**[Solution]**
+
+There are two formats of .coverage files, which will be used in different environment. If you encounter this issue, consider utilizing an alternative parsing method available in [this file](src/Fuzzing/get_code_coverage.py). 
+
+Specifically, you need to select an alternative regex pattern for variable declaration between lines 27 and 28, and ensure that all matching statements correspond with either the first or the second regex pattern.

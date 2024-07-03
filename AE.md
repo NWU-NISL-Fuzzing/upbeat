@@ -111,6 +111,8 @@ jupyter notebook --ip=[YOUR_IP] --port=8888 --allow-root
 
 This will open the notebook in your default web browser, allowing you to interact with it seamlessly.
 
+**Help:** If you are using a Docker container, you can find the IP address by running `cat /etc/hosts`.
+
 # Troubleshooting
 
-Here are some issues we've encountered when installing Upeat on different devices. We hope [this page](build/CommonIssues.md) can help you resolve them.
+Here are some issues we've encountered when installing and running Upeat on different devices. We hope [this page](build/CommonIssues.md) can help you resolve them.
