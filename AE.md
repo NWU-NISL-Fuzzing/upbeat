@@ -8,7 +8,7 @@ This document provides instructions for the artifact evaluation of our accepted 
 
 ### 1 Jupyter Notebook
 
-We provide an interactive Jupyter Notebook hosted on a cloud server. The notebook first uses a single case to demonstrate the entire Upbeat pipeline. Then, it conducts small-scale testing (100 test cases) and finally reproduces the evaluation presented in our paper. 
+We provide an interactive Jupyter Notebook hosted on a remote server. The notebook first uses a single case to demonstrate the entire Upbeat pipeline. Then, it conducts small-scale testing (100 test cases) and finally reproduces the evaluation presented in our paper. 
 
 Please click [this link](http://issta2024upbeat.free.idcfengye.com) to access our notebook.
 
@@ -22,7 +22,7 @@ We offer a ready-to-use [image](https://hub.docker.com/repository/docker/weucode
 docker pull weucodee/upbeat:latest
 ```
 
-Alternatively, users can also run the [Dockerfile](build/Dockerfile). 
+Alternatively, users can also run the [Dockerfile](Dockerfile). 
 
 ```
 docker build -t upbeat:v1 .
@@ -90,7 +90,7 @@ python differential_testing.py
 python history_bug_filter.py
 ```
 
-UPBEAT is capable of filtering the anomalies into three types: (1) bugs that have already been analyzed (save in `bug.txt`), (2) faulty that have already been analyzed (save in `faulty.txt`), (3) new anomalies awaiting verification (save in `new_anomalies.txt`). 
+Upbeat is capable of filtering the anomalies into three types: (1) bugs that have already been analyzed (save in `bug.txt`), (2) faulty that have already been analyzed (save in `faulty.txt`), (3) new anomalies awaiting verification (save in `new_anomalies.txt`). 
 
 #### 2.3 Experimental Result
 
@@ -115,4 +115,4 @@ This will open the notebook in your default web browser, allowing you to interac
 
 # Troubleshooting
 
-Here are some issues we've encountered when installing and running Upbeat on different devices. We hope [this page](build/CommonIssues.md) can help you resolve them.
+Here are some issues we've encountered when installing and running Upbeat on different devices. We hope [this page](docs/CommonIssues.md) can help you resolve them.

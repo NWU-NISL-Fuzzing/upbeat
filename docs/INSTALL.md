@@ -47,7 +47,7 @@ vim ~/.bashrc
 Add the following content.
 
 ```
-export PYTHONPATH=[path]/UPBEAT/src:[path]/UPBEAT/src/Generate:[path]/UPBEAT/src/Fuzzing:$PYTHONPATH
+export PYTHONPATH=[path]/upbeat/src:[path]/upbeat/src/Generate:[path]/upbeat/src/Fuzzing:$PYTHONPATH
 ```
 
 Refresh the configure file.

@@ -128,21 +128,21 @@ class DataBaseHandle:
         cursor = conn.cursor()
         cursor.execute(sql)
 
-    def tableExists(self, tableName):
-        connection = self.getConnection()
-        cursor = connection.cursor()
-        sql = "SELECT * FROM sqlite_master WHERE type = 'table' AND name = '" + tableName + "'"
-        cursor.execute(sql)
-        result = cursor.fetchall()
-        return not len(result) == 0
+    # def tableExists(self, tableName):
+    #     connection = self.getConnection()
+    #     cursor = connection.cursor()
+    #     sql = "SELECT * FROM sqlite_master WHERE type = 'table' AND name = '" + tableName + "'"
+    #     cursor.execute(sql)
+    #     result = cursor.fetchall()
+    #     return not len(result) == 0
 
-    def isEmpty(self):
-        connection = self.getConnection()
-        cursor = connection.cursor()
-        sql = "SELECT count(*) FROM " + self.tableName
-        cursor.execute(sql)
-        result = cursor.fetchall()
-        return result[0][0] == 0
+    # def isEmpty(self):
+    #     connection = self.getConnection()
+    #     cursor = connection.cursor()
+    #     sql = "SELECT count(*) FROM " + self.tableName
+    #     cursor.execute(sql)
+    #     result = cursor.fetchall()
+    #     return result[0][0] == 0
 
     def selectAll(self, sql: str):
         conn = self.getConnection()

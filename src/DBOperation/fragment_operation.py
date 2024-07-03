@@ -2,7 +2,7 @@ from dboperation_sqlite import DataBaseHandle
 
 
 def delete_failed():
-    """ 根据运行结果，删除语法错误的代码片段 """
+    """ Delete syntax wrong segments according to the output results. """
 
     result = DataBaseHandle("../../data/result/qfuzz-cw-20240110.db")
     fragment = DataBaseHandle("../../data/query/corpus-v3.db")
@@ -13,7 +13,7 @@ def delete_failed():
     fragment.finalize()
 
 def merge_fragment_tables():
-    """ 将CodeFragment_CW和CodeFragment_CS合并为一张表 """
+    """ Merge CodeFragment_CW and CodeFragment_CS. """
 
     corpus_db = "/root/QFuzz/data/query/corpus-v3.db"
     targetDB = DataBaseHandle(corpus_db)
