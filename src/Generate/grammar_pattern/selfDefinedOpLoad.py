@@ -33,15 +33,15 @@ class OperationLoad:
                     parsedOpration.append(self.parseOperation(op))
         return parsedOpration
 
-    # def classifyCallable(self, parsedOperations: list):
-    #     operations = []
-    #     functions = []
-    #     for callable in parsedOperations:
-    #         if callable.callableType == "function":
-    #             functions.append(callable)
-    #         elif callable.callableType == "operation":
-    #             operations.append(callable)
-    #     return functions, operations
+    def classifyCallable(self, parsedOperations: list):
+        operations = []
+        functions = []
+        for callable in parsedOperations:
+            if callable.callableType == "function":
+                functions.append(callable)
+            elif callable.callableType == "operation":
+                operations.append(callable)
+        return functions, operations
 
     def loadCallables(self, file_path = r"../data/selfDefinedOperations.txt"):
         parsedOperations = self.loadFile(file_path)

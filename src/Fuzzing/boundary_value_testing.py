@@ -30,7 +30,7 @@ def run_and_analysis(targetDB, index: int, testcase_content: str):
     if  ((flag == 1 and output.returnCode != 0) or 
         (flag == 0 and output.returnCode == 0) or 
         output.outputClass in ["timout", "crash"]):
-        print("\033[91m!!!find wrong cons\033[0m")
+        print("\033[91m!!!find anomaly\033[0m")
         targetDB.insertToDifferentialResult(output, "differentialResult_cw")
     else:
         print("\033[92mnothing happened\033[0m")

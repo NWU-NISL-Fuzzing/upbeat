@@ -26,7 +26,7 @@ RUN dotnet tool install -g dotnet-coverage
 
 RUN git clone https://github.com/NWU-NISL-Fuzzing/UPBEAT.git
 
-RUN pip install gdown numpy z3-solver jupyter matplotlib scipy tabulate
+RUN pip install gdown numpy z3-solver jupyter matplotlib scipy tabulate pandas
 
 RUN gdown --id 112cRelito9MXYyzeL_ofwUUSUqaCRfKP && \
     unzip -q qsharp-compiler-28.zip && \

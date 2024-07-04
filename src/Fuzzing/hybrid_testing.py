@@ -35,7 +35,7 @@ def bound_value_testing(index: int, testcase_content: str):
     if  ((flag == 1 and output.returnCode != 0) or 
         (flag == 0 and output.returnCode == 0) or 
         output.outputClass in ["timout", "crash"]):
-        print("\033[91m!!!find wrong cons\033[0m")
+        print("\033[91m!!!find anomaly\033[0m")
         susp_flag = True
         targetDB.insertToDifferentialResult(output, "differentialResult_cw")
     else:

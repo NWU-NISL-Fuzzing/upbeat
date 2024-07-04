@@ -104,7 +104,7 @@ def run_all(targetDB: DataBaseHandle, testcaseList: list, total_time = 24, inter
         if  ((flag == 1 and output.returnCode != 0) or 
             (flag == 0 and output.returnCode == 0) or 
             output.outputClass in ["timout", "crash"]):
-            print("!!!find wrong cons")
+            print("!!!find anomaly")
             targetDB.insertToDifferentialResult(output, "differentialResult_cw")
         else:
             print("nothing happened")
