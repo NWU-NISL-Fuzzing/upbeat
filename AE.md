@@ -6,7 +6,7 @@ This document provides instructions for the artifact evaluation of our accepted 
 
 # Publicly Available Data
 
-Our code and data are available at [this reprository](https://github.com/NWU-NISL-Fuzzing/upbeat). The preprint of our paper can be accessed at [this file](docs). 
+Our code and data are available at [this reprository](https://github.com/NWU-NISL-Fuzzing/upbeat). The preprint of our paper can be accessed at [this file](docs/preprint.pdf). 
 
 # Step-by-Step Instructions
 
@@ -32,7 +32,7 @@ Alternatively, users can also run the [Dockerfile](Dockerfile).
 docker build -t upbeat:v1 .
 ```
 
-Then, create a Docker container. There are two ports that should be mapped: the 22 port (for SSH) and the 8888 port (for local Jupyter Notebook). 
+Then, create a Docker container. There are two ports that should be mapped: the 22 port (for SSH) and the 8888 port (for local Jupyter Notebook). The default password of ssh is "upbeat2024". 
 
 ```
 docker run -d -it -p [XXX]:22 -p [XXX]:8888 upbeat:v1
