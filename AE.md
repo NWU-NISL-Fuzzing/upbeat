@@ -4,6 +4,10 @@ This document provides instructions for the artifact evaluation of our accepted 
 
 **Disclaim:** Although we have worked hard to ensure our AE scripts are robust, our tool remains a research prototype. It can still have glitches when used in complex, real-life settings. If you discover any bugs, please raise an issue, describing how you ran the program and what problem you encountered. We will get back to you ASAP. Thank you.
 
+# Publicly Available Data
+
+Our code and data are available at [this reprository](https://github.com/NWU-NISL-Fuzzing/upbeat). The preprint of our paper can be accessed at [this file](docs). 
+
 # Step-by-Step Instructions
 
 ### 1 Jupyter Notebook
