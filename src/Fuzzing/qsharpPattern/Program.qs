@@ -1,14 +1,14 @@
 namespace NISLNameSpace {
-    open Microsoft.Quantum.Intrinsic;
-    open Microsoft.Quantum.Arithmetic;
-    open Microsoft.Quantum.Canon;
-    open Microsoft.Quantum.Convert;
-    open Microsoft.Quantum.ErrorCorrection;
-    open Microsoft.Quantum.Oracles;
-    open Microsoft.Quantum.Arrays;
-    open Microsoft.Quantum.Diagnostics;
     open Microsoft.Quantum.Logical;
+    open Microsoft.Quantum.Arrays;
+    open Microsoft.Quantum.Canon;
     open Microsoft.Quantum.Math;
+    open Microsoft.Quantum.Arithmetic;
+    open Microsoft.Quantum.Convert;
+    open Microsoft.Quantum.Oracles;
+    open Microsoft.Quantum.Intrinsic;
+    open Microsoft.Quantum.Diagnostics;
+    open Microsoft.Quantum.MachineLearning;
 
 
     
@@ -16,14 +16,17 @@ namespace NISLNameSpace {
     operation main() : Unit {
         //no cons
         //no cons
-        use logicalRegisterQubitArray = Qubit[4];
-        // Modify initial state(s) of qubit(s).
-        // Modify end.
-        mutable logicalRegister = LogicalRegister(logicalRegisterQubitArray);
-        mutable APIResult = DecodeFromSteaneCode(logicalRegister);
-        Message($"{APIResult}");
+        let left275 = [1, 2, 101];
+        let right275 = [PauliY, PauliI];
+        let zipped275 = Zipped(left275, right275);
         
-        DumpMachine();
+        let localPL1129 = left275;
+        mutable labels1129 = [1,-1,-2];
+        let nMisclassifications1129 = NMisclassifications(localPL1129, labels1129);
+        let returnVar1129 = ValidationResults(nMisclassifications1129,Length(localPL1129));
+        
+        Message($"{nMisclassifications1129}");
+        Message($"{returnVar1129}");
         
     }
 }
