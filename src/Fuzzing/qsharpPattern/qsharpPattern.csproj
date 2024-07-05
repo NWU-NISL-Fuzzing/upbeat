@@ -4,6 +4,9 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <QscExe>dotnet /root/qsharp-compiler-release-v0.28.302812/src/QsCompiler/CommandLineTool/bin/Debug/net6.0/qsc.dll</QscExe>
+    <NoWarn>
+        QS3306;QS3307;QS5003;QS5004;CS0219;CS1718;QS6003
+    </NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

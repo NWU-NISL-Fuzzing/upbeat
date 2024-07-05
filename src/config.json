@@ -1,6 +1,6 @@
 {
   "work_dir":"/root/upbeat/src",
-  "fragment_num": 2,
+  "fragment_num": 100,
   "level": 1,
   "ingredient_table_name": "CodeFragment",
   "reference_db": "/root/upbeat/data/query/reference-v3.db",
