@@ -98,11 +98,23 @@ Upbeat is capable of filtering the anomalies into three types: (1) bugs that hav
 
 #### 2.3 Experimental Result
 
+We provide all experimental results in [this folder](data/experiment/).
+
 + (RQ1) The bug data can be found in [this page](data/result/BugList.md). 
 + (RQ2) The coverage data is organized into two folders, [one](data/experiment/cov-result-origin) stores the original coverage values of four libraries, and [another](data/experiment/cov-result-calculated) stores the calculated weighted averages of coverage.
 + (RQ2) The anomalous behaviors found by baseline methods and Upbeat. Anomalous detected via language-level testing are stored in [this folder](data/experiment/anomalies-lang), and ones via differential testing are stored in [this folder](data/experiment/anomalies-diff).
 + (RQ3) The results of the ablation study can be found in [this folder](data/experiment/ablation-study).
 + (RQ4) The evaluation of constraint extraction can be found in [this folder](data/experiment/constraint-extraction).
+
+Run the following command to observe the experimental results and reproduce the reduced evaluation.
+
+```
+cd ../Reproduction
+python run_rqs.py --rq=1
+python run_rqs.py --rq=2
+python run_rqs.py --rq=3
+python run_rqs.py --rq=4
+```
 
 #### 2.4 Jupyter Notebook
 

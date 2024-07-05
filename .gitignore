@@ -5,6 +5,5 @@ src/ParseAPI/data/origin
 src/ParseAPI/data/compare.py
 src/Fuzzing/qsharpPattern/
 src/Fuzzing/qsharpPattern/Program.qs
-src/Fuzzing/run_baselines.py
 data/experiment/database
 data/experiment/temp-q-project/

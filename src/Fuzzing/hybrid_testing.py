@@ -7,11 +7,10 @@ from Fuzzing.lib.post_processor import *
 from Generate.basic_operation.file_operation import initParams
 
 params = initParams("../config.json")
-targetDB = DataBaseHandle(params["result_db"])
 tempProj = pathlib.Path("./qsharpPattern").absolute()
 
 
-def diff_testing(index: int, output):
+def diff_testing(targetDB: DataBaseHandle, index: int, output):
     outputs = [output]
     command_list = [["dotnet", "run", "-s", "SparseSimulator"],
                     ["dotnet", "run", "-s", "ToffoliSimulator"]]
@@ -20,7 +19,7 @@ def diff_testing(index: int, output):
     vote(outputs, output.testcaseContent)
     targetDB.commit()
 
-def bound_value_testing(index: int, testcase_content: str):
+def bound_value_testing(targetDB: DataBaseHandle, index: int, testcase_content: str):
     print("==running "+str(index)+"th test case==")
     susp_flag = False
     if "//wrong" in testcase_content or "//invalid" in testcase_content:
@@ -41,12 +40,13 @@ def bound_value_testing(index: int, testcase_content: str):
     else:
         print("\033[92mnothing happened\033[0m")
     if not susp_flag and output.returnCode not in [134, 137]:
-        diff_testing(index, output)
+        diff_testing(targetDB, index, output)
 
 def main():
     if not os.path.exists("cov"):
         os.makedirs("cov")
         print("Create the coverage folder.")
+    targetDB = DataBaseHandle(params["result_db"])
     targetDB.createTable("originResult_cw")
     targetDB.createTable("differentialResult_cw")
     # targetDB.createTable("originResult_sim")
@@ -55,7 +55,7 @@ def main():
     print("Here are "+str(len(testcaseList))+" test cases.")
     for index, testcase_content in enumerate(testcaseList, start=1):
         # print(testcase_content)
-        bound_value_testing(index, testcase_content[0])
+        bound_value_testing(targetDB, index, testcase_content[0])
         # if index == 1:
         #     break
     targetDB.finalize()
