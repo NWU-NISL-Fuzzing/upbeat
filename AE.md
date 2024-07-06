@@ -57,12 +57,12 @@ boundary_value:         Special values for random input generation.
 
 **Step1. Generate test cases.**
 
+_(Approximate 2 seconds for 100 test cases.)_
+
 ```
 cd ~/upbeat/src/Generate
 python main.py
 ```
-
-_(Approximate 2 seconds for 100 test cases.)_
 
 There are two steps in test case generation: (1) assemble code segments and (2) generate callable inputs. All generated test cases are stored in `result_db`.
 
@@ -70,12 +70,12 @@ PS. `fragment_num` does not necessarily correspond to the number of test cases. 
 
 **Step2. Execute test cases.**
 
+_(Approximate 50 minuts for 100 test cases.)_
+
 ```
 cd ../Fuzzing
 python hybrid_testing.py
 ```
-
-_(Approximate 50 minuts for 100 test cases.)_
 
 Each test case will first be applied on language-level testing, with execution information stored in table `originResult_cw`. If any anomalies occur, relevant information will be logged in table `differentialResult_cw`. 
 
@@ -89,6 +89,8 @@ python differential_testing.py
 ```
 
 **Step3. Filter anomalies.**
+
+_(Approximate 2 seconds for 100 test cases.)_
 
 ```
 python history_bug_filter.py
@@ -108,6 +110,8 @@ We provide all experimental results in [this folder](data/experiment/).
 
 Run the following command to observe the experimental results and reproduce the reduced evaluation.
 
+_(Approximate 3 days.)_
+
 ```
 cd ../Reproduction
 python run_rqs.py --rq=1
@@ -115,6 +119,8 @@ python run_rqs.py --rq=2
 python run_rqs.py --rq=3
 python run_rqs.py --rq=4
 ```
+
+**Tips:** To keep a stable environment, we recommend running the above commands in a separate session using `screen`.
 
 #### 2.4 Jupyter Notebook
 
