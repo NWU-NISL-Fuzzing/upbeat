@@ -120,7 +120,7 @@ def run_baselines():
         # Run and get code coverage
         run_all(targetDB, testcaseList, 0.1, 0.1, baseline)
     for baseline in baselines:
-        with open(f"/root/upbeat/src/Reproduction/qsharpPattern/{baseline}.txt", "r") as f:
+        with open(f"/root/upbeat/src/Fuzzing/qsharpPattern/{baseline}.txt", "r") as f:
             content = f.readlines()
         total_block_coverage, total_line_coverage = calculate_coverage(content[-6:])
         # pretty print
@@ -148,7 +148,7 @@ def rq3():
 
 def run_ablation():
     # variants = ["upbeat-a", "upbeat-b", "upbeat"]
-    variants = ["upbeat-b"]
+    variants = ["upbeat-a", "upbeat-b"]
     for variant in variants:
         print(f"==Start to run test cases from {variant}.==")
         targetDB = DataBaseHandle(f"/root/upbeat/data/experiment/database/{variant}.db")
@@ -158,9 +158,8 @@ def run_ablation():
         sql_str = "select Content from corpus"
         testcaseList = targetDB.selectAll(sql_str)
         # start to run
-        for i, testcase in enumerate(testcaseList, start=1):
+        for i, testcase in enumerate(testcaseList[:1000], start=1):
             bound_value_testing(targetDB, i, testcase[0])
-            break
 
 def rq4():
     # Calculate the analysis results of constraints from source code. 
