@@ -118,7 +118,7 @@ def run_baselines():
             shutil.rmtree(cov_folder)
         os.makedirs(cov_folder)
         # Run and get code coverage
-        run_all(targetDB, testcaseList, 0.1, 0.1, baseline)
+        run_all(targetDB, testcaseList, 5, 1, baseline)
     for baseline in baselines:
         with open(f"/root/upbeat/src/Fuzzing/qsharpPattern/{baseline}.txt", "r") as f:
             content = f.readlines()
