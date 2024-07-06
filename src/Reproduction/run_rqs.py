@@ -147,8 +147,8 @@ def rq3():
     print(tabulate(abl_results.items(), headers=["Tool", "#Bugs"]))
 
 def run_ablation():
-    # variants = ["upbeat-a", "upbeat-b", "upbeat"]
-    variants = ["upbeat-a", "upbeat-b"]
+    # upbeat-c represent upbeat in ablation study
+    variants = ["upbeat-a", "upbeat-b", "upbeat-c"]
     for variant in variants:
         print(f"==Start to run test cases from {variant}.==")
         targetDB = DataBaseHandle(f"/root/upbeat/data/experiment/database/{variant}.db")
