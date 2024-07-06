@@ -58,7 +58,7 @@ boundary_value:         Special values for random input generation.
 **Step1. Generate test cases.**
 
 ```
-cd upbeat/src/Generate
+cd ~/upbeat/src/Generate
 python main.py
 ```
 
@@ -81,7 +81,7 @@ Each test case will first be applied on language-level testing, with execution i
 
 If no anomalies are detected, the test case proceeds to differential testing, where results are stored in table `differentialResult_sim`.
 
-Users can also execute these two steps separately by running the following command:
+Alternatively, users can also execute these two steps separately by running the following command:
 
 ```
 python language_level_testing.py
