@@ -19,6 +19,22 @@ ENV http_proxy="XXX"
 ENV https_proxy="XXX"
 ```
 
+**[Issue]**
+
+When running the Dockerfile, if you encounter the following error:
+
+```
+failed to create symbolic link '/usr/bin/python': File exists
+```
+
+**[Solution]**
+
+You can modify line 10 into the following content:
+
+```
+ln -snf /usr/bin/python3 /usr/bin/python
+```
+
 ## Basic Usage
 
 **[Issue]** 
