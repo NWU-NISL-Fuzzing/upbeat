@@ -112,6 +112,10 @@ Run the following command to observe the experimental results and reproduce the 
 
 _(Approximate 3 days.)_
 
+Download the databases from [this website](https://drive.google.com/file/d/11gTUv4vpBE5OMZefZV6-Wp1DEPaHvo8A/view?usp=sharing), and unzip them into `data/experiment`. 
+
+Then, located in `Reproduction` directionary and select one of research questions. 
+
 ```
 cd ../Reproduction
 python run_rqs.py --rq=1
