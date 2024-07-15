@@ -6,7 +6,7 @@ ENV LANG C.UTF-8
 WORKDIR /root
 
 RUN apt-get -y update && \
-    apt-get install -y python3-pip git openssh-server curl nodejs npm zip
+    apt-get install -y python3-pip git openssh-server curl nodejs npm zip vim screen
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
 RUN mkdir /var/run/sshd
@@ -23,6 +23,8 @@ RUN apt-get update && \
 RUN apt-get update && \
     apt-get install -y dotnet-sdk-6.0
 RUN dotnet tool install -g dotnet-coverage
+RUN dotnet new -i Microsoft.Quantum.ProjectTemplates
+RUN dotnet new -i Microsoft.Quantum.ProjectTemplates::0.24.210930
 
 RUN git clone https://github.com/NWU-NISL-Fuzzing/upbeat.git
 
@@ -31,5 +33,9 @@ RUN pip install gdown numpy z3-solver jupyter matplotlib scipy tabulate pandas
 RUN gdown --id 112cRelito9MXYyzeL_ofwUUSUqaCRfKP && \
     unzip -q qsharp-compiler-28.zip && \
     rm qsharp-compiler-28.zip
+
+RUN gdown --id 11gTUv4vpBE5OMZefZV6-Wp1DEPaHvo8A && \
+    unzip -q -d /root/upbeat/data/experiment database-20240715-1.zip && \
+    rm database-20240715-1.zip
 
 RUN echo "export PYTHONPATH=$PYTHONPATH:/root/upbeat/src/:/root/upbeat/src/Generate:/root/upbeat/src/Fuzzing" >> ~/.bashrc
