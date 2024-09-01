@@ -1,4 +1,4 @@
-# Upbeat (Updating)
+# Upbeat
 
 Upbeat is a fuzzing tool to generate random test cases for bugs related to input checking in Q# libraries. It leverages open-source Q# code samples to synthesize test programs. It frames the test case generation as a constraint satisfaction problem for classical computing and a quantum state model for quantum computing to produce carefully generated subroutine inputs to test if the input-checking mechanism is appropriately implemented.
 
